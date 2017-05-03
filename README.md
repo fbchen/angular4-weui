@@ -10,7 +10,7 @@ Angular4-WeUI 是采用Angular对WeUI重写的UI库，包含了全部WeUI官方�
 ## Install
 
 ```bash
-npm install angular-weui --save
+npm install angular4-weui --save
 ```
 
 如果下载速度较慢，可以尝试加入[淘宝 NPM 镜像](http://npm.taobao.org)，以加快模块下载速度。
@@ -21,7 +21,7 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 
 然后通过cnpm命令来安装：
 ```bash
-cnpm install angular-weui --save
+cnpm install angular4-weui --save
 ```
 
 ## Quickstart
@@ -33,7 +33,7 @@ cd angular4-weui
 cnpm install
 ```
 
-下载angular-weui后，通过开发工具[VSCode](http://code.visualstudio.com/Download)打开安装目录，点击调试“启动程序”，然后在浏览器中输入 http://localhost:4200/ 直接预览效果。
+下载angular4-weui后，通过开发工具[VSCode](http://code.visualstudio.com/Download)打开安装目录，点击调试“启动程序”，然后在浏览器中输入 http://localhost:4200/ 直接预览效果。
 
 ## Usage
 
@@ -42,7 +42,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { WeUIModule } from 'angular-weui';
+import { WeUIModule } from 'angular4-weui';
 
 import { AppComponent }   from './app.component';
 
