@@ -1,0 +1,32 @@
+{
+  "name": "angular4-weui",
+  "version": "0.0.0-PLACEHOLDER",
+  "license": "MIT",
+  "author": "32674406@qq.com",
+  "description": "Angular4-WeUI - a development UI library for building mobile web applications with Angular",
+  "keywords": ["angular-weui", "mobile", "framework", "webapp", "wechat"],
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fbchen/angular4-weui.git"
+  },
+  "main": "bundles/angular-weui.umd.js",
+  "module": "index.js",
+  "typings": "index.d.ts",
+  "peerDependencies": {
+    "@angular/common": "^4.1.0",
+    "@angular/compiler": "^4.1.0",
+    "@angular/core": "^4.1.0",
+    "@angular/forms": "^4.1.0",
+    "@angular/http": "^4.1.0",
+    "@angular/platform-browser": "^4.1.0",
+    "@angular/platform-browser-dynamic": "^4.1.0",
+    "@angular/router": "^4.1.0",
+    "@angular/animations": "^4.1.0",
+    "core-js": "^2.4.1",
+    "rxjs": "^5.3.0",
+    "zone.js": "^0.8.9",
+    "weui": "^1.1.2",
+    "font-awesome": "~4.7.0"
+  }
+}

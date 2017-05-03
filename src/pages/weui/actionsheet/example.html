@@ -1,0 +1,18 @@
+<div class="page">
+    <div class="page__hd">
+        <h1 class="page__title">ActionSheet</h1>
+        <p class="page__desc">弹出式菜单 （<a href="https://weui.io/#actionsheet" target="_blank">原链接</a>）</p>
+    </div>
+    <div class="page__bd page__bd_spacing">
+        <weui-actionsheet #actionsheet1 [menu]="actionsheet_menu"></weui-actionsheet>
+        <weui-actionsheet #actionsheet2 [menu]="actionsheet_menu" mode="md"></weui-actionsheet>
+
+        <weui-button (click)="showIOSActionSheet()">iOS ActionSheet</weui-button>
+        <weui-button (click)="showAndroidActionSheet()">Android ActionSheet</weui-button>
+        <weui-button (click)="showIOSActionSheet2()">another iOS ActionSheet</weui-button>
+    </div>
+
+    <div class="page__ft">
+        <a href="javascript:;" (click)="home()"><img src="./assets/weui-example/images/icon_footer_link.png" /></a>
+    </div>
+</div>

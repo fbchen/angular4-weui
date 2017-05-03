@@ -1,0 +1,59 @@
+
+/** --- weui-btn --- */
+@mixin weui-btn-default($color-name, $color-base, $color-contrast) {
+    $bg-color: $color-base;
+    $bg-color-activated: color-shade($bg-color);
+    $bg-color-disabled: color-shade($bg-color, 50%);
+
+    .weui-btn_#{$color-name} {
+        background-color: $bg-color;
+    }
+    .weui-btn_#{$color-name}:not(.weui-btn_disabled):active {
+        color: rgba(255, 255, 255, 0.6);
+        background-color: $bg-color-activated;
+    }
+    .weui-btn_disabled.weui-btn_#{$color-name} {
+        background-color: $bg-color-disabled;
+    }
+    .weui-btn_loading.weui-btn_#{$color-name} {
+        background-color: $bg-color-activated;
+    }
+
+    .weui-btn_plain-#{$color-name} {
+        color: $bg-color;
+        border: 1px solid $color-base;
+    }
+    .weui-btn_plain-#{$color-name}:not(.weui-btn_plain-disabled):active {
+        color: $bg-color-activated;
+        border-color: $bg-color-activated;
+    }
+}
+
+/** --- weui-text-counter --- */
+@mixin weui-text-counter($color-name, $color-base, $color-contrast) {
+    .weui-cell_#{$color-name} .weui-text-counter {
+        color: $color-base;
+    }
+}
+
+/** --- weui-slider --- */
+@mixin weui-slider($color-name, $color-base, $color-contrast) {
+    .weui-slider_#{$color-name} .weui-slider__track {
+        background-color: $color-base;
+    }
+}
+
+/** --- weui-progress --- */
+@mixin weui-progress($color-name, $color-base, $color-contrast) {
+    .weui-progress_#{$color-name} .weui-progress__inner-bar {
+        background-color: $color-base;
+    }
+}
+
+/** --- weui-badge --- */
+@mixin weui-badge($color-name, $color-base, $color-contrast) {
+    .weui-badge_#{$color-name} {
+        background-color: $color-base;
+    }
+}
+

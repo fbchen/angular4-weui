@@ -1,0 +1,19 @@
+<div class="page">
+    <div class="page__hd">
+        <h1 class="page__title">Picker</h1>
+        <p class="page__desc">多列选择器 （<a href="https://weui.io/#picker" target="_blank">原链接</a>）</p>
+    </div>
+    <div class="page__bd page__bd_spacing">
+        <weui-button (click)="showPicker()">单列选择器</weui-button>
+        <weui-button (click)="showMultiPicker()">多列选择器</weui-button>
+        <weui-button (click)="showDatePicker()">日期选择器</weui-button>
+
+        <weui-picker #picker1 [menu]="menu1"></weui-picker>
+        <weui-picker #picker2 [menus]="menu2" [value]="['G', 75]"></weui-picker>
+        <weui-date-picker #picker3></weui-date-picker> <!--test: cron="1-15 * *" -->
+    </div>
+    <div class="page__ft">
+        <a href="javascript:;" (click)="home()"><img src="./assets/weui-example/images/icon_footer_link.png" /></a>
+    </div>
+
+</div>

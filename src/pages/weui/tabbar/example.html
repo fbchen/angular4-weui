@@ -1,0 +1,40 @@
+<div class="page">
+    <div class="page__bd" style="height: 100%;">
+        <div class="weui-tab">
+            <div class="weui-tab__panel">
+
+            </div>
+
+            <weui-tabbar (activated)="onActivated($event)" [activeIndex]="3">
+                <weui-tabbar-item value="1">
+                    <span style="display: inline-block;position: relative;">
+                        <img src="./assets/weui-example/images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
+                        <weui-badge style="position: absolute;top: -2px; right: -13px;">8</weui-badge>
+                    </span>
+                    <p class="weui-tabbar__label">微信</p>
+                </weui-tabbar-item>
+                <weui-tabbar-item value="2">
+                    <img src="./assets/weui-example/images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
+                    <p class="weui-tabbar__label">通讯录</p>
+                </weui-tabbar-item>
+                <weui-tabbar-item value="3">
+                    <span style="display: inline-block;position: relative;">
+                        <img src="./assets/weui-example/images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
+                        <weui-badge dot style="position: absolute;top: 0; right: -6px;"></weui-badge>
+                    </span>
+                    <p class="weui-tabbar__label">发现</p>
+                </weui-tabbar-item>
+                <weui-tabbar-item value="4">
+                    <span class="weui-tabbar__icon">
+                        <i class="fa fa-user-circle-o"></i>
+                    </span>
+                    <p class="weui-tabbar__label">我</p>
+                </weui-tabbar-item>
+            </weui-tabbar>
+
+        </div>
+    </div>
+    <div class="page__ft j_bottom">
+        <a href="javascript:;" (click)="home()"><img src="./assets/weui-example/images/icon_footer_link.png" /></a>
+    </div>
+</div>

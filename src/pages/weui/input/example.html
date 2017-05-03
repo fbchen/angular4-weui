@@ -1,0 +1,147 @@
+<div class="page">
+    <div class="page__hd">
+        <h1 class="page__title">Input</h1>
+        <p class="page__desc">表单输入 （<a href="https://weui.io/#input" target="_blank">原链接</a>）</p>
+    </div>
+    <form #form="ngForm" class="page__bd">
+        <weui-title>单选列表项</weui-title>
+        <weui-items baseCls="radio">
+            <weui-radio name="radio1" value="1" [(ngModel)]="data.radio1">
+                <p>cell standard</p>
+            </weui-radio>
+            <weui-radio name="radio1" value="2" [(ngModel)]="data.radio1">
+                <p>cell standard</p>
+            </weui-radio>
+            <weui-link href="javascript:void(0);" baseCls="link" [noPushArrow]="true">
+                添加更多
+            </weui-link>
+        </weui-items>
+
+        <weui-title>复选列表项</weui-title>
+        <weui-items baseCls="checkbox">
+            <weui-checkbox name="checkbox1" value="1" [(ngModel)]="data.checkbox1">
+                <p>standard is dealt for u.</p>
+            </weui-checkbox>
+            <weui-checkbox name="checkbox1" value="2" [(ngModel)]="data.checkbox1">
+                <p>standard is dealicient for u.</p>
+            </weui-checkbox>
+            <weui-link href="javascript:void(0);" baseCls="link" [noPushArrow]="true">
+                添加更多
+            </weui-link>
+        </weui-items>
+
+        <weui-title>表单</weui-title>
+        <weui-items baseCls="form">
+            <weui-input type="number" name="qq" pattern="[0-9]*" placeholder="请输入qq号" [(ngModel)]="data.qq"
+                (keyup)="onEvent($event)" (keydown)="onEvent($event)" (keypress)="onEvent($event)" (keydown.space)="onEvent($event)"
+                (change)="onEvent($event)" (focus)="onEvent($event)" (blur)="onEvent($event)">
+                <label class="weui-label">qq</label>
+            </weui-input>
+            <weui-input type="tel" name="tel" placeholder="请输入手机号" [maxLength]="11" [(ngModel)]="data.tel" baseCls="vcode">
+                <label class="weui-label">手机号</label>
+                <button class="weui-vcode-btn" weui-last>获取验证码</button>
+            </weui-input>
+            <weui-input type="date" name="date1" [(ngModel)]="data.date1">
+                <label class="weui-label">日期</label>
+            </weui-input>
+            <weui-input type="datetime-local" name="date2" [(ngModel)]="data.date2">
+                <label class="weui-label">时间</label>
+            </weui-input>
+            <weui-input type="tel" name="vcode" placeholder="请输入验证码" [(ngModel)]="data.vcode" baseCls="vcode">
+                <label class="weui-label">验证码</label>
+                <img class="weui-vcode-img" weui-last src="./assets/weui-example/images/vcode.jpg" />
+            </weui-input>
+        </weui-items>
+        <weui-tips>底部说明文字底部说明文字</weui-tips>
+
+        <weui-title>表单报错</weui-title>
+        <weui-items baseCls="form">
+            <weui-input type="number" name="card" pattern="[0-9]*" placeholder="请输入卡号"
+               [(ngModel)]="data.card" [required]="true">
+                <label class="weui-label">卡号</label>
+            </weui-input>
+            <weui-input type="number" name="num" placeholder="请输入金额" [(ngModel)]="data.num"
+                max="100" [min]="10" [autocomplete]="false">
+                <label class="weui-label">金额</label>
+            </weui-input>
+        </weui-items>
+
+
+        <weui-title>开关</weui-title>
+        <weui-items baseCls="form">
+            <weui-switch name="switch1" [(ngModel)]="data.switch1" label="标题文字">
+            </weui-switch>
+            <weui-switch name="switch2" [(ngModel)]="data.switch2" value="open">
+                <label>兼容IE Edge的版本</label>
+            </weui-switch>
+        </weui-items>
+
+
+        <weui-title>文本框</weui-title>
+        <weui-items baseCls="form">
+            <weui-input type="text" name="text1" placeholder="请输入文本" [(ngModel)]="data.text1"
+                maxLength="20" [countChars]="true">
+            </weui-input>
+        </weui-items>
+
+        <weui-title>文本域</weui-title>
+        <weui-items baseCls="form">
+            <weui-input type="textarea" name="text2" placeholder="请输入文本" [(ngModel)]="data.text2"
+                rows="3" maxLength="20" [countChars]="true">
+            </weui-input>
+        </weui-items>
+
+        <weui-title>选择</weui-title>
+        <weui-items baseCls="">
+            <weui-item>
+                <select weui-start name="select1" [(ngModel)]="data.select1">
+                    <option value="1">+86</option>
+                    <option value="2">+80</option>
+                    <option value="3">+84</option>
+                    <option value="4">+87</option>
+                </select>
+                <input weui-content
+                       class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入号码">
+            </weui-item>
+        </weui-items>
+
+        <weui-title>选择</weui-title>
+        <weui-items baseCls="">
+            <weui-item>
+                <select weui-content name="select2" [(ngModel)]="data.select2">
+                    <option value="1">微信号</option>
+                    <option value="2">QQ号</option>
+                    <option value="3">Email</option>
+                </select>
+            </weui-item>
+            <weui-item>
+                <label weui-start for="" class="weui-label">国家/地区</label>
+                <select weui-content name="select3" [(ngModel)]="data.select3">
+                    <option value="1">中国</option>
+                    <option value="2">美国</option>
+                    <option value="3">英国</option>
+                </select>
+            </weui-item>
+        </weui-items>
+
+        <label for="weuiAgree" class="weui-agree">
+            <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+            <span class="weui-agree__text">
+                阅读并同意<a href="javascript:void(0);">《相关条款》</a>
+            </span>
+        </label>
+
+        <div class="weui-btn-area">
+            <weui-button color="primary" (click)="showError()">确定</weui-button>
+        </div>
+    </form>
+    <div class="page__bd page__bd_spacing">
+        <div>表单内容：</div>
+        <pre>{{ form.value | json }}</pre>
+    </div>
+    <weui-toptips #weuiToptips content="错误提示"></weui-toptips>
+
+    <div class="page__ft">
+        <a href="javascript:;" (click)="home()"><img src="./assets/weui-example/images/icon_footer_link.png" /></a>
+    </div>
+</div>

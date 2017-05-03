@@ -1,0 +1,569 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+body {
+    user-select: text;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.fc {
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  clear: both;
+}
+
+.inline {
+  display: inline-block;
+}
+
+.block {
+  display: block;
+}
+.flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.ws {
+  white-space: nowrap;
+}
+
+.ml5 {
+  margin-left: 5px;
+}
+
+.mr5 {
+  margin-right: 5px;
+}
+
+.mt5 {
+  margin-top: 5px;
+}
+
+.mb5 {
+  margin-bottom: 5px;
+}
+
+.mt10 {
+  margin-top: 10px;
+}
+
+.mb10 {
+  margin-bottom: 10px;
+}
+
+.mr10 {
+  margin-right: 10px;
+}
+
+.ml10 {
+  margin-left: 10px;
+}
+
+.mt0 {
+  margin-top: 0;
+}
+
+.mb0 {
+  margin-bottom: 0;
+}
+
+.ml0 {
+  margin-left: 0;
+}
+
+.mr0 {
+  margin-right: 0;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+.pb0 {
+    padding-bottom: 0;
+}
+.pl0 {
+    padding-left: 0;
+}
+.pr0 {
+    padding-right: 0;
+}
+.pt0 {
+    padding-top: 0;
+}
+.pb5 {
+    padding-bottom: 5px;
+}
+.pl5 {
+    padding-left: 5px;
+}
+.pr5 {
+    padding-right: 5px;
+}
+.pt5 {
+    padding-top: 5px;
+}
+.padding2 {
+    padding: 2px;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #F1F1F1;
+}
+.border-left {
+    border-left: 1px solid #F1F1F1;
+}
+.border-right {
+    border-right: 1px solid #F1F1F1;
+}
+.border-top {
+    border-top: 1px solid #F1F1F1;
+}
+.border {
+    border: 1px solid #F1F1F1;
+}
+.border-none, .no-border {
+    border: 0 none;
+}
+.border-bottom-none {
+    border-bottom: 0;
+}
+.border-left-none {
+    border-left: 0;
+}
+.border-right-none {
+    border-right: 0;
+}
+.border-top-none {
+    border-top: 0;
+}
+
+.pr {
+  position: relative;
+}
+
+.w60 {
+  width: 60px
+}
+
+.w80 {
+  width: 80px
+}
+
+.w100 {
+  width: 100px
+}
+
+.w120 {
+  width: 120px
+}
+
+.w150 {
+  width: 150px
+}
+
+.w200 {
+  width: 200px
+}
+
+.full-width {
+  width: 100%
+}
+
+.f20 {
+    font-size: 20px !important;
+}
+.f08em {
+    font-size: 0.8em;
+}
+.f09em {
+    font-size: 0.9em;
+}
+.f12em {
+    font-size: 1.2em;
+}
+.f15em {
+    font-size: 1.5em;
+}
+
+.c {
+  color: #999;
+}
+.cc {
+  color: #999;
+  text-align: center;
+}
+.c4 {
+    color: #444;
+}
+.gray {
+  color: #949494;
+}
+.gray2 {
+  color: #a3a3a3;
+}
+
+.bright {
+    color: #FF8612;
+    font-family: "ArialMT","Arial";
+}
+.boring {
+    color: #9A9A9A;
+    font-size: 1.4rem;
+}
+.mute {
+  color: #aaa !important;
+}
+.mute-text {
+  color: #aaa !important;
+  font-size: 0.8em;
+}
+.mute-button {
+    color: #777;
+}
+
+.highlight-left {
+    border-left: 4px solid #ff8706;
+}
+.highlight-top {
+    border-top: 4px solid #ff8706;
+}
+.highlight-right {
+    border-right: 4px solid #ff8706;
+}
+
+.error {
+    color: #F44336;
+    font-size: 0.9em;
+    padding: 10px 0 5px 10px;
+}
+.alert-message .error {
+    padding: 0;
+}
+
+.text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.text-shadow {
+  text-shadow: 0 0 1px rgba(0, 0, 0, .05), 0 1px 2px rgba(0, 0, 0, .3);
+}
+img.align-middle {
+    vertical-align: middle;
+}
+img.radius {
+    border-radius: 50%;
+}
+
+input[type=date] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+form.ng-submitted .invalid-item, form .invalid-item.ng-dirty {
+    border-color: #F44336;
+    background-color: #FAEBD7;
+}
+form.ng-submitted .ng-invalid, form .ng-invalid.ng-dirty, form .ng-invalid.ng-touched {
+    background-color: #FAEBD7;
+}
+
+.item-divider.sm {
+    min-height: 15px;
+}
+
+.bigTxt-weixin {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: rgba(0,0,0,0.7);
+    z-index: 99;
+}
+.bigTxt-weixin img {
+    width: 100%;
+}
+
+.avatar-bg { 
+    width: 100px;
+    height: 100px;
+    position: relative;
+    display: inline-block;
+    border-radius: 50%;
+    border: 5px solid rgba(0, 0, 0, 0.2);
+    -webkit-animation: grow 450ms 1 cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    -moz-animation: grow 450ms 1 cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    animation: grow 450ms 1 cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+.avatar-bg img {
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+}
+img.wx-avatar, .item-avatar > img.wx-avatar {
+    max-width: 48px;
+    max-height: 48px;
+}
+
+.transition-all {
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.transition-all-bezier {
+  -webkit-transition: all 600ms cubic-bezier(0.175, 0.885, 0.335, 1);
+  -moz-transition: all 600ms cubic-bezier(0.175, 0.885, 0.335, 1);
+  -ms-transition: all 600ms cubic-bezier(0.175, 0.885, 0.335, 1);
+  -o-transition: all 600ms cubic-bezier(0.175, 0.885, 0.335, 1);
+  transition: all 600ms cubic-bezier(0.175, 0.885, 0.335, 1);
+}
+
+
+@-webkit-keyframes grow {
+  0% {
+    -webkit-transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+    opacity: 0.9;
+  }
+  80% {
+    -webkit-transform: scale(0.95);
+  }
+  100% {
+    -webkit-transform: scale(1);
+  }
+}
+@-moz-keyframes grow {
+  0% {
+    -moz-transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    -moz-transform: scale(1.1);
+    opacity: 0.9;
+  }
+  80% {
+    -moz-transform: scale(0.95);
+  }
+  100% {
+    -moz-transform: scale(1);
+  }
+}
+@keyframes grow {
+  0% {
+    -webkit-transform: scale(0.3);
+    -moz-transform: scale(0.3);
+    -ms-transform: scale(0.3);
+    -o-transform: scale(0.3);
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+    opacity: 0.9;
+  }
+  80% {
+    -webkit-transform: scale(0.95);
+    -moz-transform: scale(0.95);
+    -ms-transform: scale(0.95);
+    -o-transform: scale(0.95);
+    transform: scale(0.95);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+.bs-callout {
+  padding: 20px;
+  margin: 20px 0;
+  border: 1px solid #eee;
+  border-left-width: 5px;
+  border-radius: 3px;
+}
+
+.bs-callout-info {
+  border-left-color: #1b809e;
+}
+
+.bs-callout-warning {
+  border-left-color: #aa6708;
+}
+
+.bs-callout-danger {
+  border-left-color: #ce4844;
+}
+
+.pin-tag {
+    font-size: 13px;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    padding: 4px 6px;
+    position: absolute;
+}
+
+.pin-tag1 {
+    border-radius: 15px 0px 0px 15px;
+    right: 0px;
+    top: 5px;
+}
+
+.zp-reward {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    z-index: 10;
+}
+.zp-reward img.reward {
+    width: 30px;
+    height: 30px;
+}
+
+.ui-input-group .input-bar {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+.ui-input-group .input-bar:before,
+.ui-input-group .input-bar:after {
+    content: '';
+    height: 1px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #3396ff;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.ui-input-group .input-bar:before {
+    left: 50%;
+}
+.ui-input-group .input-bar:after {
+    right: 50%;
+}
+
+.photo-picker {
+    text-align: center;
+    color: #CECECE;
+    padding: 40px;
+}
+.photo-picker .icon-pick {
+    font-size: 30px;
+}
+
+.item-responsive {
+    padding-bottom: 40%;
+    height: 0;
+    overflow: hidden;
+}
+img.full-width-image {
+    width: 100%;
+    padding: 2px;
+}
+
+ion-app.md {
+    background-image: url('../assets/images/bg.png');
+}
+
+.table-wrapper .label-md {
+    margin: 0;
+}
+.table-wrapper .button-small-md {
+    height: 1.4em;
+    margin: 0 0.2rem;
+}
+
+.table-wrapper ion-row ion-col [type=text],
+.table-wrapper ion-row ion-col [type=tel] {
+    border-radius: 3px;
+    border: 1px solid #eee;
+    margin: 0 4px;
+    padding: 2px 6px;
+    line-height: 100%;
+}
+.table-wrapper ion-row ion-col [type=text].ng-invalid,
+.table-wrapper ion-row ion-col [type=tel].ng-invalid {
+    background: #f9edde !important;
+    border: 1px solid #dc3e45;
+}
+.table-wrapper ion-spinner.small {
+    width: 16px;
+    height: 16px
+}
+.ion-page {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.content-wrapper .item-md.item-block .item-inner {
+    border-bottom: 0;
+}
+
+.ico-circle {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+
+    &.succ {
+        background-color: #5ee588;
+    }
+    &.fail {
+        background-color: #ffcfbc;
+    }
+}
+
+.item-input ion-label {
+    font-size: 1.2rem;
+}
+
+.item .item-button.button-default-size {
+    height: 3.6rem;
+    font-size: 1.6rem;
+}
+.item.item-input.input-has-border .item-inner {
+    box-shadow: inset 0 -1px 0 0 #afbed4;
+    margin-right: 8px;
+}

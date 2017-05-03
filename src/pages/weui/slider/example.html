@@ -1,0 +1,28 @@
+<div class="page">
+    <div class="page__hd">
+        <h1 class="page__title">Slider</h1>
+        <p class="page__desc">滑块 （<a href="https://weui.io/#slider" target="_blank">原链接</a>）</p>
+    </div>
+    <div class="page__bd page__bd_spacing">
+        <weui-slider [(ngModel)]="data.slider1"></weui-slider>
+        <br>
+        <weui-slider [showValue]="false" color="primary" [(ngModel)]="data.slider2">
+            <i weui-start class="fa fa-volume-down"></i>
+            <i weui-last class="fa fa-2x fa-volume-up"></i>
+        </weui-slider>
+        <br>
+        <weui-slider [showValue]="false" color="warn" [(ngModel)]="data.slider3" [max]="1000">
+            <i weui-start class="fa fa-thermometer-empty"></i>
+            <i weui-last class="fa fa-2x fa-thermometer-full"></i>
+        </weui-slider>
+    </div>
+
+    <div class="page__bd page__bd_spacing" style="padding-top: 20px;">
+        <div>结果输出：</div>
+        <pre>{{ data | json }}</pre>
+    </div>
+
+    <div class="page__ft j_bottom">
+        <a href="javascript:;" (click)="home()"><img src="./assets/weui-example/images/icon_footer_link.png" /></a>
+    </div>
+</div>

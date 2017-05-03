@@ -1,0 +1,31 @@
+// Shared Variables
+// --------------------------------------------------
+// To customize the look and feel of this app, you can override
+// the Sass variables found in Angular-WeUI's source scss files.
+
+
+
+// Named Color Variables
+// --------------------------------------------------
+// Named colors makes it easy to reuse colors on various components.
+// It's highly recommended to change the default colors
+// to match your app's branding. Angular-WeUI uses a Sass map of
+// colors so you can add, rename and remove colors as needed.
+
+$colors: (
+  primary:    #1AAD19,
+  warn:       #E64340,
+  //secondary:  #32db64,
+  //danger:     #f53d3d,
+  //light:      #f4f4f4,
+  //dark:       #222,
+  //stable:     #f8f8f8,
+  //positive:   #4a87ee,
+  //assertive:  #ef4e3a,
+  //balanced:   #66cc33,
+  //energized:  #f0b840,
+  //royal:      #8a6de9,
+  //calm:       #43cee6,
+  //brighten:   #f39800
+);
+

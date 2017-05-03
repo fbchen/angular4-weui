@@ -1,0 +1,34 @@
+<div class="page">
+    <div class="page__bd" style="height: 100%;">
+        <div class="weui-tab">
+            <weui-navbar (activated)="onActivated($event)">
+                <weui-navbar-item value="1">选项一</weui-navbar-item>
+                <weui-navbar-item value="2">选项二</weui-navbar-item>
+                <weui-navbar-item value="3">选项三</weui-navbar-item>
+            </weui-navbar>
+            <div class="weui-tab__panel">
+                <div class="weui-tab__content" [ngStyle]="{display: activeValue == '1' ? 'block' : 'none'}">
+                    <div style="padding: 30px;">
+                        <h1 class="page__title">Navbar</h1>
+                        <p class="page__desc">导航栏  （<a href="https://weui.io/#navbar" target="_blank">原链接</a>）</p>
+                        <br><br>
+                        <p class="page__desc">这是第一页</p>
+                    </div>
+                </div>
+                <div class="weui-tab__content" [ngStyle]="{display: activeValue == '2' ? 'block' : 'none'}">
+                    <div style="padding: 30px;">
+                        <p class="page__desc">这是第二页</p>
+                    </div>
+                </div>
+                <div class="weui-tab__content" [ngStyle]="{display: activeValue == '3' ? 'block' : 'none'}">
+                    <div style="padding: 30px;">
+                        <p class="page__desc">这是第三页</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page__ft j_bottom">
+        <a href="javascript:;" (click)="home()"><img src="./assets/weui-example/images/icon_footer_link.png" /></a>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="page">
+    <div class="page__hd">
+        <h1 class="page__title">Dialog</h1>
+        <p class="page__desc">对话框 （<a href="https://weui.io/#dialog" target="_blank">原链接</a>）</p>
+    </div>
+    <div class="page__bd page__bd_spacing">
+        <weui-button (click)="showIOSDialog1()">iOS Dialog样式一</weui-button>
+        <weui-button (click)="showIOSDialog2()">iOS Dialog样式二</weui-button>
+        <weui-button (click)="showAndroidDialog1()">Android Dialog样式一</weui-button>
+        <weui-button (click)="showAndroidDialog2()">Android Dialog样式二</weui-button>
+
+
+        <weui-dialog #dialog1 title="弹窗标题"
+            content="弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内"
+            btnNOText="辅助操作" btnOKText="主操作"></weui-dialog>
+
+        <weui-dialog #dialog2 [showNOButton]="false"
+            content="弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内"
+            btnOKText="知道了"></weui-dialog>
+
+        <weui-dialog #dialog3 title="弹窗标题" mode="md"
+            content="弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内"
+            btnNOText="辅助操作" btnOKText="主操作"></weui-dialog>
+
+        <weui-dialog #dialog4 [showNOButton]="false" mode="md"
+            content="弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内"
+            btnOKText="知道了"></weui-dialog>
+
+    </div>
+    <div class="page__ft">
+        <a href="javascript:;" (click)="home()"><img src="./assets/weui-example/images/icon_footer_link.png" /></a>
+    </div>
+
+</div>

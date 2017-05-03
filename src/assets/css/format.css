@@ -1,0 +1,151 @@
+
+.fmt {
+    line-height: 1.6;
+    word-wrap: break-word
+}
+
+.fmt h1 {
+    font-size: 2.25em
+}
+
+.fmt h2 {
+    font-size: 1.75em
+}
+
+.fmt h3 {
+    font-size: 1.5em
+}
+
+.fmt h4 {
+    font-size: 1.25em
+}
+
+.fmt h5 {
+    font-size: 1em
+}
+
+.fmt h6 {
+    font-size: .86em
+}
+
+.fmt blockquote, .fmt h4, .fmt h5, .fmt ol, .fmt p, .fmt pre, .fmt table,
+.fmt ul {
+    margin: 1.5em 0
+}
+
+.fmt h1, .fmt h2, .fmt h3 {
+    margin: 1.5em 0 0
+}
+
+.fmt h1, .fmt h2 {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px
+}
+
+.fmt > h1:first-child, .fmt blockquote:first-child, .fmt h2:first-child,
+.fmt h3:first-child, .fmt h4:first-child, .fmt ol:first-child, .fmt p:first-child,
+.fmt pre:first-child, .fmt ul:first-child {
+    margin-top: 0
+}
+
+.fmt ol, .fmt ul {
+    margin-left: 3em;
+    padding-left: 0
+}
+
+.fmt ol li, .fmt ul li {
+    margin: .3em 0
+}
+
+.fmt ol ol, .fmt ol ul, .fmt ul ol, .fmt ul ul {
+    margin-top: 0;
+    margin-bottom: 0
+}
+
+.fmt ol p, .fmt ul p {
+    margin: 0
+}
+
+.fmt p:last-child {
+    margin-bottom: 0
+}
+
+.fmt div > br:only-child, .fmt div > div:empty, .fmt div > p:empty, .fmt img + br,
+.fmt p + br, .fmt p > br:only-child, .fmt p > div:empty, .fmt p > p:empty {
+    display: none
+}
+
+.fmt audio, .fmt img, .fmt video {
+    position: static !important;
+    max-width: 100%
+}
+
+.fmt img {
+    padding: 3px;
+    border: 1px solid #ddd
+}
+
+.fmt img.emoji {
+    padding: 0;
+    border: none
+}
+
+.fmt blockquote {
+    border-left: 2px solid #009a61;
+    background: #f6f6f6;
+    color: #555;
+    font-size: 1em
+}
+
+.fmt code, .fmt pre {
+    font-size: .93em
+}
+
+.fmt pre {
+    padding: 1em;
+    border: none;
+    overflow: auto;
+    line-height: 1.3;
+    max-height: 35em;
+    position: relative;
+    background: url(../img/blueprint.png) #f6f6f6;
+    background-size: 30px, 30px
+}
+
+.fmt pre code {
+    background: none;
+    font-size: 1em;
+    overflow-wrap: normal;
+    white-space: inherit
+}
+
+.fmt hr {
+    margin: 1.5em auto;
+    border-top: 2px dotted #eee
+}
+
+.fmt kbd {
+    margin: 0 4px;
+    padding: 3px 4px;
+    background: #eee;
+    color: #555
+}
+
+.fmt .x-scroll {
+    overflow-x: auto
+}
+
+.fmt table {
+    width: 100%
+}
+
+.fmt table td, .fmt table th {
+    border: 1px solid #e6e6e6;
+    padding: 5px 8px;
+    word-break: normal
+}
+
+.fmt table th {
+    background: #f3f3f3
+}
+

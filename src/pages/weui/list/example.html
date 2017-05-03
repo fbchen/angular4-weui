@@ -1,0 +1,96 @@
+<div class="page">
+    <div class="page__hd">
+        <h1 class="page__title">List</h1>
+        <p class="page__desc">列表 （<a href="https://weui.io/#list" target="_blank">原链接</a>）</p>
+    </div>
+    <div class="page__bd">
+        <weui-title>带说明的列表项</weui-title>
+        <weui-items>
+            <weui-item>
+                <p weui-content>标题文字</p>
+                <p weui-last>说明文字</p>
+            </weui-item>
+        </weui-items>
+        <weui-title>带图标、说明的列表项</weui-title>
+        <weui-items>
+            <weui-item>
+                <img weui-start src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt="" style="width:20px;margin-right:5px;display:block">
+                <p weui-content>标题文字</p>
+                <p weui-last>说明文字</p>
+            </weui-item>
+            <weui-item>
+                <img weui-start src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt="" style="width:20px;margin-right:5px;display:block">
+                <p weui-content>标题文字</p>
+                <p weui-last>说明文字</p>
+            </weui-item>
+        </weui-items>
+
+        <weui-title>带跳转的列表项</weui-title>
+        <weui-items>
+            <weui-link href="javascript:;" (click)="onClickLink($event)">
+                <p weui-content>cell standard</p>
+                <p weui-last></p>
+            </weui-link>
+            <weui-link href="javascript:;" (click)="onClickLink($event)">
+                <p weui-content>cell standard</p>
+                <p weui-last></p>
+            </weui-link>
+            <weui-link href="javascript:void(0);" baseCls="link" [noPushArrow]="true">
+                添加更多
+            </weui-link>
+        </weui-items>
+
+        <weui-title>带说明、跳转的列表项</weui-title>
+        <weui-items>
+            <weui-link href="javascript:;" (click)="onClickLink($event)">
+                <p weui-content>cell standard</p>
+                <p weui-last>说明文字</p>
+            </weui-link>
+            <weui-link href="javascript:;" (click)="onClickLink($event)">
+                <p weui-content>cell standard</p>
+                <p weui-last>说明文字</p>
+            </weui-link>
+            <weui-link href="javascript:void(0);" baseCls="link" [noPushArrow]="true">
+                添加更多
+            </weui-link>
+        </weui-items>
+
+        <weui-title>带图标、说明、跳转的列表项</weui-title>
+        <weui-items>
+            <weui-link href="javascript:;" (click)="onClickLink($event)">
+                <img weui-start src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt="" style="width:20px;margin-right:5px;display:block">
+                <p weui-content>cell standard</p>
+                <p weui-last>说明文字</p>
+            </weui-link>
+            <weui-link href="javascript:;" (click)="onClickLink($event)">
+                <img weui-start src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt="" style="width:20px;margin-right:5px;display:block">
+                <p weui-content>cell standard</p>
+                <p weui-last>说明文字</p>
+            </weui-link>
+        </weui-items>
+
+        <weui-title>带头像的列表项</weui-title>
+        <weui-items>
+            <weui-item>
+                <img weui-start weui-avatar src="pages/images/avatar-1.jpg">
+                <div weui-content>
+                    <h2>甄嬛</h2>
+                    <p>逆风如解意，容易莫摧残。</p>
+                </div>
+                <p weui-last weui-note>3:43 pm</p>
+            </weui-item>
+            <weui-item>
+                <img weui-start weui-avatar src="pages/images/avatar-2.jpg">
+                <div weui-content>
+                    <h2>皇后</h2>
+                    <p>臣妾做不到啊！</p>
+                </div>
+                <p weui-last weui-note>10:03 am</p>
+            </weui-item>
+        </weui-items>
+
+    </div>
+    <div class="page__ft">
+        <a href="javascript:;" (click)="home()"><img src="./assets/weui-example/images/icon_footer_link.png" /></a>
+    </div>
+</div>
