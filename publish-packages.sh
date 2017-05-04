@@ -26,7 +26,7 @@ echo "====== ngc begin to compile typescript files.....\n"
 ${ROOT}/node_modules/.bin/ngc -p ${ROOT}/src/app/weui/tsconfig.json
 echo "====== ngc compiles typescript files to dir: ${OUTDIR} \n"
 
-# rollup
+# rollup - 摇树优化（Tree shaking）[Rollup只能对ES2015模块摇树, 因此tsconfig.json要配置为"module": "es2015"]
 echo "====== rollup begins .....\n"
 ${ROOT}/node_modules/.bin/rollup -c ${ROOT}/rollup.config.js
 echo "====== rollup completes.\n"
