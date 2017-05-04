@@ -6,6 +6,9 @@ set -ex
 cd `dirname $0`
 ROOT=`dirname "$0"`
 
+PACKAGE="angular4-weui"
+OUTDIR="${ROOT}/dist/${PACKAGE}"
+
 # 检查版本号是否已设置
 VERSION=$(node -p "require('./package.json').version")
 
@@ -18,10 +21,10 @@ fi
 # clean
 rm -rf ${ROOT}/dist/angular4-weui
 
-# tsc编译
-echo "====== tsc begin to compile typescript files.....\n"
-${ROOT}/node_modules/typescript/bin/tsc -p ${ROOT}/src/app/weui/tsconfig.json
-echo "====== tsc compiles typescript files to dir: ${ROOT}/dist/angular4-weui \n"
+# ngc编译
+echo "====== ngc begin to compile typescript files.....\n"
+${ROOT}/node_modules/.bin/ngc -p ${ROOT}/src/app/weui/tsconfig.json
+echo "====== ngc compiles typescript files to dir: ${OUTDIR} \n"
 
 # rollup
 echo "====== rollup begins .....\n"
@@ -30,11 +33,10 @@ echo "====== rollup completes.\n"
 
 # uglifyjs
 echo "====== uglifyjs begins .....\n"
-${ROOT}/node_modules/.bin/uglifyjs  ${ROOT}/dist/angular4-weui/bundles/angular-weui.umd.js --screw-ie8 --compress --mangle --comments --output  ${ROOT}/dist/angular4-weui/bundles/angular-weui.umd.min.js
+${ROOT}/node_modules/.bin/uglifyjs  ${OUTDIR}/bundles/angular-weui.umd.js --screw-ie8 --compress --mangle --comments --output  ${OUTDIR}/bundles/angular-weui.umd.min.js
 echo "====== uglifyjs completes.\n"
 
 # copy files: package.json, README.md, css files
-PACKAGE="angular4-weui"
 SRCDIR="./src/app/weui"
 DESTDIR=./dist/${PACKAGE}
 

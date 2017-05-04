@@ -7,6 +7,7 @@
     "emitDecoratorMetadata": true,
     "strictNullChecks": false,
     "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
     "target": "es5",
     "module": "es2015",
     "moduleResolution": "node",
@@ -24,10 +25,7 @@
     "inlineSources": true,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
-    "lib": [
-      "es2015",
-      "dom"
-    ],
+    "lib": ["es2015", "dom"],
     "typeRoots": [
       "../../../node_modules/@types/"
     ]
@@ -37,7 +35,7 @@
     "../../../node_modules/zone.js/dist/zone.js.d.ts"
   ],
   "angularCompilerOptions": {
-    "skipMetadataEmit": false,
+    "skipMetadataEmit": true,
     "skipTemplateCodegen": true
   },
   "exclude": [
