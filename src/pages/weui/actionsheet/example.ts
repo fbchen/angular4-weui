@@ -11,6 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AbstractPage } from '../abstract-page';
 import { WeUIActionSheet } from '../../../app/weui/actionsheet/weui.actionsheet';
+import { Layer } from '../../../app/weui/overlay/layer';
 
 @Component({
     templateUrl: 'example.html'
@@ -30,7 +31,8 @@ export class ActionsheetExamplePage extends AbstractPage {
     constructor(
         public element: ElementRef,
         public router: Router,
-        public route: ActivatedRoute) {
+        public route: ActivatedRoute,
+        public layer: Layer) {
             super(element, router, route);
     }
 
@@ -47,13 +49,12 @@ export class ActionsheetExamplePage extends AbstractPage {
     }
 
     showIOSActionSheet2(): void {
-        // 修改了菜单列表，然后再显示
-        this.actionsheet_menu = [
+        const actionsheet_menu = [
             {text: '示例菜单5', value: '05'},
             {text: '示例菜单6', value: '06'},
             {text: '示例菜单7', value: '07'}
         ];
-        this.actionsheet1.show().then((menu: any) => {
+        this.layer.showActionsheet(actionsheet_menu).then((menu: any) => {
             console.log('您刚刚选择了:', menu);
         });
     }

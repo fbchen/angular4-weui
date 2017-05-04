@@ -11,6 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AbstractPage } from '../abstract-page';
 import { WeUIToast } from '../../../app/weui/toast/weui.toast';
+import { Layer } from '../../../app/weui/overlay/layer';
 
 @Component({
     templateUrl: 'example.html'
@@ -23,7 +24,8 @@ export class ToastExamplePage extends AbstractPage {
     constructor(
         public element: ElementRef,
         public router: Router,
-        public route: ActivatedRoute) {
+        public route: ActivatedRoute,
+        public layer: Layer) {
         super(element, router, route);
     }
 
@@ -37,6 +39,18 @@ export class ToastExamplePage extends AbstractPage {
         // 隐藏Toast
         setTimeout(() => {
             this.toast2.hide();
+        }, 2000);
+    }
+
+    showToast2(): void {
+        this.layer.showSuccess();
+    }
+
+    showLoadingToast2(): void {
+        const toast = this.layer.showLoading();
+
+        setTimeout(() => {
+            toast.hide(); // 隐藏Toast
         }, 2000);
     }
 

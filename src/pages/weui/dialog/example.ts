@@ -11,6 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AbstractPage } from '../abstract-page';
 import { WeUIDialog } from '../../../app/weui/dialog/weui.dialog';
+import { Layer } from '../../../app/weui/overlay/layer';
 
 @Component({
     templateUrl: 'example.html'
@@ -25,8 +26,10 @@ export class DialogExamplePage extends AbstractPage {
     constructor(
         public element: ElementRef,
         public router: Router,
-        public route: ActivatedRoute) {
+        public route: ActivatedRoute,
+        public layer: Layer) {
             super(element, router, route);
+            console.log(layer);
     }
 
     showIOSDialog1(): void {
@@ -55,6 +58,23 @@ export class DialogExamplePage extends AbstractPage {
 
     showAndroidDialog2(): void {
         this.dialog4.show().then(() => {
+            console.log('您刚刚选择了: OK');
+        }, () => {
+            console.log('您刚刚选择了: NO');
+        });
+    }
+
+
+    showAlert(): void {
+        this.layer.showAlert('你好，世界!').then(() => {
+            console.log('您刚刚选择了: OK');
+        }, () => {
+            console.log('您刚刚选择了: NO');
+        });
+    }
+
+    showConfirm(): void {
+        this.layer.showConfirm({content: '你好，世界?', title: '系统消息', btnOKText: '朕知道了'}).then(() => {
             console.log('您刚刚选择了: OK');
         }, () => {
             console.log('您刚刚选择了: NO');

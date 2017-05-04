@@ -6,7 +6,7 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, HostBinding, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, Input, HostBinding, OnChanges, SimpleChange, SimpleChanges, Renderer, ElementRef } from '@angular/core';
 
 /**
  * Toast - 弹出式提示
@@ -29,8 +29,8 @@ export class WeUIToast implements OnChanges {
      * @i18n
      */
     defaults: any = {
-       loadingText: '数据加载中',
-       successText: '操作成功'
+        loadingText: '数据加载中',
+        successText: '操作成功'
     };
 
     /**
@@ -38,9 +38,9 @@ export class WeUIToast implements OnChanges {
      */
     @Input() content: string;
 
-   /**
-     * 状态，取值：loading, success
-     */
+    /**
+      * 状态，取值：loading, success
+      */
     @Input() status: string;
 
     /**
@@ -66,7 +66,9 @@ export class WeUIToast implements OnChanges {
      */
     private shown = false;
 
-    constructor() {
+    constructor(
+        private renderer: Renderer,
+        private elementRef: ElementRef) {
 
     }
 

@@ -133,9 +133,10 @@
 
         <div class="weui-btn-area">
             <weui-button color="primary" (click)="showError()">确定</weui-button>
+            <weui-button (click)="showError2()">显示错误</weui-button>
         </div>
     </form>
-    <div class="page__bd page__bd_spacing">
+    <div class="page__bd page__bd_spacing" style="padding-top: 20px">
         <div>表单内容：</div>
         <pre>{{ form.value | json }}</pre>
     </div>

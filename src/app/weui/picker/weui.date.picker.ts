@@ -93,7 +93,8 @@ function getActualMaximumDate(year: number, month: number): number {
                     [options]="options" [value]="value[i]" (change)="onChange($event, i)"></weui-picker-group>
             </div>
         </div>
-    `
+    `,
+    exportAs: 'weuiDatePicker'
 })
 export class WeUIDatePicker extends WeUIPicker implements OnInit, AfterViewInit {
 

@@ -12,6 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AbstractPage } from '../abstract-page';
 
 import { WeUITopTips } from '../../../app/weui/toptips/weui.toptip';
+import { Layer } from '../../../app/weui/overlay/layer';
 
 @Component({
     templateUrl: 'example.html'
@@ -35,7 +36,8 @@ export class InputExamplePage extends AbstractPage {
     constructor(
         public element: ElementRef,
         public router: Router,
-        public route: ActivatedRoute) {
+        public route: ActivatedRoute,
+        public layer: Layer) {
         super(element, router, route);
     }
 
@@ -44,6 +46,10 @@ export class InputExamplePage extends AbstractPage {
      */
     showError(): void {
         this.toptips.show();
+    }
+
+    showError2(): void {
+        this.layer.showError('用户名不能为空！');
     }
 
     /**

@@ -50,6 +50,7 @@ import { WeUIActionSheet } from './actionsheet/weui.actionsheet';
 import { WeUIDialog } from './dialog/weui.dialog';
 import { WeUIToast } from './toast/weui.toast';
 import { WeUITopTips } from './toptips/weui.toptip';
+import { Layer } from './overlay/layer';
 
 /**
  * Export Components/Directives
@@ -175,7 +176,7 @@ export { WeUITopTips } from './toptips/weui.toptip';
         WeUIToast,
         WeUITopTips
     ],
-    providers: []
+    providers: [Layer]
 })
 export class WeUIModule {
 

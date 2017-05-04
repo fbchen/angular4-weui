@@ -53,7 +53,8 @@ export class PickerOption {
                     [options]="options" [value]="value[i]" (change)="onChange($event, i)"></weui-picker-group>
             </div>
         </div>
-    `
+    `,
+    exportAs: 'weuiPicker'
 })
 export class WeUIPicker {
 
