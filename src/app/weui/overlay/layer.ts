@@ -35,7 +35,7 @@ export class Layer {
         return div;
     }
 
-    private _createCompInstance<T>(component: Type<T>): T {
+    private _createCompInstance<T>(component: Type<T>): ComponentRef<T> {
         const componentFactory = this._componentFactoryResolver.resolveComponentFactory(component);
         const componentRef: ComponentRef<T> = componentFactory.create(this._injector);
         this._appRef.attachView(componentRef.hostView);
@@ -45,11 +45,15 @@ export class Layer {
         const _hostDomElement = this._createDivElement();
         _hostDomElement.appendChild(this._getComponentRootNode(componentRef));
 
-        return componentRef.instance;
+        return componentRef;
     }
 
     private _createDialog(): WeUIDialog {
-        return this._createCompInstance(WeUIDialog);
+        const componentRef = this._createCompInstance(WeUIDialog);
+        componentRef.instance.deactivate.subscribe(() => {
+            componentRef.destroy();
+        });
+        return componentRef.instance;
     }
 
     /**
@@ -91,7 +95,11 @@ export class Layer {
     }
 
     private _createToast(): WeUIToast {
-        return this._createCompInstance(WeUIToast);
+        const componentRef = this._createCompInstance(WeUIToast);
+        componentRef.instance.deactivate.subscribe(() => {
+            componentRef.destroy();
+        });
+        return componentRef.instance;
     }
 
     /**
@@ -129,7 +137,12 @@ export class Layer {
      * @param message  错误消息
      */
     public showError(message: string): void {
-        const tip: WeUITopTips = this._createCompInstance(WeUITopTips);
+        const componentRef = this._createCompInstance(WeUITopTips);
+        componentRef.instance.deactivate.subscribe(() => {
+            componentRef.destroy();
+        });
+
+        const tip: WeUITopTips = componentRef.instance;
         if (message) {
             tip.content = message;
         }
@@ -137,7 +150,11 @@ export class Layer {
     }
 
     private _createActionSheet(): WeUIActionSheet {
-        return this._createCompInstance(WeUIActionSheet);
+        const componentRef = this._createCompInstance(WeUIActionSheet);
+        componentRef.instance.deactivate.subscribe(() => {
+            componentRef.destroy();
+        });
+        return componentRef.instance;
     }
 
     /**

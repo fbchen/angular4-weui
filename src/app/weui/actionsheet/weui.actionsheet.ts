@@ -6,7 +6,7 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, HostBinding } from '@angular/core';
+import { Component, Input, Output, HostBinding, EventEmitter } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/core';
 
 @Component({
@@ -52,6 +52,11 @@ export class WeUIActionSheet {
      * @i18n 取消
      */
     @Input() cancelText: string = this.defaults.cancelText;
+
+    /**
+     * 隐藏对象
+     */
+    @Output() deactivate = new EventEmitter<any>();
 
     /**
      * 安卓模式下的特殊样式
@@ -109,6 +114,7 @@ export class WeUIActionSheet {
         this.shown = false;
         setTimeout(() => {
             this._show = false;
+            this.deactivate.emit();
         }, 200);
     }
 

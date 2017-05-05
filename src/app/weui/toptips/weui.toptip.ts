@@ -6,7 +6,7 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 /**
  * TopTips - 顶部提示
@@ -21,6 +21,11 @@ export class WeUITopTips {
      * 内容
      */
     @Input() content: string;
+
+    /**
+     * 隐藏对象
+     */
+    @Output() deactivate = new EventEmitter<any>();
 
     /**
      * 样式控制
@@ -52,6 +57,7 @@ export class WeUITopTips {
      */
     hide(): void {
         this.shown = false;
+        this.deactivate.emit();
     }
 
 }

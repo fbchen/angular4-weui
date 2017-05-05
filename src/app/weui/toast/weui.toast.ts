@@ -6,7 +6,8 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, HostBinding, OnChanges, SimpleChange, SimpleChanges, Renderer, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostBinding, OnChanges } from '@angular/core';
+import { SimpleChange, SimpleChanges, Renderer, ElementRef } from '@angular/core';
 
 /**
  * Toast - 弹出式提示
@@ -54,6 +55,11 @@ export class WeUIToast implements OnChanges {
     @Input() success = true;
 
     /**
+     * 隐藏对象
+     */
+    @Output() deactivate = new EventEmitter<any>();
+
+    /**
      * 样式控制
      */
     @HostBinding('class.weui-hide') get hideCls(): boolean {
@@ -99,6 +105,7 @@ export class WeUIToast implements OnChanges {
      */
     hide(): void {
         this.shown = false;
+        this.deactivate.emit();
     }
 
 }

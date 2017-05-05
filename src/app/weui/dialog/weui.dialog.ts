@@ -6,7 +6,7 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, HostBinding } from '@angular/core';
+import { Component, Input, Output, HostBinding, EventEmitter } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/core';
 
 @Component({
@@ -71,6 +71,11 @@ export class WeUIDialog {
     @Input() showNOButton = true;
 
     /**
+     * 隐藏对象
+     */
+    @Output() deactivate = new EventEmitter<any>();
+
+    /**
      * 用于控制动画的触发(trigger)
      */
     @HostBinding('@visibility') get visibility(): string {
@@ -109,6 +114,7 @@ export class WeUIDialog {
      */
     hide(): void {
         this.shown = false;
+        this.deactivate.emit();
     }
 
     /**
