@@ -1,7 +1,5 @@
 import {
-    TemplateRef,
     ViewContainerRef,
-    ElementRef,
     ComponentRef,
     Injector
 } from '@angular/core';
@@ -123,7 +121,7 @@ export abstract class BasePortalHost implements PortalHost {
   private _disposeFn: () => void;
 
   /** Whether this host has already been permanently disposed. */
-  private _isDisposed: boolean = false;
+  private _isDisposed = false;
 
   /** Whether this host has an attached portal. */
   hasAttached(): boolean {

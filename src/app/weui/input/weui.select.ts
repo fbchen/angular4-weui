@@ -10,6 +10,7 @@ import { Directive, Host, Renderer2, ElementRef, Optional, AfterViewInit } from 
 import { WeUIItem } from '../list/weui.item';
 
 @Directive({
+    // tslint:disable-next-line:directive-selector
     selector: 'select'
 })
 export class WeUISelect implements AfterViewInit {

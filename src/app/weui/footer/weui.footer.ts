@@ -42,6 +42,7 @@ export class WeUIFooter {
 }
 
 @Directive({
+    // tslint:disable-next-line:directive-selector
     selector: 'weui-footer-text,[weui-footer-text]'
 })
 export class WeUIFooterText {
@@ -58,6 +59,7 @@ export class WeUIFooterText {
 }
 
 @Directive({
+    // tslint:disable-next-line:directive-selector
     selector: 'weui-footer-links,[weui-footer-links]'
 })
 export class WeUIFooterLinks {
@@ -74,6 +76,7 @@ export class WeUIFooterLinks {
 }
 
 @Directive({
+    // tslint:disable-next-line:directive-selector
     selector: 'a'
 })
 export class WeUIFooterLink {

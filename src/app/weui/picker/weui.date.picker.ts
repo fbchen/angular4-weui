@@ -82,7 +82,9 @@ function getActualMaximumDate(year: number, month: number): number {
     template: `
         <div class="weui-mask" (click)="onCancel()"
             [ngClass]="{'weui-animate-fade-in': shown, 'weui-animate-fade-out': !shown}"></div>
-        <div class="weui-picker" [ngClass]="{'weui-animate-slide-up': shown, 'weui-animate-slide-down': !shown}" (animationend)="onAnimationEnd($event)">
+        <div class="weui-picker"
+            [ngClass]="{'weui-animate-slide-up': shown, 'weui-animate-slide-down': !shown}"
+            (animationend)="onAnimationEnd($event)">
             <div class="weui-picker__hd">
                 <a href="javascript:;" class="weui-picker__action" (click)="onCancel()">{{cancelText}}  </a>
                 <a href="javascript:;" class="weui-picker__action" (click)="onConfirm()">{{confirmText}}</a>

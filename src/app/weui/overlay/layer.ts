@@ -3,7 +3,7 @@ import { ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Injectable, Ap
 import { WeUIDialog } from '../dialog/weui.dialog';
 import { WeUIToast } from '../toast/weui.toast';
 import { WeUITopTips } from '../toptips/weui.toptip';
-import { WeUIActionSheet } from '../actionsheet/weui.actionsheet'
+import { WeUIActionSheet } from '../actionsheet/weui.actionsheet';
 
 /** Next overlay unique ID. */
 let nextUniqueId = 0;

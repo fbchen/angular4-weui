@@ -12,6 +12,7 @@ import { Inject, forwardRef } from '@angular/core';
 import { WeUINavBar } from './weui.navbar';
 
 @Directive({
+    // tslint:disable-next-line:directive-selector
     selector: 'weui-navbar-item,[weui-navbar-item]'
 })
 export class WeUINavBarItem {

@@ -13,6 +13,7 @@ import { WeUITabBar } from './weui.tabbar';
 
 
 @Directive({
+    // tslint:disable-next-line:directive-selector
     selector: 'weui-tabbar-item,[weui-tabbar-item]'
 })
 export class WeUITabBarItem {

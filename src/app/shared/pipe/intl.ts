@@ -30,8 +30,8 @@ export class NumberFormatter {
             style: NumberFormatStyle[style].toLowerCase()
         };
 
-        if (style == NumberFormatStyle.Currency) {
-            options.currency = typeof currency == 'string' ? currency : undefined;
+        if (style === NumberFormatStyle.Currency) {
+            options.currency = typeof currency === 'string' ? currency : undefined;
             options.currencyDisplay = currencyAsSymbol ? 'symbol' : 'code';
         }
         return new Intl.NumberFormat(locale, options).format(num);
@@ -123,7 +123,7 @@ const DATE_FORMATS: { [format: string]: DateFormatterFn } = {
 function digitModifier(inner: DateFormatterFn): DateFormatterFn {
     return function (date: Date, locale: string): string {
         const result = inner(date, locale);
-        return result.length == 1 ? '0' + result : result;
+        return result.length === 1 ? '0' + result : result;
     };
 }
 
@@ -185,7 +185,9 @@ const DATE_FORMATTER_CACHE = new Map<string, string[]>();
 function dateFormatter(format: string, date: Date, locale: string): string {
     const fn = PATTERN_ALIASES[format];
 
-    if (fn) return fn(date, locale);
+    if (fn) {
+        return fn(date, locale);
+    }
 
     const cacheKey = format;
     let parts = DATE_FORMATTER_CACHE.get(cacheKey);
@@ -211,8 +213,8 @@ function dateFormatter(format: string, date: Date, locale: string): string {
     }
 
     return parts.reduce((text, part) => {
-        const fn = DATE_FORMATS[part];
-        return text + (fn ? fn(date, locale) : partToTime(part));
+        const _fn = DATE_FORMATS[part];
+        return text + (_fn ? _fn(date, locale) : partToTime(part));
     }, '');
 }
 
