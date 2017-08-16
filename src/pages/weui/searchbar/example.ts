@@ -53,7 +53,7 @@ export class SearchBarExamplePage extends AbstractPage implements OnInit {
         return item.title.toUpperCase().indexOf(this.value.toUpperCase()) >= 0;
     }
 
-    get filterFn(): Function {
+    get _filterFn(): Function {
         return this.filter.bind(this);
     }
 

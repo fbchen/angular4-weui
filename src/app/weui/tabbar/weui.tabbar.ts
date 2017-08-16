@@ -41,7 +41,9 @@ export class WeUITabBar implements AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        this.activateAt(this.activeIndex);
+        setTimeout(() => {
+            this.activateAt(this.activeIndex);
+        }, 1);
     }
 
     getAt(index: number): WeUITabBarItem {

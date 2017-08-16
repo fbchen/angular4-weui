@@ -6,7 +6,7 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, HostBinding, Renderer, ElementRef } from '@angular/core';
+import { Component, Input, HostBinding, Renderer2, ElementRef } from '@angular/core';
 import { Directive, Host, Optional } from '@angular/core';
 
 /**
@@ -47,11 +47,11 @@ export class WeUIFooter {
 export class WeUIFooterText {
 
     constructor(
-        private _renderer: Renderer,
+        private _renderer: Renderer2,
         private _elementRef: ElementRef,
         @Optional() @Host() private _container: WeUIFooter) {
         if (_container !== null) {
-            _renderer.setElementClass(_elementRef.nativeElement, 'weui-footer__text', true);
+            _renderer.addClass(_elementRef.nativeElement, 'weui-footer__text');
         }
     }
 
@@ -63,11 +63,11 @@ export class WeUIFooterText {
 export class WeUIFooterLinks {
 
     constructor(
-        private _renderer: Renderer,
+        private _renderer: Renderer2,
         private _elementRef: ElementRef,
         @Optional() @Host() private _container: WeUIFooter) {
         if (_container !== null) {
-            _renderer.setElementClass(_elementRef.nativeElement, 'weui-footer__links', true);
+            _renderer.addClass(_elementRef.nativeElement, 'weui-footer__links');
         }
     }
 
@@ -79,11 +79,11 @@ export class WeUIFooterLinks {
 export class WeUIFooterLink {
 
     constructor(
-        private _renderer: Renderer,
+        private _renderer: Renderer2,
         private _elementRef: ElementRef,
         @Optional() @Host() private _container: WeUIFooterLinks) {
         if (_container !== null) {
-            _renderer.setElementClass(_elementRef.nativeElement, 'weui-footer__link', true);
+            _renderer.addClass(_elementRef.nativeElement, 'weui-footer__link');
         }
     }
 

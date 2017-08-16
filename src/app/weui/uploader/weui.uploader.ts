@@ -6,7 +6,7 @@
  * found in the LICENSE file.
  */
 
-import { Component, Renderer, ElementRef, ViewChild, forwardRef } from '@angular/core';
+import { Component, Renderer2, ElementRef, ViewChild, forwardRef } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { WeUIGallery } from '../gallery/weui.gallery';
@@ -119,7 +119,7 @@ export class WeUIUploader {
     public image: WeUIFile;
 
     constructor(
-        private renderer: Renderer,
+        private renderer: Renderer2,
         private elementRef: ElementRef,
         private sanitizer: DomSanitizer) {
 

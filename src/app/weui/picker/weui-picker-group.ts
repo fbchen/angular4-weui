@@ -6,7 +6,7 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, Output, EventEmitter, HostListener, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener, AfterViewInit } from '@angular/core';
 import { PickerOption } from './weui.picker';
 
 /**
@@ -30,7 +30,7 @@ const getWindowHeight = (): number => {
         </div>
     `
 })
-export class WeUIPickerGroup implements OnInit {
+export class WeUIPickerGroup implements AfterViewInit {
 
     /**
      * 默认参数
@@ -84,8 +84,10 @@ export class WeUIPickerGroup implements OnInit {
 
     }
 
-    ngOnInit(): void {
-        this.init();
+    ngAfterViewInit(): void {
+        setTimeout(() => {
+            this.init();
+        }, 1);
     }
 
     forceChange(): void {

@@ -6,7 +6,7 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, Renderer, ElementRef, ViewChild, forwardRef } from '@angular/core';
+import { Component, Input, Renderer2, ElementRef, ViewChild, forwardRef } from '@angular/core';
 import { DefaultValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 
@@ -79,7 +79,7 @@ export class WeUISlider extends DefaultValueAccessor {
     private start: number; // 起始位置
     private startX: number; // 鼠标起始点
 
-    constructor(private renderer: Renderer, private elementRef: ElementRef) {
+    constructor(private renderer: Renderer2, private elementRef: ElementRef) {
         super(renderer, elementRef, null);
     }
 

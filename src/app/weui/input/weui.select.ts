@@ -6,7 +6,7 @@
  * found in the LICENSE file.
  */
 
-import { Directive, Host, Renderer, ElementRef, Optional, AfterViewInit } from '@angular/core';
+import { Directive, Host, Renderer2, ElementRef, Optional, AfterViewInit } from '@angular/core';
 import { WeUIItem } from '../list/weui.item';
 
 @Directive({
@@ -15,7 +15,7 @@ import { WeUIItem } from '../list/weui.item';
 export class WeUISelect implements AfterViewInit {
 
     constructor(
-        private _renderer: Renderer,
+        private _renderer: Renderer2,
         private _elementRef: ElementRef,
         @Optional() @Host() private _container: WeUIItem) {
 
@@ -27,7 +27,7 @@ export class WeUISelect implements AfterViewInit {
         }
 
         const nativeEl = this._elementRef.nativeElement as HTMLElement;
-        this._renderer.setElementClass(nativeEl, 'weui-select', true);
+        this._renderer.addClass(nativeEl, 'weui-select');
         this._container.addClass('weui-cell_select');
 
         const parentEl = nativeEl.parentElement;

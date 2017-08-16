@@ -6,7 +6,7 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, Output, EventEmitter, Renderer, ElementRef, HostBinding, ContentChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter, Renderer2, ElementRef, HostBinding, ContentChild } from '@angular/core';
 import { forwardRef, ViewEncapsulation } from '@angular/core';
 import { NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { WeUIFormControl } from './weui.form.control';
@@ -150,7 +150,7 @@ export class WeUIInput extends WeUIFormControl {
     // 实际输入控件(<input>)
     @ContentChild(NgControl) state: NgControl;
 
-    constructor(private renderer: Renderer, private elementRef: ElementRef) {
+    constructor(private renderer: Renderer2, private elementRef: ElementRef) {
         super(renderer, elementRef, null);
     }
 

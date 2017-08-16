@@ -223,6 +223,9 @@ export class WeUIDatePicker extends WeUIPicker implements OnInit, AfterViewInit 
         if (!this.monthPicker) {
             return;
         }
+        if (!this.value || !this.value.length || !this.value[0]) {
+            return;
+        }
 
         const year: number = this.value[0].value;
         const months = nexts(this.cron, year);

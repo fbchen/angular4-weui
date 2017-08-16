@@ -8,7 +8,7 @@
         <weui-searchbar (search)="search($event)"></weui-searchbar>
 
         <div class="weui-cells searchbar-result" [ngStyle]="{display: showResult ? 'block' : 'none'}">
-            <div class="weui-cell weui-cell_access" *ngFor="let item of list | arrayfilter: filterFn">
+            <div class="weui-cell weui-cell_access" *ngFor="let item of list | arrayfilter: _filterFn">
                 <div class="weui-cell__bd weui-cell_primary">
                     <p>{{item.title}}</p>
                 </div>

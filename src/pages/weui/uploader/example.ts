@@ -10,6 +10,10 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/observable/from';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/concatMap';
+
 import { AbstractPage } from '../abstract-page';
 
 import { WeUIUploader, WeUIFile } from '../../../app/weui/uploader/weui.uploader';

@@ -6,7 +6,7 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, Renderer, ElementRef, HostBinding } from '@angular/core';
+import { Component, Input, Renderer2, ElementRef, HostBinding } from '@angular/core';
 
 @Component({
     selector: 'weui-item',
@@ -42,12 +42,12 @@ export class WeUIItem {
         return ['weui-cell weui-item', basicCls, (this.additionalCls || '')].join(' ');
     }
 
-    constructor(private _renderer: Renderer, private _elementRef: ElementRef) {
+    constructor(private _renderer: Renderer2, private _elementRef: ElementRef) {
 
     }
 
     addClass(cls: string): void {
-        this._renderer.setElementClass(this._elementRef.nativeElement, cls, true);
+        this._renderer.addClass(this._elementRef.nativeElement, cls);
     }
 
 }

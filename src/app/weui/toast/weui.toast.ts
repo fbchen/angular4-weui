@@ -7,7 +7,7 @@
  */
 
 import { Component, Input, Output, EventEmitter, HostBinding, OnChanges } from '@angular/core';
-import { SimpleChange, SimpleChanges, Renderer, ElementRef } from '@angular/core';
+import { SimpleChange, SimpleChanges, Renderer2, ElementRef } from '@angular/core';
 
 /**
  * Toast - 弹出式提示
@@ -73,7 +73,7 @@ export class WeUIToast implements OnChanges {
     private shown = false;
 
     constructor(
-        private renderer: Renderer,
+        private renderer: Renderer2,
         private elementRef: ElementRef) {
 
     }

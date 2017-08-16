@@ -6,7 +6,7 @@
  * found in the LICENSE file.
  */
 
-import { Input, Renderer, ElementRef, Inject, Optional } from '@angular/core';
+import { Input, Renderer2, ElementRef, Inject, Optional } from '@angular/core';
 import { DefaultValueAccessor } from '@angular/forms';
 import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
 
@@ -96,7 +96,7 @@ export /*abstract*/ class WeUIFormControl extends DefaultValueAccessor {
     }
 
     constructor(
-        @Inject(Renderer) private __renderer: Renderer,
+        @Inject(Renderer2) private __renderer: Renderer2,
         @Inject(ElementRef) private __elementRef: ElementRef,
         @Optional() @Inject(COMPOSITION_BUFFER_MODE) private __compositionMode: boolean) {
         super(__renderer, __elementRef, __compositionMode);
