@@ -3,11 +3,17 @@
 set -ex
 
 # 切换到根目录
-cd `dirname $0`
-ROOT=`dirname "$0"`
+ROOT=`pwd`
 
 PACKAGE="angular4-weui"
 OUTDIR="${ROOT}/dist/${PACKAGE}"
+
+N="
+"
+TSC=${ROOT}/node_modules/.bin/tsc
+NGC=${ROOT}/node_modules/.bin/ngc
+UGLIFYJS=${ROOT}/node_modules/.bin/uglifyjs
+ROLLUP=${ROOT}/node_modules/.bin/rollup
 
 # 检查版本号是否已设置
 VERSION=$(node -p "require('./package.json').version")
@@ -22,18 +28,20 @@ fi
 rm -rf ${ROOT}/dist/angular4-weui
 
 # ngc编译
+TSCONFIG="${ROOT}/src/app/weui/tsconfig.json"
 echo "====== ngc begin to compile typescript files.....\n"
-${ROOT}/node_modules/.bin/ngc -p ${ROOT}/src/app/weui/tsconfig.json
+  $TSC -p ${TSCONFIG}
+
 echo "====== ngc compiles typescript files to dir: ${OUTDIR} \n"
 
 # rollup - 摇树优化（Tree shaking）[Rollup只能对ES2015模块摇树, 因此tsconfig.json要配置为"module": "es2015"]
 echo "====== rollup begins .....\n"
-${ROOT}/node_modules/.bin/rollup -c ${ROOT}/rollup.config.js
+  $ROLLUP -c ${ROOT}/rollup.config.js
 echo "====== rollup completes.\n"
 
 # uglifyjs
 echo "====== uglifyjs begins .....\n"
-${ROOT}/node_modules/.bin/uglifyjs  ${OUTDIR}/bundles/angular-weui.umd.js --screw-ie8 --compress --mangle --comments --output  ${OUTDIR}/bundles/angular-weui.umd.min.js
+  $UGLIFYJS  ${OUTDIR}/bundles/angular-weui.umd.js --screw-ie8 --compress --mangle --comments --output  ${OUTDIR}/bundles/angular-weui.umd.min.js
 echo "====== uglifyjs completes.\n"
 
 # copy files: package.json, README.md, css files
