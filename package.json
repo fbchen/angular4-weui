@@ -6,8 +6,7 @@
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
-    "start": "webpack-dev-server --port=4200",
-    "build": "webpack",
+    "start": "ng serve",
     "package": "ng build -prod --aot",
     "lint": "ng lint",
     "lite": "lite-server"
@@ -31,10 +30,10 @@
     "font-awesome": "~4.7.0"
   },
   "devDependencies": {
-    "@angular/cli": "latest",
+    "@angular/cli": "^1.3.0",
     "@angular/compiler-cli": "^4.1.0",
     "@types/jasmine": "^2.5.47",
-    "@types/node": "^7.0.14",
+    "@types/node": "^8.0.0",
     "codelyzer": "^2.0.0",
     "concurrently": "^3.4.0",
     "rollup": "^0.41.5",
@@ -43,7 +42,7 @@
     "rollup-plugin-uglify": "^1.0.1",
     "ts-node": "^3.0.2",
     "tslint": "^4.5.0",
-    "typescript": "~2.2.0",
+    "typescript": "~2.3.0",
     "uglify-js": "^2.8.22",
     "webpack-dev-server": "~2.4.2",
     "autoprefixer": "^6.5.3",
