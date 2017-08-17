@@ -10,8 +10,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AbstractPage } from '../abstract-page';
-import { WeUIToast } from '../../../app/weui/toast/weui.toast';
-import { Layer } from '../../../app/weui/overlay/layer';
+import { WeUIToast, Layer } from '../../../app/weui';
 
 @Component({
     templateUrl: 'example.html'

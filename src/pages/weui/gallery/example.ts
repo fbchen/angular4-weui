@@ -10,7 +10,7 @@ import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AbstractPage } from '../abstract-page';
-import { WeUIGallery } from '../../../app/weui/gallery/weui.gallery';
+import { WeUIGallery } from '../../../app/weui';
 
 
 @Component({

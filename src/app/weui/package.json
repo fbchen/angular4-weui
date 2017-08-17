@@ -10,9 +10,9 @@
     "type": "git",
     "url": "https://github.com/fbchen/angular4-weui.git"
   },
-  "main": "bundles/angular-weui.umd.js",
+  "main": "es2015/index.umd.js",
   "module": "index.js",
-  "typings": "index.d.ts",
+  "typings": "angular-weui.d.ts",
   "peerDependencies": {
     "@angular/common": "^4.2.4",
     "@angular/core": "^4.2.4",

@@ -11,8 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AbstractPage } from '../abstract-page';
 
-import { WeUITopTips } from '../../../app/weui/toptips/weui.toptip';
-import { Layer } from '../../../app/weui/overlay/layer';
+import { WeUITopTips, Layer } from '../../../app/weui';
 
 @Component({
     templateUrl: 'example.html'

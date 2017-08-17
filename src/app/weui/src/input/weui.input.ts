@@ -7,8 +7,8 @@
  */
 
 import { Component, Input, Output, EventEmitter, Renderer2, ElementRef, HostBinding, ContentChild } from '@angular/core';
-import { forwardRef, ViewEncapsulation } from '@angular/core';
-import { NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { forwardRef, ViewEncapsulation, Optional, Inject } from '@angular/core';
+import { NgControl, NG_VALUE_ACCESSOR, COMPOSITION_BUFFER_MODE } from '@angular/forms';
 import { WeUIFormControl } from './weui.form.control';
 
 const WEUI_INPUT_CONTROL_VALUE_ACCESSOR: any = {
@@ -93,13 +93,13 @@ export class WeUIInput extends WeUIFormControl {
      * max 属性规定输入字段所允许的最大值。<br>
      * 注释：max 和 min 属性适用于以下 <input> 类型：number, range, date, datetime, datetime-local, month, time 以及 week。
      */
-    @Input() max: number|Date;
+    @Input() max: number | Date;
 
     /**
      * min 属性规定输入字段所允许的最小值。<br>
      * 注释：max 和 min 属性适用于以下 <input> 类型：number, range, date, datetime, datetime-local, month, time 以及 week。
      */
-    @Input() min: number|Date;
+    @Input() min: number | Date;
 
     /**
      * 是否必填
@@ -150,8 +150,11 @@ export class WeUIInput extends WeUIFormControl {
     // 实际输入控件(<input>)
     @ContentChild(NgControl) state: NgControl;
 
-    constructor(private renderer: Renderer2, private elementRef: ElementRef) {
-        super(renderer, elementRef, null);
+    constructor(
+        private renderer: Renderer2,
+        private elementRef: ElementRef,
+        @Optional() @Inject(COMPOSITION_BUFFER_MODE) private compositionMode: boolean) {
+        super(renderer, elementRef, compositionMode);
     }
 
     /**
@@ -166,7 +169,7 @@ export class WeUIInput extends WeUIFormControl {
      * 扩展样式，如：weui-cell_example
      */
     @HostBinding('class.weui-cell_warn') get warnCls(): boolean {
-        return this.state.invalid;
+        return this.state.invalid === true;
     }
 
     /**

@@ -10,8 +10,7 @@ import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AbstractPage } from '../abstract-page';
-import { WeUIPicker } from '../../../app/weui/picker/weui.picker';
-import { WeUIDatePicker } from '../../../app/weui/picker/weui.date.picker';
+import { WeUIPicker, WeUIDatePicker } from '../../../app/weui';
 
 @Component({
     templateUrl: 'example.html'

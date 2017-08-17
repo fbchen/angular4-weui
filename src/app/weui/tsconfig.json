@@ -5,7 +5,7 @@
     "stripInternal": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
     "target": "es5",
@@ -26,20 +26,17 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "lib": ["es2015", "dom"],
-    "typeRoots": [
-      "../../../node_modules/@types/"
-    ]
+    // don't auto-discover @types/node, it results in a ///<reference in the .d.ts output
+    "types": []
   },
   "files": [
     "index.ts",
     "../../../node_modules/zone.js/dist/zone.js.d.ts"
   ],
   "angularCompilerOptions": {
-    "skipMetadataEmit": true,
-    "skipTemplateCodegen": true
-  },
-  "exclude": [
-    "test.ts",
-    "**/*.spec.ts"
-  ]
+    "annotateForClosureCompiler": true,
+    "strictMetadataEmit": true,
+    "flatModuleOutFile": "index.js",
+    "flatModuleId": "angular4-weui"
+  }
 }

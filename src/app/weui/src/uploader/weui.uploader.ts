@@ -33,7 +33,7 @@ export class WeUIFile {
     /**
      * 错误消息
      */
-    error: string | Error;
+    error: string | Error | null;
 
     /**
      * 是否正在上传
@@ -153,9 +153,14 @@ export class WeUIUploader {
      */
     onSelect(event: Event): void {
         const picker = event.target as HTMLInputElement;
-        const length = picker.files.length;
+        const files = picker && picker.files;
+        if (!files) {
+            return;
+        }
+
+        const length = files.length;
         for (let i = 0; i < length; i++) {
-            const file: File = picker.files.item(i);
+            const file: File = files.item(i);
             const url: string = 'url(' + window.URL.createObjectURL(file) + ')';
             const safeUrl = this.sanitizer.bypassSecurityTrustStyle(url);
             this.files.push(new WeUIFile(file, safeUrl));

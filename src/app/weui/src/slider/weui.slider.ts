@@ -6,8 +6,8 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, Renderer2, ElementRef, ViewChild, forwardRef } from '@angular/core';
-import { DefaultValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, Input, Renderer2, ElementRef, ViewChild, forwardRef, Optional, Inject } from '@angular/core';
+import { DefaultValueAccessor, NG_VALUE_ACCESSOR, COMPOSITION_BUFFER_MODE } from '@angular/forms';
 
 
 const WEUI_FORM_CONTROL_VALUE_ACCESSOR: any = {
@@ -79,8 +79,11 @@ export class WeUISlider extends DefaultValueAccessor {
     private start: number; // 起始位置
     private startX: number; // 鼠标起始点
 
-    constructor(private renderer: Renderer2, private elementRef: ElementRef) {
-        super(renderer, elementRef, null);
+    constructor(
+        private renderer: Renderer2,
+        private elementRef: ElementRef,
+        @Optional() @Inject(COMPOSITION_BUFFER_MODE) private compositionMode: boolean) {
+        super(renderer, elementRef, compositionMode);
     }
 
     onTouchStart(event: TouchEvent): void {

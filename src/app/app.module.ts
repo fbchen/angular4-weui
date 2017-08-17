@@ -9,6 +9,7 @@
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CoreModule } from './core/core.module';
 
@@ -24,6 +25,7 @@ import { WeUIExample } from '../pages/weui/weui.example';
     imports: [
         HttpModule,
         CoreModule,
+        BrowserAnimationsModule,
         WeUIModule,
         WeUIExampleModule,
         RouterModule.forRoot([])

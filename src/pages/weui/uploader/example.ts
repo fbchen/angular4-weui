@@ -16,7 +16,7 @@ import 'rxjs/add/operator/concatMap';
 
 import { AbstractPage } from '../abstract-page';
 
-import { WeUIUploader, WeUIFile } from '../../../app/weui/uploader/weui.uploader';
+import { WeUIUploader, WeUIFile } from '../../../app/weui';
 
 @Component({
     templateUrl: 'example.html'

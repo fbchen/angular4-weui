@@ -32,10 +32,10 @@ export class WeUISelect implements AfterViewInit {
         this._container.addClass('weui-cell_select');
 
         const parentEl = nativeEl.parentElement;
-        if (parentEl.classList.contains('weui-cell__hd')) {
+        if (parentEl && parentEl.classList.contains('weui-cell__hd')) {
             this._container.addClass('weui-cell_select-before');
         }
-        if (parentEl.classList.contains('weui-cell__bd')) {
+        if (parentEl && parentEl.classList.contains('weui-cell__bd')) {
             this._container.addClass('weui-cell_select-after');
         }
     }

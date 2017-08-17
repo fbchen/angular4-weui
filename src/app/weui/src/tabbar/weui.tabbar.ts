@@ -7,13 +7,14 @@
  */
 
 import { Component, Input, Output, EventEmitter, HostBinding, AfterViewInit, ContentChildren, QueryList } from '@angular/core';
-import { WeUINavBarItem } from './weui.navbar.item';
+
+import { WeUITabBarItem } from './weui.tabbar.item';
 
 @Component({
-    selector: 'weui-navbar',
+    selector: 'weui-tabbar',
     template: `<ng-content></ng-content>`
 })
-export class WeUINavBar implements AfterViewInit {
+export class WeUITabBar implements AfterViewInit {
 
     /**
      * 初始激活的子对象
@@ -23,15 +24,15 @@ export class WeUINavBar implements AfterViewInit {
     /**
      * 设置基本样式
      */
-    @HostBinding('class.weui-navbar') barCls = true;
+    @HostBinding('class.weui-tabbar') barCls = true;
 
     /** @internal */
-    @ContentChildren(WeUINavBarItem) items: QueryList<WeUINavBarItem>;
+    @ContentChildren(WeUITabBarItem) items: QueryList<WeUITabBarItem>;
 
     /**
      * 激活事件
      */
-    @Output() activated = new EventEmitter<WeUINavBarItem>();
+    @Output() activated = new EventEmitter<WeUITabBarItem>();
 
     private _activated: any;
 
@@ -40,11 +41,13 @@ export class WeUINavBar implements AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        this.activateAt(this.activeIndex);
+        setTimeout(() => {
+            this.activateAt(this.activeIndex);
+        }, 1);
     }
 
-    getAt(index: number): WeUINavBarItem {
-        return this.items.find((item: WeUINavBarItem, i: number): boolean => i === index);
+    getAt(index: number): WeUITabBarItem {
+        return this.items.find((item: WeUITabBarItem, i: number) => i === index) as WeUITabBarItem;
     }
 
     activate(item: any): void {
@@ -63,8 +66,9 @@ export class WeUINavBar implements AfterViewInit {
         }
     }
 
-    isActivated(item: WeUINavBarItem): boolean {
+    isActivated(item: WeUITabBarItem): boolean {
         return item.isActivated();
     }
 
 }
+

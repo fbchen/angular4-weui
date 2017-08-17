@@ -174,7 +174,7 @@ export function parseField(field: string, _constraints: number[]): number[] {
                     result.push(pointer);
                     pointer += step;
                 } while (pointer <= upper);
-                return null;
+                return '';
             });
         }
     }

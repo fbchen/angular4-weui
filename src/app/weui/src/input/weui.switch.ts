@@ -6,8 +6,8 @@
  * found in the LICENSE file.
  */
 
-import { Component, HostBinding, Renderer2, ElementRef, forwardRef } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, HostBinding, Renderer2, ElementRef, forwardRef, Optional, Inject } from '@angular/core';
+import { NG_VALUE_ACCESSOR, COMPOSITION_BUFFER_MODE } from '@angular/forms';
 
 import { WeUIFormControl } from './weui.form.control';
 
@@ -69,8 +69,11 @@ export class WeUISwitch extends WeUIFormControl {
         return [super.getBasicControlCls(), 'weui-cell_switch', (this.additionalCls || '')].join(' ');
     }
 
-    constructor(private renderer: Renderer2, private elementRef: ElementRef) {
-        super(renderer, elementRef, null);
+    constructor(
+        private renderer: Renderer2,
+        private elementRef: ElementRef,
+        @Optional() @Inject(COMPOSITION_BUFFER_MODE) private compositionMode: boolean) {
+        super(renderer, elementRef, compositionMode);
         this.value = 'on'; // default value
     }
 

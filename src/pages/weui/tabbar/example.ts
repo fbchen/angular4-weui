@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AbstractPage } from '../abstract-page';
 
-import { WeUITabBarItem } from '../../../app/weui/tabbar/weui.tabbar.item';
+import { WeUITabBarItem } from '../../../app/weui';
 
 @Component({
     templateUrl: 'example.html'

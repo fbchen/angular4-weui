@@ -10,7 +10,7 @@ import { Component, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AbstractPage } from '../abstract-page';
-import { WeUIProgressBar } from '../../../app/weui/progress/weui.progress';
+import { WeUIProgressBar } from '../../../app/weui';
 
 
 @Component({

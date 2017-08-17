@@ -37,9 +37,11 @@ function nexts(expr: string, year?: number, month?: number): PickerOption[] {
     }
 
     // (2) 根据“年、月” 求可用的“日”
-    const maxDate = getActualMaximumDate(year, month);
-    const startDt = new Date(year, month - 1, 1);
-    const endDt = new Date(year, month - 1, maxDate);
+    const today = new Date();
+    const _year = year || today.getFullYear();
+    const maxDate = getActualMaximumDate(_year, month);
+    const startDt = new Date(_year, month - 1, 1);
+    const endDt = new Date(_year, month - 1, maxDate);
     const interval: Schedule = parseCron(expr, startDt, endDt);
 
     const available: number[] = [];
@@ -187,12 +189,19 @@ export class WeUIDatePicker extends WeUIPicker implements OnInit, AfterViewInit 
     }
 
     ngAfterViewInit(): void {
-        this.monthPicker = this._groups.find((group: WeUIPickerGroup, index: number): boolean => {
+        const monthPicker = this._groups.find((group: WeUIPickerGroup, index: number): boolean => {
             return index === 1;
         });
-        this.datePicker = this._groups.find((group: WeUIPickerGroup, index: number): boolean => {
+        const datePicker = this._groups.find((group: WeUIPickerGroup, index: number): boolean => {
             return index === 2;
         });
+
+        if (monthPicker) {
+            this.monthPicker = monthPicker;
+        }
+        if (datePicker) {
+            this.datePicker = datePicker;
+        }
 
         // 更新月份、日期列表
         this._updateMonthPickerList();

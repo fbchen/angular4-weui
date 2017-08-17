@@ -59,7 +59,7 @@ export class WeUIPickerGroup implements AfterViewInit {
     @Output() change = new EventEmitter<any>();
 
     private startTime: number; // 开始触摸的时间
-    private startY: number;    // 保存开始按下的位置 (touchstart)
+    private startY: number | null;    // 保存开始按下的位置 (touchstart)
     private endY: number;      // 保存结束时的位置 (touchend)
     private speed: number;     // 手滑动的速度 (用途：速度乘以惯性滑动的时间, 例如 300ms, 计算出应该滑动的距离)
 
@@ -106,7 +106,7 @@ export class WeUIPickerGroup implements AfterViewInit {
         this.endY = event.changedTouches[0].pageY;
 
         // 计算滑动的速度: 距离 / 时间
-        const _distance: number = this.endY - this.startY;
+        const _distance: number = this.endY - (this.startY || 0);
         this.speed = _distance / (endTime - this.startTime);
 
         // 重新设置开始时间、开始位置

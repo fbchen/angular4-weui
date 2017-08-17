@@ -66,7 +66,7 @@ export class Layer {
     public showAlert(message: string, title?: string): Promise<any> {
         const dialog: WeUIDialog = this._createDialog();
         dialog.content = message;
-        dialog.title = title;
+        dialog.title = title || '';
         dialog.showNOButton = false;
         return dialog.show();
     }
@@ -88,7 +88,7 @@ export class Layer {
             }
         } else {
             dialog.content = message;
-            dialog.title = title;
+            dialog.title = title || '';
         }
 
         return dialog.show();

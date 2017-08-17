@@ -5,7 +5,7 @@ import uglify from 'rollup-plugin-uglify';
 
 export default {
   entry: 'dist/angular4-weui/index.js',
-  dest: 'dist/angular4-weui/bundles/angular-weui.umd.js',
+  dest: 'dist/angular4-weui/es2005/index.umd.js',
   sourceMap: false,
   format: 'iife',
   moduleName: 'angular.weui',

@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AbstractPage } from '../abstract-page';
 
-import { WeUINavBarItem } from '../../../app/weui/navbar/weui.navbar.item';
+import { WeUINavBarItem } from '../../../app/weui';
 
 @Component({
     templateUrl: 'example.html'

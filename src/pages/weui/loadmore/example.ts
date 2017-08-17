@@ -10,7 +10,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AbstractPage } from '../abstract-page';
-import { WeUILoadmore } from '../../../app/weui/loadmore/weui.loadmore';
+import { WeUILoadmore } from '../../../app/weui';
 
 @Component({
     templateUrl: 'example.html'
