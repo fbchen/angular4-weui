@@ -103,7 +103,7 @@ export class Schedule {
                 continue;
             }
 
-            next = new Date(this._pointer);
+            next = new Date(this._pointer.getTime());
 
             break;
         }

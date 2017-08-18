@@ -8,6 +8,15 @@ import { WeUIActionSheet } from '../actionsheet/weui.actionsheet';
 /** Next overlay unique ID. */
 let nextUniqueId = 0;
 
+export interface DialogProps {
+    mode?: string;
+    title?: string;
+    content?: string;
+    btnNOText?: string;
+    btnOKText?: string;
+    showNOButton?: boolean;
+};
+
 /**
  * 浮层通用接口
  */
@@ -77,12 +86,12 @@ export class Layer {
      * @param message  消息，或者自定义对话框属性对象
      * @param title    标题
      */
-    public showConfirm(message: string | { [key: string]: any }, title?: string): Promise<any> {
+    public showConfirm(message: string | DialogProps, title?: string): Promise<any> {
         const dialog: WeUIDialog = this._createDialog();
 
         if (typeof message === 'object') {
             for (const key in message) {
-                if (message.hasOwnProperty(key)) {
+                if (message.hasOwnProperty(key) && typeof message[key] !== 'undefined') {
                     dialog[key] = message[key];
                 }
             }
@@ -177,40 +186,4 @@ export class Layer {
         return (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
     }
 
-
-    /**
-     * Attach the given ComponentPortal to DOM element using the ComponentFactoryResolver.
-     * @param portal Portal to be attached
-     */
-    /*
-    attachComponentPortal<T>(portal: ComponentPortal<T>): ComponentRef<T> {
-        const componentFactory = this._componentFactoryResolver.resolveComponentFactory(portal.component);
-        let componentRef: ComponentRef<T>;
-
-        // If the portal specifies a ViewContainerRef, we will use that as the attachment point
-        // for the component (in terms of Angular's component tree, not rendering).
-        // When the ViewContainerRef is missing, we use the factory to create the component directly
-        // and then manually attach the view to the application.
-        if (portal.viewContainerRef) {
-            componentRef = portal.viewContainerRef.createComponent(
-                componentFactory,
-                portal.viewContainerRef.length,
-                portal.injector || portal.viewContainerRef.parentInjector);
-
-            this.setDisposeFn(() => componentRef.destroy());
-        } else {
-            componentRef = componentFactory.create(portal.injector || this._defaultInjector);
-            this._appRef.attachView(componentRef.hostView);
-            this.setDisposeFn(() => {
-                this._appRef.detachView(componentRef.hostView);
-                componentRef.destroy();
-            });
-        }
-        // At this point the component has been instantiated, so we move it to the location in the DOM
-        // where we want it to be rendered.
-        this._hostDomElement.appendChild(this._getComponentRootNode(componentRef));
-
-        return componentRef;
-    }
-    */
 }
