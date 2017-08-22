@@ -52,7 +52,7 @@ const WEUI_INPUT_CONTROL_VALUE_ACCESSOR: any = {
         </div>
         <div class="weui-cell__ft">
             <ng-content select="[weui-last]"></ng-content>
-            <i class="weui-icon-warn" *ngIf="state.invalid && showWarnIcon"></i>
+            <i class="weui-icon-warn" *ngIf="shouldShowWarnIcon()"></i>
         </div>
     `,
     providers: [WEUI_INPUT_CONTROL_VALUE_ACCESSOR],
@@ -169,7 +169,16 @@ export class WeUIInput extends WeUIFormControl {
      * 扩展样式，如：weui-cell_example
      */
     @HostBinding('class.weui-cell_warn') get warnCls(): boolean {
-        return this.state.invalid === true;
+        return this.shouldWarn();
+    }
+
+    shouldWarn(): boolean {
+        return this.state.invalid === true &&
+            (this.state.touched === true || this.state.dirty === true);
+    }
+
+    shouldShowWarnIcon(): boolean {
+        return this.showWarnIcon && this.shouldWarn();
     }
 
     /**
