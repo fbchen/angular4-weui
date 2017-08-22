@@ -27,14 +27,14 @@ const WEUI_INPUT_CONTROL_VALUE_ACCESSOR: any = {
             <div class="weui-input-area" *ngIf="type !== 'textarea'">
                 <input #input class="weui-input" [type]="type"
                     [attr.id]="id" [attr.name]="name" [placeholder]="placeholder"
-                    [attr.maxlength]="maxLength" [attr.minlength]="minLength" [pattern]="pattern"
+                    [attr.maxlength]="maxlength" [attr.minlength]="minlength" [pattern]="pattern"
                     [attr.max]="max" [attr.min]="min" [required]="required" [readonly]="readonly"
                     [disabled]="disabled" [autocomplete]="autocomplete ? 'on' : 'off'"
                     [(ngModel)]="innerValue"
                     (blur)="onBlur($event)" (focus)="onFocus($event)"
                     (keydown)="onKeyboardEvent($event)" (keyup)="onKeyboardEvent($event)" />
-                <div *ngIf="maxLength && countChars" class="weui-text-counter">
-                    <span>{{getCharCount()}}</span>/{{maxLength}}
+                <div *ngIf="maxlength && countChars" class="weui-text-counter">
+                    <span>{{getCharCount()}}</span>/{{maxlength}}
                 </div>
             </div>
 
@@ -42,11 +42,11 @@ const WEUI_INPUT_CONTROL_VALUE_ACCESSOR: any = {
                 <textarea #textarea class="weui-textarea"
                     [placeholder]="placeholder" [rows]="rows"
                     [required]="required" [readonly]="readonly"
-                    [attr.minlength]="minLength" [attr.maxlength]="maxLength"
+                    [attr.minlength]="minlength" [attr.maxlength]="maxlength"
                     [(ngModel)]="innerValue"
                     (keydown)="onKeyboardEvent($event)" (keyup)="onKeyboardEvent($event)"></textarea>
-                <div *ngIf="maxLength && countChars" class="weui-textarea-counter">
-                    <span>{{getCharCount()}}</span>/{{maxLength}}
+                <div *ngIf="maxlength && countChars" class="weui-textarea-counter">
+                    <span>{{getCharCount()}}</span>/{{maxlength}}
                 </div>
             </div>
         </div>
@@ -81,13 +81,13 @@ export class WeUIInput extends WeUIFormControl {
      * maxlength 属性规定输入字段的最大长度，以字符个数计。<br>
      * 注释：maxlength 属性与 <input type="text"> 或 <input type="password"> 配合使用。
      */
-    @Input() maxLength: number;
+    @Input() maxlength: string;
 
     /**
      * minlength 属性规定输入字段的最小长度，以字符个数计。<br>
      * 注释：minlength 属性与 <input type="text"> 或 <input type="password"> 配合使用。
      */
-    @Input() minLength: number;
+    @Input() minlength: string;
 
     /**
      * max 属性规定输入字段所允许的最大值。<br>
@@ -198,7 +198,8 @@ export class WeUIInput extends WeUIFormControl {
      * 当事件keyup、change时，当字数大于等于maxLength后，禁止输入
      */
     onKeyboardEvent(event: KeyboardEvent): void {
-        if (this.maxLength && this.getCharCount() >= this.maxLength) {
+        const maxLen = parseInt(this.maxlength, 10);
+        if (!isNaN(maxLen) && this.getCharCount() >= maxLen) {
             if (event.keyCode !== 46 && event.keyCode !== 8) {
                 event.preventDefault(); // 禁止输入
             }
