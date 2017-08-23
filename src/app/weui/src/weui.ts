@@ -45,5 +45,6 @@ export { WeUIToast } from './toast/weui.toast';
 export { WeUITopTips } from './toptips/weui.toptip';
 export { Layer } from './overlay/layer';
 export { WeUIPickerService } from './picker/weui.picker.service';
+export { FormValidation } from './validation/form.validation';
 
 export { WeUIModule } from './weui.module';

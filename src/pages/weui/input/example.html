@@ -56,6 +56,10 @@
 
         <weui-title>表单报错</weui-title>
         <weui-items baseCls="form">
+            <weui-input type="text" name="name" placeholder="请输入姓名"
+                [(ngModel)]="data.name" [required]="true">
+                <label class="weui-label">姓名</label>
+            </weui-input>
             <weui-input type="number" name="card" pattern="[0-9]*" placeholder="请输入卡号"
                [(ngModel)]="data.card" [required]="true">
                 <label class="weui-label">卡号</label>
@@ -134,7 +138,9 @@
         <div class="weui-btn-area">
             <weui-button color="primary" (click)="showError()">确定</weui-button>
             <weui-button (click)="showError2()">显示错误</weui-button>
+            <weui-submit style="margin-top: 10px">提 交</weui-submit>
         </div>
+        <form-validation [messages]="{card: {required: '请填写卡号'}}"></form-validation>
     </form>
     <div class="page__bd page__bd_spacing" style="padding-top: 20px">
         <div>表单内容：</div>
