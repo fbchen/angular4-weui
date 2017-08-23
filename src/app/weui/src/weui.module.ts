@@ -13,11 +13,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-/**
 /** Import WeUI Components */
 import { WeUIFormControl } from './input/weui.form.control';
 import { WeUIBadge } from './badge/weui.badge';
 import { WeUIButton } from './button/weui.button';
+import { WeUISubmit } from './button/weui.submit';
 import { WeUICheckbox } from './input/weui.checkbox';
 import { WeUIDatePicker } from './picker/weui.date.picker';
 import { WeUIFooter, WeUIFooterText, WeUIFooterLinks, WeUIFooterLink } from './footer/weui.footer';
@@ -51,7 +51,7 @@ import { WeUIDialog } from './dialog/weui.dialog';
 import { WeUIToast } from './toast/weui.toast';
 import { WeUITopTips } from './toptips/weui.toptip';
 import { Layer } from './overlay/layer';
-
+import { WeUIPickerService } from './picker/weui.picker.service';
 
 /**
  * @name WeUIModule
@@ -67,6 +67,7 @@ import { Layer } from './overlay/layer';
     declarations: [
         WeUIFormControl,
         WeUIButton,
+        WeUISubmit,
         WeUIInput,
         WeUIRadio,
         WeUICheckbox,
@@ -102,6 +103,7 @@ import { Layer } from './overlay/layer';
     ],
     exports: [
         WeUIButton,
+        WeUISubmit,
         WeUIInput,
         WeUIRadio,
         WeUICheckbox,
@@ -138,9 +140,14 @@ import { Layer } from './overlay/layer';
         WeUIActionSheet,
         WeUIDialog,
         WeUIToast,
-        WeUITopTips
+        WeUITopTips,
+        WeUIPicker,
+        WeUIDatePicker
     ],
-    providers: [Layer]
+    providers: [
+        Layer,
+        WeUIPickerService
+    ]
 })
 export class WeUIModule {
 

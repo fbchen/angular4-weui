@@ -6,7 +6,7 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, HostBinding } from '@angular/core';
+import { Component, Input, HostBinding, Output, EventEmitter } from '@angular/core';
 
 /**
  * 菜单选项
@@ -105,6 +105,9 @@ export class WeUIPicker {
         return this.hidden;
     }
 
+    /** 关闭事件 */
+    @Output() close = new EventEmitter<any>();
+
     /**
      * 点击【确定】按钮时，通过Promise.resolve()输出最终值
      * @internal
@@ -131,6 +134,7 @@ export class WeUIPicker {
     onAnimationEnd(event: AnimationEvent): void {
         if (event.animationName === 'slideDown') {
             this.hidden = true;
+            this.close.emit();
         }
     }
 
