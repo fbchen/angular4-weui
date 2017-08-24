@@ -14,8 +14,15 @@ import { animate, state, style, transition, trigger } from '@angular/core';
     template: `
         <div class="weui-mask"></div>
         <div class="weui-dialog" [ngClass]="{'weui-skin_android': mode == 'md'}">
-            <div class="weui-dialog__hd"><strong class="weui-dialog__title">{{title}}</strong></div>
-            <div class="weui-dialog__bd">{{content}}</div>
+            <div [ngClass]="getWrapperClass()">
+                <i [ngClass]="getIconClass()" *ngIf="getIcon()"></i>
+                <div class="weui-dialog__wrapper_inner">
+                    <div class="weui-dialog__hd"><strong class="weui-dialog__title">{{title}}</strong></div>
+                    <div class="weui-dialog__bd">
+                        {{content}}
+                    </div>
+                </div>
+            </div>
             <div class="weui-dialog__ft">
                 <a href="javascript:;" (click)="negativeClick($event)" *ngIf="showNOButton"
                     class="weui-dialog__btn weui-dialog__btn_default">{{btnNOText || defaults.btnNOText}}</a>
@@ -54,6 +61,15 @@ export class WeUIDialog {
      * 内容
      */
     @Input() content: string;
+
+    /** 类型，可选：info, success, error, warning, default */
+    @Input() type: string | null;
+
+    /** 自定义图标 */
+    @Input() icon: string;
+
+    /** 自定义图标样式 */
+    @Input() iconCls: string;
 
     /**
      * @i18n 取消
@@ -131,6 +147,40 @@ export class WeUIDialog {
     positiveClick(event: MouseEvent): void {
         this.resolve();
         this.hide();
+    }
+
+    getIcon(): string | null {
+        if (this.icon) {
+            return this.icon;
+        }
+        if (this.type) {
+            return ({
+                info: 'weui-icon-info',
+                success: 'weui-icon-success',
+                error: 'weui-icon-cancel',
+                warning: 'weui-icon-warn',
+                confirm: 'weui-icon-waiting',
+                'default': 'weui-icon-info-circle',
+            })[this.type];
+        }
+        return null;
+    }
+
+    getIconClass(): any {
+        const icon = this.getIcon();
+        return {
+            [`weui-dialog-icon`]: 1,
+            [`weui-dialog-icon-${this.type}`]: this.type,
+            [`${icon}`]: icon,
+            [`${this.iconCls}`]: this.iconCls
+        };
+    }
+
+    getWrapperClass(): any {
+        return {
+            [`weui-dialog__wrapper`]: 1,
+            [`weui-dialog__wrapper_with_icon`]: this.getIcon(),
+        };
     }
 
 }

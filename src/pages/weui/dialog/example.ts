@@ -80,4 +80,24 @@ export class DialogExamplePage extends AbstractPage {
         });
     }
 
+    showSuccess(): void {
+        this.layer.success('操作成功！', '标题');
+    }
+
+    showInfo(): void {
+        this.layer.info('操作成功！', '标题');
+    }
+
+    showError(): void {
+        this.layer.error('操作失败！', '标题');
+    }
+
+    showWarning(): void {
+        this.layer.warning('操作失败！', '标题');
+    }
+
+    showDefault(): void {
+        this.layer.showAlert('操作失败！', '标题', 'default');
+    }
+
 }

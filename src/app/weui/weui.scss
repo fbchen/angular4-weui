@@ -183,6 +183,29 @@ img[weui-avatar] {
   margin: 2px 8px 8px 8px;
 }
 
+.weui-dialog__wrapper {
+    display: flex;
+
+    .weui-dialog__wrapper_inner {
+        width: 100%;
+    }
+    .weui-dialog-icon {
+        font-size: 45px;
+        align-self: center;
+        margin-left: 8px;
+    }
+
+    &.weui-dialog__wrapper_with_icon {
+        .weui-dialog__hd,
+        .weui-dialog__bd {
+            padding-left: 1em;
+            text-align: left;
+        }
+    }
+}
+
+
+
 // Generate Slider-Track Colors
 // --------------------------------------------------
 @each $color-name, $color-base, $color-contrast in get-colors($colors) {

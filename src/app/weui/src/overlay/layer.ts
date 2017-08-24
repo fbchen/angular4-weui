@@ -15,6 +15,9 @@ export interface DialogProps {
     btnNOText?: string;
     btnOKText?: string;
     showNOButton?: boolean;
+    type?: string | null;
+    icon?: string;
+    iconCls?: string;
 };
 
 /**
@@ -66,17 +69,66 @@ export class Layer {
     }
 
     /**
+     * 显示Success
+     *
+     * @param message  消息
+     * @param title    标题(可选)
+     */
+    public success(message: string, title?: string): Promise<any> {
+        return this.showAlert(message, title, 'success');
+    }
+
+    /**
+     * 显示Info
+     *
+     * @param message  消息
+     * @param title    标题(可选)
+     */
+    public info(message: string, title?: string): Promise<any> {
+        return this.showAlert(message, title, 'info');
+    }
+
+    /**
+     * 显示Error
+     *
+     * @param message  消息
+     * @param title    标题(可选)
+     */
+    public error(message: string, title?: string): Promise<any> {
+        return this.showAlert(message, title, 'error');
+    }
+
+    /**
+     * 显示Warning
+     *
+     * @param message  消息
+     * @param title    标题(可选)
+     */
+    public warning(message: string, title?: string): Promise<any> {
+        return this.showAlert(message, title, 'warning');
+    }
+
+    /**
      * 显示Alert
      *
      * @param message  消息
      * @param title    标题(可选)
-     * @param handler  处理方法
+     * @param type     告警等级
      */
-    public showAlert(message: string, title?: string): Promise<any> {
+    public showAlert(message: string | DialogProps, title?: string, type?: string): Promise<any> {
         const dialog: WeUIDialog = this._createDialog();
-        dialog.content = message;
-        dialog.title = title || '';
         dialog.showNOButton = false;
+        if (typeof message === 'object') {
+            for (const key in message) {
+                if (message.hasOwnProperty(key) && typeof message[key] !== 'undefined') {
+                    dialog[key] = message[key];
+                }
+            }
+        } else {
+            dialog.content = message;
+            dialog.title = title || '';
+            dialog.type = type || null;
+        }
         return dialog.show();
     }
 
@@ -102,6 +154,8 @@ export class Layer {
 
         return dialog.show();
     }
+
+
 
     private _createToast(): WeUIToast {
         const componentRef = this._createCompInstance(WeUIToast);
