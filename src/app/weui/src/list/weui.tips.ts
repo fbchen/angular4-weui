@@ -17,9 +17,7 @@ export class WeUITips {
      /**
      * 设置基本样式
      */
-    @HostBinding('class') get basicClass() {
-        return 'weui-cells__tips';
-    }
+    @HostBinding('class.weui-cells__tips') _cls_tips = true;
 
     constructor() {
 

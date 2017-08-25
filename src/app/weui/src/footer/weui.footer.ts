@@ -26,7 +26,7 @@ export class WeUIFooter {
     /**
      * 基本样式
      */
-    @HostBinding('class') cls = 'weui-footer';
+    @HostBinding('class.weui-footer') _cls_footer = true;
 
     /**
      * 固定在底部样式

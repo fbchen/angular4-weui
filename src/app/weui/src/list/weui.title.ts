@@ -17,9 +17,7 @@ export class WeUITitle {
     /**
      * 设置基本样式
      */
-    @HostBinding('class') get basicClass() {
-        return 'weui-cells__title';
-    }
+    @HostBinding('class.weui-cells__title') _cls_title = true;
 
     constructor() {
 

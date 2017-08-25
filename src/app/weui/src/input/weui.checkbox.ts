@@ -90,9 +90,7 @@ export class WeUICheckbox extends WeUIFormControl {
     /**
      * 扩展样式
      */
-    @HostBinding('class') get hostCls(): string {
-        return [super.getBasicControlCls(), 'weui-check__label', (this.additionalCls || '')].join(' ');
-    }
+    @HostBinding('class.weui-check__label') _cls_check_label = true;
 
     constructor(
         private renderer: Renderer2,

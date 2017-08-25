@@ -7,7 +7,7 @@
  */
 
 import { Component, Input, Output, EventEmitter, Renderer2, ElementRef, HostBinding, ContentChild } from '@angular/core';
-import { forwardRef, ViewEncapsulation, Optional, Inject } from '@angular/core';
+import { OnChanges, SimpleChanges, forwardRef, ViewEncapsulation, Optional, Inject } from '@angular/core';
 import { NgControl, NG_VALUE_ACCESSOR, COMPOSITION_BUFFER_MODE } from '@angular/forms';
 import { WeUIFormControl } from './weui.form.control';
 
@@ -58,7 +58,7 @@ const WEUI_INPUT_CONTROL_VALUE_ACCESSOR: any = {
     providers: [WEUI_INPUT_CONTROL_VALUE_ACCESSOR],
     encapsulation: ViewEncapsulation.None
 })
-export class WeUIInput extends WeUIFormControl {
+export class WeUIInput extends WeUIFormControl implements OnChanges {
 
     /**
      * 控件类型：text, number, tel, email, password, date, datetime-local等
@@ -160,16 +160,26 @@ export class WeUIInput extends WeUIFormControl {
     /**
      * 扩展样式，如：weui-cell_example
      */
-    @HostBinding('class') get hostCls(): string {
-        const inputClass = (this.baseCls && 'weui-cell_' + this.baseCls) || '';
-        return [super.getBasicControlCls(), inputClass, (this.additionalCls || '')].join(' ');
-    }
+    @HostBinding('class.weui-check__label') _cls_check_label = true;
 
     /**
      * 扩展样式，如：weui-cell_example
      */
     @HostBinding('class.weui-cell_warn') get warnCls(): boolean {
         return this.shouldWarn();
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        const changed = changes['baseCls'];
+        if (changed) {
+            const _el = this.elementRef.nativeElement as HTMLElement;
+            if (changed.previousValue) {
+                _el.classList.remove(`weui-cell_${changed.previousValue}`);
+            }
+            if (changed.currentValue) {
+                _el.classList.add(`weui-cell_${changed.currentValue}`);
+            }
+        }
     }
 
     shouldWarn(): boolean {

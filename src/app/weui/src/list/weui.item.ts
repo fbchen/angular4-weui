@@ -6,7 +6,7 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, Renderer2, ElementRef, HostBinding } from '@angular/core';
+import { Component, Input, Renderer2, ElementRef, HostBinding, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
     selector: 'weui-item',
@@ -23,23 +23,27 @@ import { Component, Input, Renderer2, ElementRef, HostBinding } from '@angular/c
         </div>
     `
 })
-export class WeUIItem {
+export class WeUIItem implements OnChanges {
     /**
      * 样式
      */
     @Input() baseCls: string;
 
-    /**
-     * 额外样式
-     */
-    @Input() additionalCls: string;
 
-    /**
-     * 设置基本样式
-     */
-    @HostBinding('class') get itemCls(): string {
-        const basicCls = (this.baseCls && 'weui-cell_' + this.baseCls) || '';
-        return ['weui-cell weui-item', basicCls, (this.additionalCls || '')].join(' ');
+    @HostBinding('class.weui-cell') _cls_cell = true;
+    @HostBinding('class.weui-item') _cls_item = true;
+
+    ngOnChanges(changes: SimpleChanges): void {
+        const changed = changes['baseCls'];
+        if (changed) {
+            const _el = this._elementRef.nativeElement as HTMLElement;
+            if (changed.previousValue) {
+                _el.classList.remove(`weui-cell_${changed.previousValue}`);
+            }
+            if (changed.currentValue) {
+                _el.classList.add(`weui-cell_${changed.currentValue}`);
+            }
+        }
     }
 
     constructor(private _renderer: Renderer2, private _elementRef: ElementRef) {

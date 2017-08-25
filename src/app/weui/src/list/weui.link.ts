@@ -6,7 +6,7 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, HostBinding } from '@angular/core';
+import { Component, Renderer2, ElementRef, Input, HostBinding, OnChanges, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
@@ -26,7 +26,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
         </a>
     `
 })
-export class WeUILink {
+export class WeUILink implements OnChanges {
 
     /**
      * 不显示最右边的箭头。默认为false，即：显示箭头。
@@ -39,11 +39,6 @@ export class WeUILink {
     @Input() baseCls: string;
 
     /**
-     * 额外样式
-     */
-    @Input() additionalCls: string;
-
-    /**
      * 链接
      */
     @Input() set href(_href: string) {
@@ -52,16 +47,30 @@ export class WeUILink {
 
     _href: SafeUrl;
 
-    /**
-     * 设置基本样式
-     */
-    @HostBinding('class') get itemCls(): string {
-        const basicCls = (this.baseCls && 'weui-cell_' + this.baseCls) || '';
-        const arrawCls = this.noPushArrow ? 'weui-cell_access-noarrow' : '';
-        return ['weui-cell weui-item weui-cell_access', basicCls, arrawCls, (this.additionalCls || '')].join(' ');
+    @HostBinding('class.weui-cell') _cls_cell = true;
+    @HostBinding('class.weui-item') _cls_item = true;
+    @HostBinding('class.weui-cell_access') _cls_cell_access = true;
+    @HostBinding('class.weui-cell_access-noarrow') get _cls_cell_access_noarrow() {
+        return this.noPushArrow;
     }
 
-    constructor(private sanitizer: DomSanitizer) {
+    ngOnChanges(changes: SimpleChanges): void {
+        const changed = changes['baseCls'];
+        if (changed) {
+            const _el = this._elementRef.nativeElement as HTMLElement;
+            if (changed.previousValue) {
+                _el.classList.remove(`weui-cell_${changed.previousValue}`);
+            }
+            if (changed.currentValue) {
+                _el.classList.add(`weui-cell_${changed.currentValue}`);
+            }
+        }
+    }
+
+    constructor(
+        private _renderer: Renderer2,
+        private _elementRef: ElementRef,
+        private sanitizer: DomSanitizer) {
 
     }
 

@@ -6,7 +6,7 @@
  * found in the LICENSE file.
  */
 
-import { Input, Renderer2, ElementRef, Inject, Optional } from '@angular/core';
+import { Input, Renderer2, ElementRef, Inject, Optional, HostBinding } from '@angular/core';
 import { DefaultValueAccessor } from '@angular/forms';
 import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
 
@@ -37,11 +37,6 @@ export /*abstract*/ class WeUIFormControl extends DefaultValueAccessor {
      * 是否禁用
      */
     @Input() disabled = false;
-
-    /**
-     * 额外样式
-     */
-    @Input() additionalCls: string;
 
     /**
      * value 属性为 input 元素设定值。<br>
@@ -91,9 +86,8 @@ export /*abstract*/ class WeUIFormControl extends DefaultValueAccessor {
         return 'weui-control-' + (++WeUIFormControl.count).toString();
     }
 
-    public getBasicControlCls(): string {
-        return 'weui-cell weui-control';
-    }
+    @HostBinding('class.weui-cell') _cls_cell = true;
+    @HostBinding('class.weui-control') _cls_control = true;
 
     constructor(
         @Inject(Renderer2) private __renderer: Renderer2,
