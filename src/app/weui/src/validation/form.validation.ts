@@ -8,6 +8,10 @@
 import { Component, Input, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
+function isPresent(obj: any): boolean {
+    return obj !== undefined && obj !== null;
+}
+
 /**
  * 控件与提示信息，例如：<code>
  * {
@@ -73,7 +77,7 @@ export class FormValidation {
     }
 
     showByName(): boolean {
-        return this.name && this.name.length > 0;
+        return isPresent(this.name) && this.name.length > 0;
     }
 
     /** Form验证后，自动执行消息提示匹配 */
