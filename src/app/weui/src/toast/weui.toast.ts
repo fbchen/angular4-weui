@@ -66,10 +66,7 @@ export class WeUIToast implements OnChanges {
         return !this.shown;
     }
 
-    /**
-     * 已显示否
-     * @internal
-     */
+    /** 已显示否 */
     private shown = false;
 
     constructor(

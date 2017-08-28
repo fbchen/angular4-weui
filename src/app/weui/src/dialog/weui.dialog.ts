@@ -98,15 +98,12 @@ export class WeUIDialog {
         return this.shown ? 'show' : 'hide';
     }
 
-    /**
-     * 已显示否
-     * @internal
-     */
+    /** 已显示否 */
     private shown = false;
 
-    /* @internal */
+    /** 用户操作反馈 */
     private resolve: (value?: any) => void;
-    /* @internal */
+    /** 用户操作反馈 */
     private reject: (value?: any) => void;
 
     constructor() {

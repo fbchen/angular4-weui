@@ -136,12 +136,12 @@ export class WeUIDatePicker extends WeUIPicker implements OnInit, AfterViewInit 
     /* 结束日期 */
     private _endDate: Date;
 
-    /** @internal */
+    /** 显示列表 */
     @ViewChildren(WeUIPickerGroup) _groups: QueryList<WeUIPickerGroup>;
 
-    /** @internal */
+    /** 月份选择控件 */
     private monthPicker: WeUIPickerGroup;
-    /** @internal */
+    /** 日期选择控件 */
     private datePicker: WeUIPickerGroup;
 
     private _parseDate(value: any, sub: string): Date {

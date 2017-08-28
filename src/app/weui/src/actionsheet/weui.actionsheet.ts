@@ -79,14 +79,11 @@ export class WeUIActionSheet {
         return this.shown ? 'show' : 'hide';
     }
 
-    /**
-     * 已显示否
-     * @internal
-     */
+    /** 已显示否 */
     public shown = false; // (显示时，先_show，然后才shown)
     public _show = false; // 解决transition动画与display冲突的问题
 
-    /* @internal */
+    /** 用户操作反馈 */
     private resolve: (value?: any) => void;
 
     constructor() {

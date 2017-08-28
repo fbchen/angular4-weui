@@ -113,9 +113,7 @@ export class WeUISlider extends DefaultValueAccessor {
     }
 
     /**
-     * Write a new value to the element.
-     *
-     * @internal (From ControlValueAccessor interface)
+     * Write a new value to the element. (From ControlValueAccessor interface)
      */
     writeValue(value: number): void {
         if (value !== undefined && value !== null) {
@@ -126,7 +124,7 @@ export class WeUISlider extends DefaultValueAccessor {
     }
 
     /**
-     * @internal (From ControlValueAccessor interface)
+     * 设置禁用状态 (From ControlValueAccessor interface)
      */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;

@@ -49,17 +49,13 @@ export class WeUIGallery {
 
     }
 
-    /**
-     * @internal
-     */
+    /** 删除照片 */
     deleteImage(event: Event): void {
         this.delete.emit(this.image);
         event.preventDefault();
     }
 
-    /**
-     * 显示图片
-     */
+    /** 显示图片 */
     show(): void {
         this._show = true;
         setTimeout(() => { // 解决transition动画与display冲突的问题
@@ -67,9 +63,7 @@ export class WeUIGallery {
         }, 10);
     }
 
-    /**
-     * 隐藏图片
-     */
+    /** 隐藏图片 */
     hide(): void {
         this.shown = false;
         setTimeout(() => {

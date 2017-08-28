@@ -19,7 +19,7 @@ import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
     template: ``
 })
 export /*abstract*/ class WeUIFormControl extends DefaultValueAccessor {
-    /** @internal */
+    /** 计数器 */
     public static count = 0;
 
     /**
@@ -58,26 +58,20 @@ export /*abstract*/ class WeUIFormControl extends DefaultValueAccessor {
 
     /**
      * The internal data model
-     *
-     * @internal
      */
     protected _value: any = '';
 
     /**
-     * The value of the input ngModel
-     *
-     * @internal (model -> view)
+     * The value of the input ngModel (model -> view)
      */
-    get innerValue() {
+    public get innerValue() {
         return this._value;
     }
 
     /**
-     * The value of the input ngModel
-     *
-     * @internal (view -> model)
+     * The value of the input ngModel (view -> model)
      */
-    set innerValue(newValue: any) {
+    public set innerValue(newValue: any) {
         if (this._value !== newValue) {
             this._value = newValue;
             // view -> model -> outside world (ie. NgModel on this control)
@@ -85,7 +79,7 @@ export /*abstract*/ class WeUIFormControl extends DefaultValueAccessor {
         }
     }
 
-    /** @internal */
+    /** 注册控件 */
     public static registerControl(): string {
         return 'weui-control-' + (++WeUIFormControl.count).toString();
     }
@@ -102,16 +96,14 @@ export /*abstract*/ class WeUIFormControl extends DefaultValueAccessor {
     }
 
     /**
-     * Write a new value to the element.
-     *
-     * @internal (From ControlValueAccessor interface)
+     * Write a new value to the element. (From ControlValueAccessor interface)
      */
     writeValue(value: any): void {
         this._value = value;
     }
 
     /**
-     * @internal (From ControlValueAccessor interface)
+     * 设置禁用状态 (From ControlValueAccessor interface)
      */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;

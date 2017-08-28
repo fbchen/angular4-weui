@@ -26,7 +26,7 @@ export class WeUITabBar implements AfterViewInit {
      */
     @HostBinding('class.weui-tabbar') barCls = true;
 
-    /** @internal */
+    /** 内部子对象 */
     @ContentChildren(WeUITabBarItem) items: QueryList<WeUITabBarItem>;
 
     /**

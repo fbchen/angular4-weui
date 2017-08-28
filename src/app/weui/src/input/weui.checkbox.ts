@@ -38,16 +38,14 @@ const WEUI_FORM_CONTROL_VALUE_ACCESSOR: any = {
 })
 export class WeUICheckbox extends WeUIFormControl {
 
-    /** @internal */
-    checked = false;
+    /** 是否已选中 */
+    public checked = false;
 
-    /** @internal */
-    values: any[] = [];
+    /** 选中的值 */
+    public values: any[] = [];
 
     /**
-     * The value of the input ngModel
-     *
-     * @internal (view -> model)
+     * The value of the input ngModel。 (view -> model)
      */
     set innerValue(checked: boolean) {
         this._value = checked || false;
@@ -71,9 +69,7 @@ export class WeUICheckbox extends WeUIFormControl {
     }
 
     /**
-     * Write a new value to the element.
-     *
-     * @internal (From ControlValueAccessor interface)
+     * Write a new value to the element. (From ControlValueAccessor interface)
      */
     writeValue(value: any): void {
         if (value !== null) {

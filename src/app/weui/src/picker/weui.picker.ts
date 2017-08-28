@@ -110,20 +110,13 @@ export class WeUIPicker {
 
     /**
      * 点击【确定】按钮时，通过Promise.resolve()输出最终值
-     * @internal
      */
     private resolve: (value: any[]) => void;
 
-    /**
-     * 已显示否
-     * @internal
-     */
+    /** 已显示否 */
     public shown = false;
 
-    /**
-     * 已显示否
-     * @internal
-     */
+    /** 已显示否 */
     private hidden = true;
 
 

@@ -25,7 +25,7 @@ export class WeUINavBar implements AfterViewInit {
      */
     @HostBinding('class.weui-navbar') barCls = true;
 
-    /** @internal */
+    /** 内部子对象 */
     @ContentChildren(WeUINavBarItem) items: QueryList<WeUINavBarItem>;
 
     /**

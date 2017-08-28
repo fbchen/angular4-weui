@@ -112,10 +112,7 @@ export class WeUIUploader {
     // 已选文件
     public files: WeUIFile[] = [];
 
-    /**
-     * 预览时用
-     * @internal
-     */
+    /** 预览时用 */
     public image: WeUIFile;
 
     constructor(
@@ -132,18 +129,12 @@ export class WeUIUploader {
         return this.files;
     }
 
-    /**
-     * 文件总数
-     * @internal
-     */
+    /** 文件总数 */
     getFileCount(): number {
         return this.files.length;
     }
 
-    /**
-     * 已上传文件数
-     * @internal
-     */
+    /** 已上传文件数 */
     getUploadedFileCount(): number {
         return this.files.filter((file: WeUIFile) => file.isUploaded).length;
     }

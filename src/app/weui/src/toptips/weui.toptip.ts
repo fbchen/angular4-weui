@@ -34,10 +34,7 @@ export class WeUITopTips {
         return this.shown ? 'block' : 'none';
     }
 
-    /**
-     * 已显示否
-     * @internal
-     */
+    /** 已显示否 */
     private shown = false;
 
     constructor() {
