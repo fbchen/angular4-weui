@@ -6,14 +6,18 @@
  * found in the LICENSE file.
  */
 
-import { Input, Renderer2, ElementRef, Inject, Optional, HostBinding } from '@angular/core';
+import { Component, Input, Renderer2, ElementRef, Inject, Optional, HostBinding } from '@angular/core';
 import { DefaultValueAccessor } from '@angular/forms';
 import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
 
 /**
- * 输入类表单控件
+ * 输入类表单控件。Do NOT use me as element directly!
  */
 // AOT编译时提示 Cannot determine the module for class WeUIFormControl in **.ts, so comment out `abstract`
+@Component({
+    selector: 'WeUIFormControl',
+    template: ``
+})
 export /*abstract*/ class WeUIFormControl extends DefaultValueAccessor {
     /** @internal */
     public static count = 0;

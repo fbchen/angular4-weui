@@ -104,6 +104,7 @@ import { WeUIPickerService } from './picker/weui.picker.service';
         FormValidation
     ],
     exports: [
+        WeUIFormControl,
         WeUIButton,
         WeUISubmit,
         WeUIInput,

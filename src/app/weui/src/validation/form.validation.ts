@@ -28,10 +28,10 @@ export interface FieldMessages {
 @Component({
     selector: 'form-validation',
     template: `
-        <div class="error" *ngIf="name && getError(name)">
+        <div class="error" *ngIf="showByName() && getError(name)">
             {{getError(name)}}
         </div>
-        <div class="error" *ngIf="!name && firstError()">
+        <div class="error" *ngIf="!showByName() && firstError()">
             {{firstError()}}
         </div>
     `
@@ -70,6 +70,10 @@ export class FormValidation {
         if (_form && _form.ngSubmit) {
             _form.ngSubmit.subscribe(this.onSubmit.bind(this));
         }
+    }
+
+    showByName(): boolean {
+        return this.name && this.name.length > 0;
     }
 
     /** Form验证后，自动执行消息提示匹配 */
