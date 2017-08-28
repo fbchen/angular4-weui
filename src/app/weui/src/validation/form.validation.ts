@@ -28,10 +28,10 @@ export interface FieldMessages {
 @Component({
     selector: 'form-validation',
     template: `
-        <div class="error" *ngIf="showByName() && getError(name)">
+        <div class="error" *ngIf="showByName() && hasError(name)">
             {{getError(name)}}
         </div>
-        <div class="error" *ngIf="!showByName() && firstError()">
+        <div class="error" *ngIf="!showByName() && hasError()">
             {{firstError()}}
         </div>
     `
@@ -144,7 +144,11 @@ export class FormValidation {
     /**
      * 是否存在错误
      */
-    public hasError(): boolean {
+    public hasError(name?: string): boolean {
+        if (name) {
+            return this.getError(name) !== null;
+        }
+
         return this.formErrors.length > 0;
     }
 
