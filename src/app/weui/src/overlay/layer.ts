@@ -62,7 +62,7 @@ export class Layer {
 
     private _createDialog(): WeUIDialog {
         const componentRef = this._createCompInstance(WeUIDialog);
-        componentRef.instance.deactivate.subscribe(() => {
+        componentRef.instance.close.subscribe(() => {
             componentRef.destroy();
         });
         return componentRef.instance;
@@ -159,7 +159,7 @@ export class Layer {
 
     private _createToast(): WeUIToast {
         const componentRef = this._createCompInstance(WeUIToast);
-        componentRef.instance.deactivate.subscribe(() => {
+        componentRef.instance.close.subscribe(() => {
             componentRef.destroy();
         });
         return componentRef.instance;
@@ -185,13 +185,14 @@ export class Layer {
      *
      * @param message  消息，默认为“操作成功”
      */
-    public showSuccess(message?: string): void {
+    public showSuccess(message?: string): WeUIToast {
         const toast: WeUIToast = this._createToast();
         if (message) {
             toast.content = message;
         }
         toast.loading = !(toast.success = true);
         toast.show();
+        return toast;
     }
 
     /**
@@ -201,7 +202,7 @@ export class Layer {
      */
     public showError(message: string): void {
         const componentRef = this._createCompInstance(WeUITopTips);
-        componentRef.instance.deactivate.subscribe(() => {
+        componentRef.instance.close.subscribe(() => {
             componentRef.destroy();
         });
 
@@ -214,7 +215,7 @@ export class Layer {
 
     private _createActionSheet(): WeUIActionSheet {
         const componentRef = this._createCompInstance(WeUIActionSheet);
-        componentRef.instance.deactivate.subscribe(() => {
+        componentRef.instance.close.subscribe(() => {
             componentRef.destroy();
         });
         return componentRef.instance;

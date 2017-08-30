@@ -56,7 +56,7 @@ export class WeUIActionSheet {
     /**
      * 隐藏对象
      */
-    @Output() deactivate = new EventEmitter<any>();
+    @Output() close = new EventEmitter<any>();
 
     /**
      * 安卓模式下的特殊样式
@@ -111,7 +111,7 @@ export class WeUIActionSheet {
         this.shown = false;
         setTimeout(() => {
             this._show = false;
-            this.deactivate.emit();
+            this.close.emit();
         }, 200);
     }
 

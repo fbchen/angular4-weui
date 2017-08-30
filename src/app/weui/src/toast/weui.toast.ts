@@ -57,7 +57,7 @@ export class WeUIToast implements OnChanges {
     /**
      * 隐藏对象
      */
-    @Output() deactivate = new EventEmitter<any>();
+    @Output() close = new EventEmitter<any>();
 
     /**
      * 样式控制
@@ -102,7 +102,7 @@ export class WeUIToast implements OnChanges {
      */
     hide(): void {
         this.shown = false;
-        this.deactivate.emit();
+        this.close.emit();
     }
 
 }

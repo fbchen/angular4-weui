@@ -89,7 +89,7 @@ export class WeUIDialog {
     /**
      * 隐藏对象
      */
-    @Output() deactivate = new EventEmitter<any>();
+    @Output() close = new EventEmitter<any>();
 
     /**
      * 用于控制动画的触发(trigger)
@@ -127,7 +127,7 @@ export class WeUIDialog {
      */
     hide(): void {
         this.shown = false;
-        this.deactivate.emit();
+        this.close.emit();
     }
 
     /**
