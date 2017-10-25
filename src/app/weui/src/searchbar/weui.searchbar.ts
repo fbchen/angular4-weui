@@ -9,8 +9,7 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
     selector: 'weui-searchbar',
@@ -80,8 +79,10 @@ export class WeUISearchBar implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this._searchTermsChangesSubscription = this.searchTerms
-            .debounceTime(300)        // wait for 300ms pause in events
-            .distinctUntilChanged()   // ignore if next search term is same as previous
+            .pipe(
+                debounceTime(300),     // wait for 300ms pause in events
+                distinctUntilChanged() // ignore if next search term is same as previous
+            )
             .subscribe((term: string) => {
                 this.search.emit(term);
             });
