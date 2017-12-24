@@ -47,4 +47,6 @@ export { Layer } from './overlay/layer';
 export { WeUIPickerService } from './picker/weui.picker.service';
 export { FormValidation } from './validation/form.validation';
 
+export { onNextFrame, clearNextFrameAction } from './core/anim.frame';
+
 export { WeUIModule } from './weui.module';

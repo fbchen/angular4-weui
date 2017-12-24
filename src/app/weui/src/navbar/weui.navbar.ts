@@ -8,6 +8,7 @@
 
 import { Component, Input, Output, EventEmitter, HostBinding, AfterViewInit, ContentChildren, QueryList } from '@angular/core';
 import { WeUINavBarItem } from './weui.navbar.item';
+import { onNextFrame } from '../core/anim.frame';
 
 @Component({
     selector: 'weui-navbar',
@@ -40,7 +41,9 @@ export class WeUINavBar implements AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        this.activateAt(this.activeIndex);
+        onNextFrame(() => {
+            this.activateAt(this.activeIndex);
+        });
     }
 
     getAt(index: number): WeUINavBarItem {
