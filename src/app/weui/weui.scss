@@ -193,6 +193,9 @@ img[weui-avatar] {
         font-size: 45px;
         align-self: center;
         margin-left: 8px;
+        &.weui-dialog-icon-warning {
+            color: #FF9800;
+        }
     }
 
     &.weui-dialog__wrapper_with_icon {
