@@ -125,7 +125,7 @@ export class Schedule {
 
     /**
      * has next
-     * @returns {boolean}
+     * @return boolean
      */
     hasNext(): boolean {
         try {
@@ -142,7 +142,7 @@ export class Schedule {
  *
  * @param field 日期cron表达式中通过空格分割后的某一部分(日、月、周)的内容
  * @param _constraints 取值约束，如日期为[1,31]
- * @returns number[]
+ * @return number[]
  */
 export function parseField(field: string, _constraints: number[]): number[] {
     const low: number = _constraints[0];
@@ -187,7 +187,6 @@ export function parseField(field: string, _constraints: number[]): number[] {
  * @param expr  cron表达式，形如: 日期 月份 周。例如：* * * 或 1,2,5-9 1-6 0-6 或 1/2 * * 等
  * @param start 开始日期
  * @param end   介绍日期
- * @returns {*}
  */
 export function parse(expr: string, start: Date, end: Date): Schedule {
     const atoms: string[] = expr.replace(/^\s\s*|\s\s*$/g, '').split(/\s+/);

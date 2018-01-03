@@ -6,7 +6,7 @@
  * found in the LICENSE file.
  */
 
-import { Component, Renderer2, ElementRef, ViewChild, forwardRef } from '@angular/core';
+import { Component, ViewChild, forwardRef } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { WeUIGallery } from '../gallery/weui.gallery';
@@ -116,8 +116,6 @@ export class WeUIUploader {
     public image: WeUIFile;
 
     constructor(
-        private renderer: Renderer2,
-        private elementRef: ElementRef,
         private sanitizer: DomSanitizer) {
 
     }
@@ -179,7 +177,7 @@ export class WeUIUploader {
 
     /**
      * 删除文件
-     * @param {file} 需要从列表中删除的图片
+     * @param file 需要从列表中删除的图片
      */
     onDelete(file: WeUIFile): void {
         const index = this.files.indexOf(file);

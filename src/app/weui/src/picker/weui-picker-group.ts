@@ -213,7 +213,7 @@ export class WeUIPickerGroup implements AfterViewInit {
      *
      * @param offset
      * @param rowHeight
-     * @returns {number}
+     * @return number
      */
     _getMax(offset: number, rowHeight: number): number {
         return offset * rowHeight;
@@ -225,7 +225,7 @@ export class WeUIPickerGroup implements AfterViewInit {
      * @param offset
      * @param rowHeight
      * @param length
-     * @returns {number}
+     * @return number
      */
     _getMin(offset: number, rowHeight: number, length: number): number {
         return -(rowHeight * (length - offset - 1));
@@ -235,7 +235,7 @@ export class WeUIPickerGroup implements AfterViewInit {
      * get index of middle item
      *
      * @param items
-     * @returns {number}
+     * @return number
      */
     _getDefaultIndex(options: any[]): number {
         let current = Math.floor(options.length / 2);

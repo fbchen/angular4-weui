@@ -7,7 +7,7 @@
  */
 
 import { Injectable, Inject } from '@angular/core';
-import { ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, ApplicationRef, Injector, NgZone, Type } from '@angular/core';
+import { ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, ApplicationRef, Injector, Type } from '@angular/core';
 import { ɵgetDOM as getDOM, DOCUMENT } from '@angular/platform-browser';
 
 import { WeUIPicker, PickerOption } from './weui.picker';
@@ -31,8 +31,7 @@ export class WeUIPickerService {
         private _componentFactoryResolver: ComponentFactoryResolver,
         private _appRef: ApplicationRef,
         private _injector: Injector,
-        private _ngZone: NgZone,
-        @Inject(DOCUMENT) private doc: Document) {
+        @Inject(DOCUMENT) private doc: any) {
 
     }
 

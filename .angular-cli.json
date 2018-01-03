@@ -31,8 +31,9 @@
   ],
   "lint": [
     {
-        "files": "src/**/*.ts",
-        "project": "src/tsconfig.app.json"
+      "project": "src/tsconfig.app.json",
+      "files": "src/**/*.ts",
+      "exclude": "**/node_modules/**"
     }
   ],
   "e2e": {

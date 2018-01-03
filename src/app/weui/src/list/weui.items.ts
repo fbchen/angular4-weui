@@ -6,7 +6,7 @@
  * found in the LICENSE file.
  */
 
-import { Component, Renderer2, ElementRef, Input, HostBinding, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, Input, HostBinding, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
     selector: 'weui-items',
@@ -34,7 +34,7 @@ export class WeUIItems implements OnChanges {
         }
     }
 
-    constructor(private _renderer: Renderer2, private _elementRef: ElementRef) {
+    constructor(private _elementRef: ElementRef) {
 
     }
 

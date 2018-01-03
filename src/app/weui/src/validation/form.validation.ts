@@ -5,7 +5,7 @@
  */
 
 
-import { Component, Input, ElementRef } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 function isPresent(obj: any): boolean {
@@ -69,7 +69,6 @@ export class FormValidation {
     };
 
     constructor(
-        private _element: ElementRef,
         private _form: NgForm) {
         if (_form && _form.ngSubmit) {
             _form.ngSubmit.subscribe(this.onSubmit.bind(this));

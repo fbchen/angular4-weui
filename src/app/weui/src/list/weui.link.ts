@@ -6,7 +6,7 @@
  * found in the LICENSE file.
  */
 
-import { Component, Renderer2, ElementRef, Input, HostBinding, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, Input, HostBinding, OnChanges, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
@@ -68,7 +68,6 @@ export class WeUILink implements OnChanges {
     }
 
     constructor(
-        private _renderer: Renderer2,
         private _elementRef: ElementRef,
         private sanitizer: DomSanitizer) {
 

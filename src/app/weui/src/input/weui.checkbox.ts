@@ -89,9 +89,9 @@ export class WeUICheckbox extends WeUIFormControl {
     @HostBinding('class.weui-check__label') _cls_check_label = true;
 
     constructor(
-        private renderer: Renderer2,
-        private elementRef: ElementRef,
-        @Optional() @Inject(COMPOSITION_BUFFER_MODE) private compositionMode: boolean) {
+        protected renderer: Renderer2,
+        protected elementRef: ElementRef,
+        @Optional() @Inject(COMPOSITION_BUFFER_MODE) protected compositionMode: boolean) {
         super(renderer, elementRef, compositionMode);
         this.value = 'on'; // default value
     }

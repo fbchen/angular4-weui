@@ -1,4 +1,4 @@
-import { ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Injectable, ApplicationRef, Injector, NgZone, Type } from '@angular/core';
+import { ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Injectable, ApplicationRef, Injector, Type } from '@angular/core';
 
 import { WeUIDialog } from '../dialog/weui.dialog';
 import { WeUIToast } from '../toast/weui.toast';
@@ -29,8 +29,7 @@ export class Layer {
     constructor(
         private _componentFactoryResolver: ComponentFactoryResolver,
         private _appRef: ApplicationRef,
-        private _injector: Injector,
-        private _ngZone: NgZone) {
+        private _injector: Injector) {
 
     }
 

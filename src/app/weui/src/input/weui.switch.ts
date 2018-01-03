@@ -62,9 +62,9 @@ export class WeUISwitch extends WeUIFormControl {
     @HostBinding('class.weui-cell_switch') _cls_cell_switch = true;
 
     constructor(
-        private renderer: Renderer2,
-        private elementRef: ElementRef,
-        @Optional() @Inject(COMPOSITION_BUFFER_MODE) private compositionMode: boolean) {
+        protected renderer: Renderer2,
+        protected elementRef: ElementRef,
+        @Optional() @Inject(COMPOSITION_BUFFER_MODE) protected compositionMode: boolean) {
         super(renderer, elementRef, compositionMode);
         this.value = 'on'; // default value
     }

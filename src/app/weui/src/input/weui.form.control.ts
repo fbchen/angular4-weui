@@ -88,9 +88,9 @@ export /*abstract*/ class WeUIFormControl extends DefaultValueAccessor {
     @HostBinding('class.weui-control') _cls_control = true;
 
     constructor(
-        @Inject(Renderer2) private __renderer: Renderer2,
-        @Inject(ElementRef) private __elementRef: ElementRef,
-        @Optional() @Inject(COMPOSITION_BUFFER_MODE) private __compositionMode: boolean) {
+        @Inject(Renderer2) protected __renderer: Renderer2,
+        @Inject(ElementRef) protected __elementRef: ElementRef,
+        @Optional() @Inject(COMPOSITION_BUFFER_MODE) protected __compositionMode: boolean) {
         super(__renderer, __elementRef, __compositionMode);
         this.id = WeUIFormControl.registerControl();
     }

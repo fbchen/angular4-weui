@@ -151,9 +151,9 @@ export class WeUIInput extends WeUIFormControl implements OnChanges {
     @ContentChild(NgControl) state: NgControl;
 
     constructor(
-        private renderer: Renderer2,
-        private elementRef: ElementRef,
-        @Optional() @Inject(COMPOSITION_BUFFER_MODE) private compositionMode: boolean) {
+        protected renderer: Renderer2,
+        protected elementRef: ElementRef,
+        @Optional() @Inject(COMPOSITION_BUFFER_MODE) protected compositionMode: boolean) {
         super(renderer, elementRef, compositionMode);
     }
 
@@ -191,17 +191,11 @@ export class WeUIInput extends WeUIFormControl implements OnChanges {
         return this.showWarnIcon && this.shouldWarn();
     }
 
-    /**
-     * @private
-     */
     onBlur(ev: UIEvent) {
         this.onTouched(); // set your control to 'touched'
         this.blur.emit(ev);
     }
 
-    /**
-     * @private
-     */
     onFocus(ev: UIEvent) {
         this.focus.emit(ev);
     }
