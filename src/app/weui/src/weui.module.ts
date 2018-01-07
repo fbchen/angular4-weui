@@ -43,6 +43,9 @@ import { WeUITips } from './list/weui.tips';
 import { WeUITitle } from './list/weui.title';
 import { WeUIUploader } from './uploader/weui.uploader';
 import { FormValidation } from './validation/form.validation';
+import { FormDirective } from './form/form.directive';
+import { FormErrorEmitter } from './form/form.error.emitter';
+
 
 /**
  * Import WeUI Overlay Entry Components
@@ -101,7 +104,9 @@ import { WeUIPickerService } from './picker/weui.picker.service';
         WeUINavBarItem,
         WeUITabBar,
         WeUITabBarItem,
-        FormValidation
+        FormValidation,
+        FormDirective,
+        FormErrorEmitter
     ],
     exports: [
         WeUIFormControl,
@@ -138,7 +143,9 @@ import { WeUIPickerService } from './picker/weui.picker.service';
         WeUINavBarItem,
         WeUITabBar,
         WeUITabBarItem,
-        FormValidation
+        FormValidation,
+        FormDirective,
+        FormErrorEmitter
     ],
     entryComponents: [
         WeUIActionSheet,
