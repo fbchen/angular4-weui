@@ -6,10 +6,9 @@
  * found in the LICENSE file.
  */
 
-import { Component, HostBinding, Renderer2, ElementRef, forwardRef, Optional, Inject } from '@angular/core';
-import { NG_VALUE_ACCESSOR, COMPOSITION_BUFFER_MODE } from '@angular/forms';
-
-import { WeUIFormControl } from './weui.form.control';
+import { Component, Input, Renderer2, ElementRef, forwardRef, Optional, Inject, OnInit } from '@angular/core';
+import { DefaultValueAccessor, NG_VALUE_ACCESSOR, COMPOSITION_BUFFER_MODE } from '@angular/forms';
+import { UpdateClassService } from '../core/service/update.class.service';
 
 
 const WEUI_FORM_CONTROL_VALUE_ACCESSOR: any = {
@@ -20,6 +19,8 @@ const WEUI_FORM_CONTROL_VALUE_ACCESSOR: any = {
 
 @Component({
     selector: 'weui-switch',
+    preserveWhitespaces: false,
+    providers: [ UpdateClassService, WEUI_FORM_CONTROL_VALUE_ACCESSOR ],
     template: `
         <div class="weui-cell__bd">
             {{label}}<ng-content select="label"></ng-content>
@@ -27,27 +28,60 @@ const WEUI_FORM_CONTROL_VALUE_ACCESSOR: any = {
         <div class="weui-cell__ft">
             <label [for]="id" class="weui-switch-cp">
                 <input type="checkbox" class="weui-switch-cp__input"
-                    [attr.id]="id" [attr.name]="name" [value]="value" [checked]="checked" [(ngModel)]="innerValue" />
+                    [attr.id]="id" [(ngModel)]="checked">
                 <div class="weui-switch-cp__box"></div>
             </label>
         </div>
-    `,
-    providers: [WEUI_FORM_CONTROL_VALUE_ACCESSOR]
+    `
 })
-export class WeUISwitch extends WeUIFormControl {
+export class WeUISwitch extends DefaultValueAccessor implements OnInit {
+    public static count = 0;
 
-    /** 是否已选中 */
-    public checked = false;
+    @Input() id: string;
+
+    @Input() name: string;
+
+    @Input() value: any = 'on';
 
     /**
-     * The value of the input ngModel。 (view -> model)
+     * 控件 label
      */
-    set innerValue(checked: boolean) {
-        if (this._value !== checked) {
-            this._value = checked || false;
-            // view -> model -> outside world (ie. NgModel on this control)
-            this.onChange(this._value ? this.value : '');
-        }
+    @Input() label: string;
+
+    /**
+     * 是否禁用
+     */
+    @Input() disabled = false;
+
+    /** 是否已选中 */
+    public get checked(): boolean {
+        return this._checked;
+    }
+    public set checked(checked: boolean) {
+        this._checked = checked;
+        this.emitValue();
+    }
+    private _checked = false;
+
+    constructor(
+        protected renderer: Renderer2,
+        protected el: ElementRef,
+        protected updateClassService: UpdateClassService,
+        @Optional() @Inject(COMPOSITION_BUFFER_MODE) protected compositionMode: boolean) {
+        super(renderer, el, compositionMode);
+        this.id = `weui-switch-${++WeUISwitch.count}`;
+    }
+
+    ngOnInit(): void {
+        this.updateClassMap();
+    }
+
+    private updateClassMap(): void {
+        const classes = {
+            [`weui-cell`]: 1,
+            [`weui-cell_switch`]: 1
+        };
+        this.updateClassService.update(this.el.nativeElement, classes);
     }
 
     /**
@@ -55,18 +89,13 @@ export class WeUISwitch extends WeUIFormControl {
      */
     writeValue(value: any): void {
         this.checked = this.value === value;
-        super.writeValue(this.checked);
     }
 
-    /** 基本样式 */
-    @HostBinding('class.weui-cell_switch') _cls_cell_switch = true;
-
-    constructor(
-        protected renderer: Renderer2,
-        protected elementRef: ElementRef,
-        @Optional() @Inject(COMPOSITION_BUFFER_MODE) protected compositionMode: boolean) {
-        super(renderer, elementRef, compositionMode);
-        this.value = 'on'; // default value
+    /** 勾选框的选择状态发生变化时，发射出实际值 */
+    emitValue(): void {
+        const value = this.checked ? this.value : null;
+        // view -> model -> outside world (ie. NgModel on this control)
+        this.onChange(value);
     }
 
 }

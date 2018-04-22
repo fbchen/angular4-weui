@@ -6,14 +6,18 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, Output, EventEmitter, HostBinding, OnChanges } from '@angular/core';
-import { SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, Renderer2, HostBinding, OnInit } from '@angular/core';
+import { UpdateClassService } from '../core/service/update.class.service';
+import { toBoolean } from '../util/lang';
+
 
 /**
  * Toast - 弹出式提示
  */
 @Component({
     selector: 'weui-toast',
+    preserveWhitespaces: false,
+    providers: [ UpdateClassService ],
     template: `
         <div class="weui-mask_transparent"></div>
         <div class="weui-toast">
@@ -24,7 +28,7 @@ import { SimpleChange, SimpleChanges } from '@angular/core';
         </div>
     `
 })
-export class WeUIToast implements OnChanges {
+export class WeUIToast implements OnInit {
 
     /**
      * @i18n
@@ -42,17 +46,51 @@ export class WeUIToast implements OnChanges {
     /**
       * 状态，取值：loading, success
       */
-    @Input() status: string;
+    @Input()
+    get status(): string {
+        return this._status;
+    }
+    set status(status: string) {
+        if (this._status !== status) {
+            this._status = status;
+            this.updateStatus();
+            this.updateClassMap();
+        }
+    }
+    private _status: string;
 
     /**
      * 状态：正在加载
      */
-    @Input() loading = false;
+    @Input()
+    get loading(): boolean {
+        return this._loading;
+    }
+    set loading(loading: boolean) {
+        const value = toBoolean(loading);
+        if (this._loading !== value) {
+            this._loading = value;
+            this.updateClassMap();
+        }
+    }
+    private _loading = false;
 
     /**
      * 状态：操作成功
      */
-    @Input() success = true;
+    @Input()
+    get success(): boolean {
+        return this._success;
+    }
+    set success(success: boolean) {
+        const value = toBoolean(success);
+        if (this._success !== value) {
+            this._success = value;
+            this.updateClassMap();
+        }
+    }
+    private _success = true;
+
 
     /**
      * 隐藏对象
@@ -69,19 +107,27 @@ export class WeUIToast implements OnChanges {
     /** 已显示否 */
     private shown = false;
 
-    constructor() {
+    constructor(
+        protected renderer: Renderer2,
+        protected el: ElementRef,
+        protected updateClassService: UpdateClassService) {
 
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        const status: SimpleChange = changes['status'];
-        if (status) {
-            if (status.currentValue === 'loading') {
-                this.success = !(this.loading = true);
-            }
-            if (status.currentValue === 'success') {
-                this.loading = !(this.success = true);
-            }
+    ngOnInit(): void {
+        this.updateClassMap();
+    }
+
+    private updateClassMap(): void {
+
+    }
+
+    private updateStatus(): void {
+        if (this.status === 'loading') {
+            this.success = !(this.loading = true);
+        }
+        if (this.status === 'success') {
+            this.loading = !(this.success = true);
         }
     }
 

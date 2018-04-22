@@ -10,6 +10,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'weui-submit',
+    preserveWhitespaces: false,
     template: `
         <button [attr.type]="type" class="weui-btn {{getColorStyle()}}"
             [ngClass]="{

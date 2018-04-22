@@ -6,21 +6,33 @@
  * found in the LICENSE file.
  */
 
-import { Component, HostBinding } from '@angular/core';
+import { Component, ElementRef, Renderer2, OnInit } from '@angular/core';
+import { UpdateClassService } from '../core/service/update.class.service';
 
 @Component({
     selector: 'weui-title',
+    preserveWhitespaces: false,
+    providers: [ UpdateClassService ],
     template: `<ng-content></ng-content>`
 })
-export class WeUITitle {
+export class WeUITitle implements OnInit {
 
-    /**
-     * 设置基本样式
-     */
-    @HostBinding('class.weui-cells__title') _cls_title = true;
+    constructor(
+        protected renderer: Renderer2,
+        protected el: ElementRef,
+        protected updateClassService: UpdateClassService) {
 
-    constructor() {
+    }
 
+    ngOnInit(): void {
+        this.updateClassMap();
+    }
+
+    private updateClassMap(): void {
+        const classes = {
+            [`weui-cells__title`]: true
+        };
+        this.updateClassService.update(this.el.nativeElement, classes);
     }
 
 }

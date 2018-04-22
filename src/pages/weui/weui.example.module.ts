@@ -9,7 +9,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 /* WeUI Module */
 import { WeUIModule } from '../../app/weui';
@@ -52,7 +53,8 @@ import { MsgExamplePage, MsgSuccExamplePage, MsgWarnExamplePage } from './msg/ex
     imports: [
         CommonModule,
         FormsModule,
-        HttpModule,
+        BrowserModule,
+        HttpClientModule,
         SharedModule,
         WeUIModule,
         WeUIExampleRoutingModule

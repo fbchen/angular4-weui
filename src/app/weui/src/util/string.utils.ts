@@ -102,8 +102,8 @@ export class StringUtils {
      *  var result2 = template2.format({name: "小明", age: 22});
      *  // 两个结果都是"我是小明，今年22了"
      *  </code>
-     * @param String|Object|Array args 参数
-     * @return String
+     * @param {String/Object/Array} args 参数
+     * @return {String}
      */
     static format(str: string, ...args: any[]): string {
         if (args.length > 0) {

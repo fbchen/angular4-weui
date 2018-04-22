@@ -6,25 +6,27 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, Output, EventEmitter, HostBinding, AfterViewInit, ContentChildren, QueryList } from '@angular/core';
-import { WeUINavBarItem } from './weui.navbar.item';
+import {
+    Component, Input, Output, EventEmitter, ElementRef, Renderer2,
+    OnInit, AfterViewInit, ContentChildren, QueryList
+} from '@angular/core';
 import { onNextFrame } from '../core/anim.frame';
+import { UpdateClassService } from '../core/service/update.class.service';
+
+import { WeUINavBarItem } from './weui.navbar.item';
 
 @Component({
-    selector: 'weui-navbar',
+    selector: 'weui-navbar,[weui-navbar]',
+    preserveWhitespaces: false,
+    providers: [ UpdateClassService ],
     template: `<ng-content></ng-content>`
 })
-export class WeUINavBar implements AfterViewInit {
+export class WeUINavBar implements OnInit, AfterViewInit {
 
     /**
      * 初始激活的子对象
      */
     @Input() activeIndex = 0;
-
-    /**
-     * 设置基本样式
-     */
-    @HostBinding('class.weui-navbar') barCls = true;
 
     /** 内部子对象 */
     @ContentChildren(WeUINavBarItem) items: QueryList<WeUINavBarItem>;
@@ -36,8 +38,22 @@ export class WeUINavBar implements AfterViewInit {
 
     private _activated: any;
 
-    constructor() {
+    constructor(
+        protected renderer: Renderer2,
+        protected el: ElementRef,
+        protected updateClassService: UpdateClassService) {
 
+    }
+
+    ngOnInit(): void {
+        this.updateClassMap();
+    }
+
+    private updateClassMap(): void {
+        const classes = {
+            [`weui-navbar`]: true
+        };
+        this.updateClassService.update(this.el.nativeElement, classes);
     }
 
     ngAfterViewInit(): void {
@@ -53,7 +69,7 @@ export class WeUINavBar implements AfterViewInit {
     activate(item: any): void {
         this._activated = item;
         this.items.forEach(child => {
-            child.activated(child === item);
+            child.activate(child === item);
         });
 
         this.activated.emit(item);

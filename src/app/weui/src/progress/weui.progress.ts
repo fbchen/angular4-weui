@@ -6,28 +6,39 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, Renderer2, OnInit } from '@angular/core';
+import { UpdateClassService } from '../core/service/update.class.service';
 
 @Component({
     selector: 'weui-progress-bar',
+    preserveWhitespaces: false,
+    providers: [ UpdateClassService ],
     template: `
-        <div class="weui-progress weui-progress_{{color}}">
-            <div class="weui-progress__bar">
-                <div class="weui-progress__inner-bar" [style.width]="value + '%'"></div>
-            </div>
-            <a href="javascript:;" class="weui-progress__opr" *ngIf="canTerminate" (click)="onTerminate()">
-                <i class="weui-icon-cancel"></i>
-            </a>
+        <div class="weui-progress__bar">
+            <div class="weui-progress__inner-bar" [style.width]="value + '%'"></div>
         </div>
+        <a href="javascript:;" class="weui-progress__opr" *ngIf="canTerminate" (click)="onTerminate()">
+            <i class="weui-icon-cancel"></i>
+        </a>
     `
 })
-export class WeUIProgressBar {
+export class WeUIProgressBar implements OnInit {
 
     /**
      * 颜色，取值：default、primary、warn等。默认为default。<br>
      * 自定义的颜色名称与色值，可以定义在 工程根目录/src/theme/variables.scss 文件中的 $colors 对象。
      */
-    @Input() color = 'default';
+    @Input()
+    get color(): string {
+        return this._color;
+    }
+    set color(color: string) {
+        if (this._color !== color) {
+            this._color = color;
+            this.updateClassMap();
+        }
+    }
+    private _color = 'default';
 
     /**
      * Type of the progress bar. <br>
@@ -54,8 +65,23 @@ export class WeUIProgressBar {
      */
     @Output() terminate = new EventEmitter<WeUIProgressBar>();
 
-    constructor() {
+    constructor(
+        protected renderer: Renderer2,
+        protected el: ElementRef,
+        protected updateClassService: UpdateClassService) {
 
+    }
+
+    ngOnInit(): void {
+        this.updateClassMap();
+    }
+
+    private updateClassMap(): void {
+        const classes = {
+            [`weui-progress`]: true,
+            [`weui-progress_${this.color}`]: this.color
+        };
+        this.updateClassService.update(this.el.nativeElement, classes);
     }
 
     onTerminate(): void {

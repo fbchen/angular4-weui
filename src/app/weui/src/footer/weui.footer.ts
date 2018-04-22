@@ -6,88 +6,98 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, HostBinding, Renderer2, ElementRef } from '@angular/core';
-import { Directive, Host, Optional } from '@angular/core';
+import { Component, Input, Renderer2, ElementRef, Directive, Host, Optional, OnInit } from '@angular/core';
+import { UpdateClassService } from '../core/service/update.class.service';
+import { toBoolean } from '../util/lang';
+
 
 /**
  * 页脚
  */
 @Component({
-    selector: 'weui-footer',
+    selector: 'weui-footer,[weui-footer]',
+    preserveWhitespaces: false,
+    providers: [ UpdateClassService ],
     template: '<ng-content></ng-content>'
 })
-export class WeUIFooter {
+export class WeUIFooter implements OnInit {
 
     /**
      * 固定在底部
      */
-    @Input() fixedAtBottom = false;
+    @Input()
+    get fixedAtBottom(): boolean {
+        return this._fixedAtBottom;
+    }
+    set fixedAtBottom(fixedAtBottom: boolean) {
+        const value = toBoolean(fixedAtBottom);
+        if (this._fixedAtBottom !== value) {
+            this._fixedAtBottom = value;
+            this.updateClassMap();
+        }
+    }
+    private _fixedAtBottom = false;
 
-    /**
-     * 基本样式
-     */
-    @HostBinding('class.weui-footer') _cls_footer = true;
 
-    /**
-     * 固定在底部样式
-     */
-    @HostBinding('class.weui-footer_fixed-bottom') get fixedBottomCls(): boolean {
-        return this.fixedAtBottom;
+    constructor(
+        protected renderer: Renderer2,
+        protected el: ElementRef,
+        protected updateClassService: UpdateClassService) {
+
     }
 
-    constructor() {
+    ngOnInit(): void {
+        this.updateClassMap();
+    }
 
+    private updateClassMap(): void {
+        const classes = {
+            [`weui-footer`]: true,
+            [`weui-footer_fixed-bottom`]: this.fixedAtBottom
+        };
+        this.updateClassService.update(this.el.nativeElement, classes);
     }
 
 }
 
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: 'weui-footer-text,[weui-footer-text]'
+    selector: `weui-footer-text, [weui-footer-text]`
 })
 export class WeUIFooterText {
 
     constructor(
-        protected _renderer: Renderer2,
-        protected _elementRef: ElementRef,
-        @Optional() @Host() protected _container: WeUIFooter) {
-        if (_container !== null) {
-            _renderer.addClass(_elementRef.nativeElement, 'weui-footer__text');
-        }
+        protected renderer: Renderer2,
+        protected elementRef: ElementRef) {
+        renderer.addClass(elementRef.nativeElement, 'weui-footer__text');
     }
 
 }
 
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: 'weui-footer-links,[weui-footer-links]'
+    selector: `weui-footer-links, [weui-footer-links]`
 })
 export class WeUIFooterLinks {
 
     constructor(
-        protected _renderer: Renderer2,
-        protected _elementRef: ElementRef,
-        @Optional() @Host() protected _container: WeUIFooter) {
-        if (_container !== null) {
-            _renderer.addClass(_elementRef.nativeElement, 'weui-footer__links');
-        }
+        protected renderer: Renderer2,
+        protected elementRef: ElementRef) {
+        renderer.addClass(elementRef.nativeElement, 'weui-footer__links');
     }
 
 }
 
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: 'a'
+    selector: `a[weui-footer-link]`
 })
 export class WeUIFooterLink {
 
     constructor(
-        protected _renderer: Renderer2,
-        protected _elementRef: ElementRef,
-        @Optional() @Host() protected _container: WeUIFooterLinks) {
-        if (_container !== null) {
-            _renderer.addClass(_elementRef.nativeElement, 'weui-footer__link');
-        }
+        protected renderer: Renderer2,
+        protected elementRef: ElementRef) {
+        renderer.addClass(elementRef.nativeElement, 'weui-footer__link');
     }
 
 }

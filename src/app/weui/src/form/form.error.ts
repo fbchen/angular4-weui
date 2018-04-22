@@ -46,9 +46,10 @@ export interface FieldMessages {
             display: block;
             padding-top: 8px;
         }
-    `]
+    `],
+    preserveWhitespaces: false
 })
-export class FormErrorEmitter {
+export class FormError {
 
     /** 控件名称 */
     @Input() name: string;

@@ -6,7 +6,7 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, OnInit, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 
 import { WeUIPicker, PickerOption } from './weui.picker';
 import { WeUIPickerGroup } from './weui-picker-group';
@@ -92,9 +92,15 @@ function getActualMaximumDate(year: number, month: number): number {
                 <a href="javascript:;" class="weui-picker__action" (click)="onConfirm()">{{confirmText}}</a>
             </div>
             <div class="weui-picker__bd">
-                <weui-picker-group tappable class="weui-picker__group"
-                    *ngFor="let options of menus; let i = index;"
-                    [options]="options" [value]="value[i]" (change)="onChange($event, i)"></weui-picker-group>
+                <weui-picker-group tappable #yearPicker
+                    class="weui-picker__group" [options]="years" (change)="onChangeYear($event)">
+                </weui-picker-group>
+                <weui-picker-group tappable #monthPicker
+                    class="weui-picker__group" [options]="months" (change)="onChangeMonth($event)">
+                </weui-picker-group>
+                <weui-picker-group tappable #datePicker
+                    class="weui-picker__group" [options]="dates" (change)="onChangeDate($event)">
+                </weui-picker-group>
             </div>
         </div>
     `,
@@ -118,6 +124,7 @@ export class WeUIDatePicker extends WeUIPicker implements OnInit, AfterViewInit 
     @Input() set start(start: any) {
         this._startDate = this._parseDate(start, '-01-01');
     }
+    private _startDate: Date; // 开始日期
 
     /**
      * 结束日期/年份。取值：<ul>
@@ -129,20 +136,18 @@ export class WeUIDatePicker extends WeUIPicker implements OnInit, AfterViewInit 
     @Input() set end(end: any) {
         this._endDate = this._parseDate(end, '-12-31');
     }
+    private _endDate: Date; // 结束日期
 
-    /* 开始日期 */
-    private _startDate: Date;
 
-    /* 结束日期 */
-    private _endDate: Date;
+    /** 年月日 显示列表 */
+    @ViewChild('yearPicker') yearPicker: WeUIPickerGroup;
+    @ViewChild('monthPicker') monthPicker: WeUIPickerGroup;
+    @ViewChild('datePicker') datePicker: WeUIPickerGroup;
 
-    /** 显示列表 */
-    @ViewChildren(WeUIPickerGroup) _groups: QueryList<WeUIPickerGroup>;
 
-    /** 月份选择控件 */
-    private monthPicker: WeUIPickerGroup;
-    /** 日期选择控件 */
-    private datePicker: WeUIPickerGroup;
+    public years: PickerOption[] = [];
+    public months: PickerOption[] = [];
+    public dates: PickerOption[] = [];
 
     private _parseDate(value: any, sub: string): Date {
         if (typeof value === 'string') {
@@ -178,62 +183,46 @@ export class WeUIDatePicker extends WeUIPicker implements OnInit, AfterViewInit 
         }
 
         // 年份列表
-        const years: PickerOption[] = [];
         const endYear = this._endDate.getFullYear();
         for (let year = this._startDate.getFullYear(); year <= endYear; year++) {
-            years.push({
+            this.years.push({
                 label: year + '年',
                 value: year
             });
         }
-
-        // 渲染数据列表
-        this.menus = [years, [], []];
     }
 
     ngAfterViewInit(): void {
-        const monthPicker = this._groups.find((group: WeUIPickerGroup, index: number): boolean => {
-            return index === 1;
-        });
-        const datePicker = this._groups.find((group: WeUIPickerGroup, index: number): boolean => {
-            return index === 2;
-        });
-
-        if (monthPicker) {
-            this.monthPicker = monthPicker;
-        }
-        if (datePicker) {
-            this.datePicker = datePicker;
-        }
-
         // 更新月份、日期列表
-        this._updateMonthPickerList();
+        this.updateMonthPickerList();
     }
 
     /**
      * 选择年或月，触发子列表的变更
      *
-     * @param option 被选择的选项
-     * @param index 哪个列（索引）
+     * @param year 被选择的选项
      */
-    onChange(option: PickerOption, index: number): void {
-        if (!option) {
+    onChangeYear(year: PickerOption): void {
+        if (!year) {
             return; // 未选择任何值，不触发子列表的变更
         }
-        super.onChange(option, index);
+        super.onChange(year, 0);
 
         // 变更“年份”时，修改月份列表；如果月份的值为2月，则也修改日期列表
-        if (index === 0) {
-            this._updateMonthPickerList();
-        }
-
-        // 变更“月份”时，修改日期列表
-        if (index === 1) {
-            this._updateDatePickerList();
-        }
+        this.updateMonthPickerList();
     }
 
-    private _updateMonthPickerList(): void {
+    onChangeMonth(month: PickerOption): void {
+        super.onChange(month, 1);
+        // 变更“月份”时，修改日期列表
+        this.updateDatePickerList();
+    }
+
+    onChangeDate(date: PickerOption): void {
+        super.onChange(date, 2);
+    }
+
+    private updateMonthPickerList(): void {
         if (!this.monthPicker) {
             return;
         }
@@ -251,10 +240,10 @@ export class WeUIDatePicker extends WeUIPicker implements OnInit, AfterViewInit 
         }
 
         // 强制日期列表更新
-        this._updateDatePickerList();
+        this.updateDatePickerList();
     }
 
-    private _updateDatePickerList(): void {
+    private updateDatePickerList(): void {
         if (!this.datePicker) {
             return;
         }

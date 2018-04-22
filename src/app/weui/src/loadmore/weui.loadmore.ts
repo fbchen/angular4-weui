@@ -6,41 +6,89 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input } from '@angular/core';
+import { Component, Input, ElementRef, Renderer2, OnInit } from '@angular/core';
+import { UpdateClassService } from '../core/service/update.class.service';
+import { toBoolean } from '../util/lang';
 
 /**
  * 加载更多
  */
 @Component({
     selector: 'weui-loadmore',
+    preserveWhitespaces: false,
+    providers: [ UpdateClassService ],
     template: `
-        <div class="weui-loadmore" [ngClass]="{
-                'weui-loadmore_line': line !== undefined && line !== null,
-                'weui-loadmore_dot': dot !== undefined && dot !== null }">
-            <i class="weui-loading" *ngIf="loading"></i>
-            <span class="weui-loadmore__tips"><ng-content></ng-content></span>
-        </div>
-    `
+        <i class="weui-loading" *ngIf="loading"></i>
+        <span class="weui-loadmore__tips"><ng-content></ng-content></span>
+    `,
+    styles: [`
+        :host { display: block; }
+    `]
 })
-export class WeUILoadmore {
+export class WeUILoadmore implements OnInit {
 
-    /**
-     * 分割线
-     */
-    @Input() line: any;
+    /** 显示为分割线 */
+    @Input()
+    get line(): boolean {
+        return this._line;
+    }
+    set line(line: boolean) {
+        const value = toBoolean(line);
+        if (this._line !== value) {
+            this._line = value;
+            this.updateClassMap();
+        }
+    }
+    private _line = false;
 
-    /**
-     * 点
-     */
-    @Input() dot: any;
+    /** 不展示文字，只有一个小点 */
+    @Input()
+    get dot(): boolean {
+        return this._dot;
+    }
+    set dot(dot: boolean) {
+        const value = toBoolean(dot);
+        if (this._dot !== value) {
+            this._dot = value;
+            this.updateClassMap();
+        }
+    }
+    private _dot = false;
 
-    /**
-     * 正在加载
-     */
-    @Input() loading = false;
+    /** 是否正在加载 */
+    @Input()
+    get loading(): boolean {
+        return this._loading;
+    }
+    set loading(loading: boolean) {
+        const value = toBoolean(loading);
+        if (this._loading !== value) {
+            this._loading = value;
+            this.updateClassMap();
+        }
+    }
+    private _loading = false;
 
-    constructor() {
 
+    constructor(
+        protected renderer: Renderer2,
+        protected el: ElementRef,
+        protected updateClassService: UpdateClassService) {
+
+    }
+
+    ngOnInit(): void {
+        this.updateClassMap();
+    }
+
+    private updateClassMap(): void {
+        const classes = {
+            [`weui-loadmore`]: true,
+            [`weui-loadmore_line`]: this.line,
+            [`weui-loadmore_dot`]: this.dot,
+            [`weui-loadmore_loading`]: this.loading
+        };
+        this.updateClassService.update(this.el.nativeElement, classes);
     }
 
 }

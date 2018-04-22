@@ -39,6 +39,7 @@ export class PickerOption {
  */
 @Component({
     selector: 'weui-picker',
+    preserveWhitespaces: false,
     template: `
         <div class="weui-mask" (click)="onCancel()"
             [ngClass]="{'weui-animate-fade-in': shown, 'weui-animate-fade-out': !shown}"></div>
@@ -75,7 +76,7 @@ export class WeUIPicker {
         if (menu !== undefined && menu !== null && menu.length) {
             this.menus = [menu];
         }
-    };
+    }
 
     /**
      * 多列菜单列表，内容任意，其中<code>label</code>用于显示，<code>value</code>表示值，<code>disabled</code>表示不可选择项。<br>

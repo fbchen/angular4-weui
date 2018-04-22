@@ -6,30 +6,32 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { UpdateClassService } from '../core/service/update.class.service';
+
 
 @Component({
     selector: 'weui-searchbar',
+    preserveWhitespaces: false,
+    providers: [ UpdateClassService ],
     template: `
-        <div class="weui-search-bar" [ngClass]="{'weui-search-bar_focusing': focusing}">
-            <form class="weui-search-bar__form">
-                <div class="weui-search-bar__box">
-                    <i class="weui-icon-search"></i>
-                    <input #searchBox type="search" name="search" class="weui-search-bar__input"
-                        [placeholder]="placeholder" [required]="required"
-                        (focus)="onFocus()" (blur)="onBlur()" [(ngModel)]="value" (keyup)="push(searchBox.value)" />
-                    <a href="javascript:" class="weui-icon-clear" (click)="clear()"></a>
-                </div>
-                <label class="weui-search-bar__label" (click)="doFocus()">
-                    <i class="weui-icon-search"></i>
-                    <span>{{placeholder}}</span>
-                </label>
-            </form>
-            <a href="javascript:" class="weui-search-bar__cancel-btn" (click)="onCancel()">{{cancelText}}</a>
-        </div>
+        <form class="weui-search-bar__form">
+            <div class="weui-search-bar__box">
+                <i class="weui-icon-search"></i>
+                <input #searchBox type="search" name="search" class="weui-search-bar__input"
+                    [placeholder]="placeholder" [required]="required"
+                    (focus)="onFocus()" (blur)="onBlur()" [(ngModel)]="value">
+                <a href="javascript:" class="weui-icon-clear" (click)="clear()"></a>
+            </div>
+            <label class="weui-search-bar__label" (click)="focus()">
+                <i class="weui-icon-search"></i>
+                <span>{{placeholder}}</span>
+            </label>
+        </form>
+        <a href="javascript:" class="weui-search-bar__cancel-btn" (click)="onCancel()">{{cancelText}}</a>
     `
 })
 export class WeUISearchBar implements OnInit, OnDestroy {
@@ -66,35 +68,69 @@ export class WeUISearchBar implements OnInit, OnDestroy {
     // 输入控件
     @ViewChild('searchBox') searchBox: ElementRef;
 
-    public focusing = false;
 
-    public value = '';
+    // 是否已聚焦
+    public get focusing(): boolean {
+        return this._focusing;
+    }
+    public set focusing(focusing: boolean) {
+        if (this._focusing !== focusing) {
+            this._focusing = focusing;
+            this.updateClassMap();
+        }
+    }
+    private _focusing = false;
 
+    // 当前输入框的值
+    public get value(): string {
+        return this._value;
+    }
+    public set value(value: string) {
+        this._value = value;
+        this.push(value);
+    }
+    private _value = '';
+
+
+    // 防抖搜索
     private searchTerms = new Subject<string>();
-    private _searchTermsChangesSubscription: Subscription;
+    private searchTermsSubscription: Subscription;
 
-    constructor() {
+    constructor(
+        protected renderer: Renderer2,
+        protected el: ElementRef,
+        protected updateClassService: UpdateClassService) {
 
     }
 
+
     ngOnInit(): void {
-        this._searchTermsChangesSubscription = this.searchTerms
-            .pipe(
-                debounceTime(300),     // wait for 300ms pause in events
-                distinctUntilChanged() // ignore if next search term is same as previous
-            )
-            .subscribe((term: string) => {
-                this.search.emit(term);
-            });
+        this.searchTermsSubscription = this.searchTerms.pipe(
+            debounceTime(300),     // wait for 300ms pause in events
+            distinctUntilChanged() // ignore if next search term is same as previous
+        ).subscribe((term: string) => {
+            this.search.emit(term);
+        });
+        // 更新样式
+        this.updateClassMap();
     }
 
     ngOnDestroy(): void {
-        if (this._searchTermsChangesSubscription) {
-            this._searchTermsChangesSubscription.unsubscribe();
+        if (this.searchTermsSubscription) {
+            this.searchTermsSubscription.unsubscribe();
         }
     }
 
-    doFocus(): void {
+    private updateClassMap(): void {
+        const classes = {
+            [`weui-search-bar`]: true,
+            [`weui-search-bar_focusing`]: this.focusing
+        };
+        this.updateClassService.update(this.el.nativeElement, classes);
+    }
+
+    /** 使光标集中于输入框 */
+    focus(): void {
         this.searchBox.nativeElement.focus();
     }
 
@@ -121,7 +157,7 @@ export class WeUISearchBar implements OnInit, OnDestroy {
 
     clear(): void {
         this.value = '';
-        this.doFocus();
+        this.focus();
     }
 
 }

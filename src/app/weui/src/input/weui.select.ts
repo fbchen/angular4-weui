@@ -6,38 +6,27 @@
  * found in the LICENSE file.
  */
 
-import { Directive, Host, Renderer2, ElementRef, Optional, AfterViewInit } from '@angular/core';
-import { WeUIItem } from '../list/weui.item';
+import { Directive, Renderer2, ElementRef } from '@angular/core';
 
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: 'select'
+    selector: 'select[weui-select]'
 })
-export class WeUISelect implements AfterViewInit {
+export class WeUISelect {
 
     constructor(
-        private _renderer: Renderer2,
-        private _elementRef: ElementRef,
-        @Optional() @Host() private _container: WeUIItem) {
-
+        public renderer: Renderer2,
+        public el: ElementRef) {
+        this.updateClasses();
     }
 
-    ngAfterViewInit(): void {
-        if (!this._container) {
-            return;
-        }
+    getHostElement(): HTMLElement {
+        return this.el.nativeElement as HTMLElement;
+    }
 
-        const nativeEl = this._elementRef.nativeElement as HTMLElement;
-        this._renderer.addClass(nativeEl, 'weui-select');
-        this._container.addClass('weui-cell_select');
-
-        const parentEl = nativeEl.parentElement;
-        if (parentEl && parentEl.classList.contains('weui-cell__hd')) {
-            this._container.addClass('weui-cell_select-before');
-        }
-        if (parentEl && parentEl.classList.contains('weui-cell__bd')) {
-            this._container.addClass('weui-cell_select-after');
-        }
+    updateClasses(): void {
+        const nativeEl = this.el.nativeElement as HTMLElement;
+        this.renderer.addClass(nativeEl, 'weui-select');
     }
 
 }

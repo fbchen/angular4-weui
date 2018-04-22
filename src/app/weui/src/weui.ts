@@ -11,7 +11,6 @@
  * @description
  * Entry point for all public APIs of the weui package.
  */
-export { WeUIFormControl } from './input/weui.form.control';
 export { WeUIBadge } from './badge/weui.badge';
 export { WeUIButton } from './button/weui.button';
 export { WeUISubmit } from './button/weui.submit';
@@ -45,7 +44,6 @@ export { WeUIToast } from './toast/weui.toast';
 export { WeUITopTips } from './toptips/weui.toptip';
 export { Layer } from './overlay/layer';
 export { WeUIPickerService } from './picker/weui.picker.service';
-export { FormValidation } from './validation/form.validation';
 
 export { onNextFrame, clearNextFrameAction } from './core/anim.frame';
 

@@ -18,6 +18,7 @@ const getWindowHeight = (): number => {
 
 @Component({
     selector: 'weui-picker-group',
+    preserveWhitespaces: false,
     template: `
         <div class="weui-picker__mask"></div>
         <div class="weui-picker__indicator"></div>

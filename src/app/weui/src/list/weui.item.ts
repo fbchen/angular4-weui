@@ -6,10 +6,14 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, Renderer2, ElementRef, HostBinding, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Renderer2, ElementRef, OnInit, AfterContentInit, ContentChildren, QueryList } from '@angular/core';
+import { UpdateClassService } from '../core/service/update.class.service';
+import { WeUISelect } from '../input/weui.select';
 
 @Component({
-    selector: 'weui-item',
+    selector: 'weui-item,[weui-item]',
+    preserveWhitespaces: false,
+    providers: [UpdateClassService],
     template: `
         <div class="weui-cell__hd">
             <ng-content select="[weui-start]"></ng-content>
@@ -23,35 +27,69 @@ import { Component, Input, Renderer2, ElementRef, HostBinding, OnChanges, Simple
         </div>
     `
 })
-export class WeUIItem implements OnChanges {
-    /**
-     * 样式
-     */
-    @Input() baseCls: string;
+export class WeUIItem implements OnInit, AfterContentInit {
+
+    /** 样式 */
+    @Input()
+    get baseCls(): string {
+        return this._baseCls;
+    }
+    set baseCls(baseCls: string) {
+        if (this._baseCls !== baseCls) {
+            this._baseCls = baseCls;
+            this.updateClassMap();
+        }
+    }
+    private _baseCls: string;
 
 
-    @HostBinding('class.weui-cell') _cls_cell = true;
-    @HostBinding('class.weui-item') _cls_item = true;
+    /** 选择控件 */
+    @ContentChildren(WeUISelect) selects: QueryList<WeUISelect>;
 
-    ngOnChanges(changes: SimpleChanges): void {
-        const changed = changes['baseCls'];
-        if (changed) {
-            const _el = this._elementRef.nativeElement as HTMLElement;
-            if (changed.previousValue) {
-                _el.classList.remove(`weui-cell_${changed.previousValue}`);
-            }
-            if (changed.currentValue) {
-                _el.classList.add(`weui-cell_${changed.currentValue}`);
-            }
+
+    constructor(
+        protected renderer: Renderer2,
+        protected el: ElementRef,
+        protected updateClassService: UpdateClassService) {
+    }
+
+    getHostElement(): HTMLElement {
+        return this.el.nativeElement as HTMLElement;
+    }
+
+    ngOnInit(): void {
+        this.updateClassMap();
+    }
+
+    private updateClassMap(): void {
+        const classes = {
+            [`weui-cell`]: 1,
+            [`weui-item`]: 1,
+            [`weui-cell_${this.baseCls}`]: this.baseCls
+        };
+        this.updateClassService.update(this.el.nativeElement, classes);
+    }
+
+    // 存在选择控件，需特殊处理
+    ngAfterContentInit(): void {
+        if (this.selects && this.selects.length) {
+            this.addClass('weui-cell_select');
+
+            const hostEl = this.getHostElement();
+            this.selects.forEach(sel => {
+                const selEl = sel.getHostElement();
+                if (selEl.hasAttribute('weui-start')) {
+                    this.addClass('weui-cell_select-before');
+                }
+                if (selEl.hasAttribute('weui-content') && hostEl.querySelectorAll('[weui-start]').length) {
+                    this.addClass('weui-cell_select-after');
+                }
+            });
         }
     }
 
-    constructor(private _renderer: Renderer2, private _elementRef: ElementRef) {
-
-    }
-
     addClass(cls: string): void {
-        this._renderer.addClass(this._elementRef.nativeElement, cls);
+        this.renderer.addClass(this.el.nativeElement, cls);
     }
 
 }

@@ -8,9 +8,16 @@
 
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Http, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { AbstractPage } from '../abstract-page';
+
+export interface POST {
+    userId: number;
+    id: number;
+    title: string;
+    body: string;
+}
 
 @Component({
     templateUrl: 'example.html'
@@ -29,7 +36,7 @@ export class SearchBarExamplePage extends AbstractPage implements OnInit {
         public element: ElementRef,
         public router: Router,
         public route: ActivatedRoute,
-        private http: Http) {
+        private http: HttpClient) {
         super(element, router, route);
     }
 
@@ -37,8 +44,8 @@ export class SearchBarExamplePage extends AbstractPage implements OnInit {
         super.ngOnInit();
 
         // 查询博客
-        this.http.get('https://jsonplaceholder.typicode.com/posts').subscribe((response: Response) => {
-            this.list = response.json();
+        this.http.get<POST[]>('https://jsonplaceholder.typicode.com/posts').subscribe((posts: POST[]) => {
+            this.list = posts;
         });
     }
 

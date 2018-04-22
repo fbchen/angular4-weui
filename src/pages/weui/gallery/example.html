@@ -5,7 +5,7 @@
     </div>
     <div class="page__bd page__bd_spacing">
         <div class="weui-btn-area">
-            <weui-button color="primary" (click)="show()">再次显示</weui-button>
+            <a href="javascript:;" weui-button color="primary" (click)="show()">再次显示</a>
         </div>
     </div>
     <weui-gallery [image]="image" [canDelete]="true" (delete)="onDelete($event)" (click)="hide()"></weui-gallery>

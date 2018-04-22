@@ -5,6 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file.
  */
+import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 
 export function isPresent(obj: any): boolean {
     return obj !== undefined && obj !== null;
@@ -26,7 +27,7 @@ export function isEmptyArray(arr: any): boolean {
     return false;
 }
 
-export function arrayEquals(array1: any[], array2: any[]): boolean {
+export function arrayEquals<T>(array1: T[], array2: T[]): boolean {
     if (!array1 || !array2 || array1.length !== array2.length) {
         return false;
     }
@@ -38,4 +39,24 @@ export function arrayEquals(array1: any[], array2: any[]): boolean {
         }
     }
     return true;
+}
+
+export function toArray<T>(value: T | T[]): T[] {
+    let ret: T[];
+    if (value === undefined || value == null) {
+        ret = [];
+    } else if (!Array.isArray(value)) {
+        ret = [value];
+    } else {
+        ret = value;
+    }
+    return ret;
+}
+
+export function toBoolean(value: boolean | string): boolean {
+  return coerceBooleanProperty(value);
+}
+
+export function toNumber<D>(value: number | string, fallback: D): number | D {
+  return coerceNumberProperty(value, fallback);
 }

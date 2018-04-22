@@ -21,7 +21,9 @@ export class InputExamplePage extends AbstractPage {
     public data: any = {
         radio1: '2',
         checkbox1: ['1'],
+        name: '',
         card: 'weui input error',
+        num: null,
         text1: 'text1 message',
         text2: 'text2 message',
         select1: '1',

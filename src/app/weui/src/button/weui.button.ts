@@ -6,57 +6,125 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input } from '@angular/core';
+import { Component, Input, ElementRef, Renderer2, OnInit } from '@angular/core';
+import { UpdateClassService } from '../core/service/update.class.service';
+import { toBoolean } from '../util/lang';
 
 @Component({
-    selector: 'weui-button',
+    // tslint:disable-next-line:component-selector
+    selector: '[weui-button]',
+    preserveWhitespaces: false,
+    providers: [ UpdateClassService ],
     template: `
-        <a href="javascript:;" class="weui-btn {{getColorStyle()}}"
-            [ngClass]="{
-                'weui-btn_disabled': disabled && plain == undefined,
-                'weui-btn_plain-disabled': disabled && plain !== undefined,
-                'weui-btn_loading': loading,
-                'weui-btn_mini': mini !== undefined
-            }">
-            <i class="weui-loading" *ngIf="loading"></i>
-            <ng-content></ng-content>
-        </a>
+        <i class="weui-loading" *ngIf="loading"></i>
+        <ng-content></ng-content>
     `
 })
-export class WeUIButton {
+export class WeUIButton implements OnInit {
 
     /**
      * 颜色，取值：default、primary、warn等。默认为default。<br>
      * 自定义的颜色名称与色值，可以定义在 工程根目录/src/theme/variables.scss 文件中的 $colors 对象。
      */
-    @Input() color = 'default';
+    @Input()
+    get color(): string {
+        return this._color;
+    }
+    set color(color: string) {
+        if (this._color !== color) {
+            this._color = color;
+            this.updateClassMap();
+        }
+    }
+    private _color = 'default';
 
     /**
      * 简朴样式 (主要出现此属性)
      */
-    @Input() plain: string;
+    @Input()
+    get plain(): boolean {
+        return this._plain;
+    }
+    set plain(plain: boolean) {
+        const value = toBoolean(plain);
+        if (this._plain !== value) {
+            this._plain = value;
+            this.updateClassMap();
+        }
+    }
+    private _plain = false;
 
     /**
      * 按钮大小 (主要出现此属性)
      */
-    @Input() mini: string;
+    @Input()
+    get mini(): boolean {
+        return this._mini;
+    }
+    set mini(mini: boolean) {
+        const value = toBoolean(mini);
+        if (this._mini !== value) {
+            this._mini = value;
+            this.updateClassMap();
+        }
+    }
+    private _mini = false;
 
     /**
      * 正在加载
      */
-    @Input() loading = false;
+    @Input()
+    get loading(): boolean {
+        return this._loading;
+    }
+    set loading(loading: boolean) {
+        const value = toBoolean(loading);
+        if (this._loading !== value) {
+            this._loading = value;
+            this.updateClassMap();
+        }
+    }
+    private _loading = false;
 
     /**
      * 禁用样式
      */
-    @Input() disabled = false;
+    @Input()
+    get disabled(): boolean {
+        return this._disabled;
+    }
+    set disabled(disabled: boolean) {
+        const value = toBoolean(disabled);
+        if (this._disabled !== value) {
+            this._disabled = value;
+            this.updateClassMap();
+        }
+    }
+    private _disabled = false;
 
-    constructor() {
+
+    constructor(
+        protected renderer: Renderer2,
+        protected el: ElementRef,
+        protected updateClassService: UpdateClassService) {
 
     }
 
-    getColorStyle(): string {
-        return 'weui-btn_' + (this.plain !== undefined ? 'plain-' : '') + this.color;
+    ngOnInit(): void {
+        this.updateClassMap();
+    }
+
+    private updateClassMap(): void {
+        const classes = {
+            [`weui-btn`]: true,
+            [`weui-btn_mini`]: this.mini,
+            [`weui-btn_loading`]: this.loading,
+            [`weui-btn_${this.color}`]: this.color && !this.plain,
+            [`weui-btn_plain-${this.color}`]: this.color && this.plain,
+            [`weui-btn_disabled`]: this.disabled,
+            [`weui-btn_plain-disabled`]: this.disabled && this.plain
+        };
+        this.updateClassService.update(this.el.nativeElement, classes);
     }
 
 }

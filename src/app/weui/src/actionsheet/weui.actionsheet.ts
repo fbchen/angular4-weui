@@ -6,15 +6,16 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, Output, HostBinding, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, Renderer2, OnInit, AfterViewInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/core';
+import { UpdateClassService } from '../core/service/update.class.service';
+
 
 @Component({
     selector: 'weui-actionsheet',
     template: `
-        <div class="weui-mask" [@visibility]="visibility" (click)="hide()"></div>
-        <div class="weui-actionsheet"
-            [ngClass]="{'weui-actionsheet_toggle': shown && mode == 'ios'}">
+        <div class="weui-mask" [@visibility]="visibility" (@visibility.done)="onVisibleChange($event)" (click)="hide()"></div>
+        <div class="weui-actionsheet" [ngClass]="{'weui-actionsheet_toggle': isToggleClassEnable()}">
             <div class="weui-actionsheet__menu">
                 <div class="weui-actionsheet__cell" *ngFor="let m of menu" (click)="onSelect(m)">{{m.text}}</div>
             </div>
@@ -23,13 +24,17 @@ import { animate, state, style, transition, trigger } from '@angular/core';
             </div>
         </div>
     `,
-    animations: [trigger('visibility', [
-        state('show', style({ opacity: 1 })),
-        state('hide', style({ opacity: 0 })),
-        transition('hide <=> show', [animate(200)])
-    ])]
+    preserveWhitespaces: false,
+    providers: [ UpdateClassService ],
+    animations: [
+        trigger('visibility', [
+            state('show', style({ opacity: 1 })),
+            state('hide', style({ opacity: 0 })),
+            transition('hide <=> show', [animate(200)])
+        ])
+    ]
 })
-export class WeUIActionSheet {
+export class WeUIActionSheet implements OnInit, AfterViewInit {
 
     /**
      * @i18n
@@ -46,7 +51,17 @@ export class WeUIActionSheet {
     /**
      * ActionSheet弹出模式，取值：ios(Ios模式) - 从底部上弹，md(Android模式) - 弹出在窗口中间。默认为ios。
      */
-    @Input() mode = 'ios';
+    @Input()
+    get mode(): string {
+        return this._mode;
+    }
+    set mode(mode: string) {
+        if (this._mode !== mode) {
+            this._mode = mode;
+            this.updateClassMap();
+        }
+    }
+    private _mode = 'ios';
 
     /**
      * @i18n 取消
@@ -54,53 +69,85 @@ export class WeUIActionSheet {
     @Input() cancelText: string = this.defaults.cancelText;
 
     /**
+     * 显示对象
+     */
+    @Output() open = new EventEmitter<void>();
+
+    /**
      * 隐藏对象
      */
-    @Output() close = new EventEmitter<any>();
+    @Output() close = new EventEmitter<void>();
 
-    /**
-     * 安卓模式下的特殊样式
-     */
-    @HostBinding('class.weui-skin_android') get androidCls(): boolean {
-        return this.mode === 'md';
-    }
-
-    /**
-     * 用于控制控件的可视化
-     */
-    @HostBinding('class.weui-hide') get hideCls(): boolean {
-        return !this._show;
-    }
 
     /**
      * 用于控制动画的触发(trigger)
      */
-    get visibility(): string {
-        return this.shown ? 'show' : 'hide';
+    public get visibility(): 'show' | 'hide' {
+        return this._visibility;
     }
+    public set visibility(visibility: 'show' | 'hide') {
+        this._visibility = visibility;
+        if (visibility === 'show') {
+            this.renderer.removeClass(this.el.nativeElement, 'weui-hide');
+            setTimeout(() => this.shown = true, 10);
+        } else {
+            this.shown = false;
+        }
+    }
+    private _visibility: 'show' | 'hide' = 'hide';
 
     /** 已显示否 */
-    public shown = false; // (显示时，先_show，然后才shown)
-    public _show = false; // 解决transition动画与display冲突的问题
+    private shown = false;
+    private isViewInit = false;
 
     /** 用户操作反馈 */
     private resolve: (value?: any) => void;
 
-    constructor() {
+    constructor(
+        protected renderer: Renderer2,
+        protected el: ElementRef,
+        protected updateClassService: UpdateClassService) {
 
+    }
+
+    ngOnInit(): void {
+        this.updateClassMap();
+    }
+
+    ngAfterViewInit(): void {
+        setTimeout(() => this.isViewInit = true, 10);
+    }
+
+    private updateClassMap(): void {
+        const classes = {
+            [`weui-actionsheet-${this.mode}`]: this.mode,
+            [`weui-skin_android`]: this.mode === 'md',
+            [`weui-hide`]: !this.shown
+        };
+        this.updateClassService.update(this.el.nativeElement, classes);
+    }
+
+    onVisibleChange(e: any): void {
+        this.shown = this.visibility === 'show';
+        this.updateClassMap();
+        if (this.shown) {
+            this.open.emit();
+        } else {
+            this.close.emit();
+        }
+    }
+
+    isToggleClassEnable(): boolean {
+        return this.shown && this.isViewInit && this.mode === 'ios';
     }
 
     /**
      * 显示菜单
      */
     show(): Promise<any> {
-        this._show = true;
-        setTimeout(() => { // 解决transition动画与display冲突的问题
-            this.shown = true;
-        }, 10);
-
         return new Promise<any>((resolve, reject) => {
             this.resolve = resolve;
+            this.visibility = 'show';
         });
     }
 
@@ -108,11 +155,7 @@ export class WeUIActionSheet {
      * 隐藏菜单
      */
     hide(): void {
-        this.shown = false;
-        setTimeout(() => {
-            this._show = false;
-            this.close.emit();
-        }, 200);
+        this.visibility = 'hide';
     }
 
     /**

@@ -6,8 +6,10 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, Renderer2, ElementRef, ViewChild, forwardRef, Optional, Inject } from '@angular/core';
+import { Component, Input, Renderer2, ElementRef, ViewChild, forwardRef, Optional, Inject, OnInit } from '@angular/core';
 import { DefaultValueAccessor, NG_VALUE_ACCESSOR, COMPOSITION_BUFFER_MODE } from '@angular/forms';
+import { UpdateClassService } from '../core/service/update.class.service';
+import { toBoolean } from '../util/lang';
 
 
 const WEUI_FORM_CONTROL_VALUE_ACCESSOR: any = {
@@ -18,39 +20,70 @@ const WEUI_FORM_CONTROL_VALUE_ACCESSOR: any = {
 
 @Component({
     selector: 'weui-slider',
+    preserveWhitespaces: false,
+    providers: [ UpdateClassService, WEUI_FORM_CONTROL_VALUE_ACCESSOR ],
     template: `
-        <div class="weui-slider-box weui-slider_{{color}}">
-            <ng-content select="[weui-start]"></ng-content>
-            <div class="weui-slider">
-                <div #sliderInner class="weui-slider__inner">
-                    <div [style.width]="percent + '%'" class="weui-slider__track"></div>
-                    <div [style.left]="percent + '%'" class="weui-slider__handler"
-                        (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)"></div>
-                </div>
+        <ng-content select="[weui-start]"></ng-content>
+        <div class="weui-slider">
+            <div #sliderInner class="weui-slider__inner">
+                <div [style.width]="percent + '%'" class="weui-slider__track"></div>
+                <div [style.left]="percent + '%'" class="weui-slider__handler"
+                    (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)"></div>
             </div>
-            <ng-content select="[weui-last]"></ng-content>
-            <div class="weui-slider-box__value" *ngIf="showValue">{{value}}</div>
         </div>
-    `,
-    providers: [WEUI_FORM_CONTROL_VALUE_ACCESSOR]
+        <ng-content select="[weui-last]"></ng-content>
+        <div class="weui-slider-box__value" *ngIf="showValue">{{value}}</div>
+    `
 })
-export class WeUISlider extends DefaultValueAccessor {
+export class WeUISlider extends DefaultValueAccessor implements OnInit {
 
     /**
      * 颜色，取值：default、primary、warn等。默认为default。<br>
      * 自定义的颜色名称与色值，可以定义在 工程根目录/src/theme/variables.scss 文件中的 $colors 对象。
      */
-    @Input() color = 'default';
+    @Input()
+    get color(): string {
+        return this._color;
+    }
+    set color(color: string) {
+        if (this._color !== color) {
+            this._color = color;
+            this.updateClassMap();
+        }
+    }
+    private _color = 'default';
 
     /**
      * 显示值（在最后）
      */
-    @Input() showValue = true;
+    @Input()
+    get showValue(): boolean {
+        return this._showValue;
+    }
+    set showValue(showValue: boolean) {
+        const value = toBoolean(showValue);
+        if (this._showValue !== value) {
+            this._showValue = value;
+            this.updateClassMap();
+        }
+    }
+    private _showValue = true;
 
     /**
      * 禁用样式
      */
-    @Input() disabled = false;
+    @Input()
+    get disabled(): boolean {
+        return this._disabled;
+    }
+    set disabled(disabled: boolean) {
+        const value = toBoolean(disabled);
+        if (this._disabled !== value) {
+            this._disabled = value;
+            this.updateClassMap();
+        }
+    }
+    private _disabled = false;
 
     /**
      * 最小值
@@ -65,14 +98,11 @@ export class WeUISlider extends DefaultValueAccessor {
     // 内部组件
     @ViewChild('sliderInner') sliderInner: ElementRef;
 
-    /**
-     * 取值
-     */
+
+    /** 取值 */
     public value = 0;
 
-    /**
-     * 滑动比例（取值：0-100）
-     */
+    /** 滑动比例（取值：0-100） */
     public percent = 0;
 
     private totalLen: number; // 滑条总长度
@@ -81,9 +111,24 @@ export class WeUISlider extends DefaultValueAccessor {
 
     constructor(
         protected renderer: Renderer2,
-        protected elementRef: ElementRef,
+        protected el: ElementRef,
+        protected updateClassService: UpdateClassService,
         @Optional() @Inject(COMPOSITION_BUFFER_MODE) protected compositionMode: boolean) {
-        super(renderer, elementRef, compositionMode);
+        super(renderer, el, compositionMode);
+    }
+
+    ngOnInit(): void {
+        this.updateClassMap();
+    }
+
+    private updateClassMap(): void {
+        const classes = {
+            [`weui-slider-box`]: true,
+            [`weui-slider-disabled`]: this.disabled,
+            [`weui-slider-show-value`]: this.showValue,
+            [`weui-slider_${this.color}`]: this.color
+        };
+        this.updateClassService.update(this.el.nativeElement, classes);
     }
 
     onTouchStart(event: TouchEvent): void {
@@ -115,12 +160,10 @@ export class WeUISlider extends DefaultValueAccessor {
     /**
      * Write a new value to the element. (From ControlValueAccessor interface)
      */
-    writeValue(value: number): void {
-        if (value !== undefined && value !== null) {
-            value = Math.min(Math.max(value, this.min), this.max);
-            this.value = value;
-            this.percent = (value + this.min) * 100 / this.max;
-        }
+    writeValue(value: number = 0): void {
+        value = Math.min(Math.max(value, this.min), this.max);
+        this.value = value;
+        this.percent = (value + this.min) * 100 / this.max;
     }
 
     /**

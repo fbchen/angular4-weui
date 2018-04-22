@@ -6,12 +6,10 @@
  * found in the LICENSE file.
  */
 
-import { Component, HostBinding, Renderer2, ElementRef, forwardRef, Optional, Inject } from '@angular/core';
-import { NG_VALUE_ACCESSOR, COMPOSITION_BUFFER_MODE } from '@angular/forms';
-
-
-import { WeUIFormControl } from './weui.form.control';
-
+import { Component, Input, Renderer2, ElementRef, forwardRef, Optional, Inject, OnInit } from '@angular/core';
+import { DefaultValueAccessor, NG_VALUE_ACCESSOR, COMPOSITION_BUFFER_MODE } from '@angular/forms';
+import { UpdateClassService } from '../core/service/update.class.service';
+import { toArray } from '../util/lang';
 
 const WEUI_FORM_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -21,13 +19,13 @@ const WEUI_FORM_CONTROL_VALUE_ACCESSOR: any = {
 
 @Component({
     selector: 'weui-checkbox',
-    providers: [WEUI_FORM_CONTROL_VALUE_ACCESSOR],
+    preserveWhitespaces: false,
+    providers: [ UpdateClassService, WEUI_FORM_CONTROL_VALUE_ACCESSOR ],
     template: `
         <label class="weui-check__label" [for]="id" (click)="onTouched()">
             <div class="weui-cell__hd">
                 <input type="checkbox" class="weui-check"
-                    [attr.id]="id" [attr.name]="name" [value]="value"
-                    [checked]="checked" [(ngModel)]="innerValue">
+                    [attr.id]="id" [(ngModel)]="checked" [disabled]="disabled">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -36,64 +34,71 @@ const WEUI_FORM_CONTROL_VALUE_ACCESSOR: any = {
         </label>
     `
 })
-export class WeUICheckbox extends WeUIFormControl {
+export class WeUICheckbox extends DefaultValueAccessor implements OnInit {
+    public static count = 0;
 
-    /** 是否已选中 */
-    public checked = false;
+    @Input() id: string;
 
-    /** 选中的值 */
-    public values: any[] = [];
+    @Input() name: string;
+
+    @Input() value: any = 'on';
 
     /**
-     * The value of the input ngModel。 (view -> model)
+     * 是否禁用
      */
-    set innerValue(checked: boolean) {
-        this._value = checked || false;
+    @Input() disabled = false;
 
-        const index = this.values.indexOf(this.value);
-        if (checked) {
-            if (index === -1) {
-                this.values.push(this.value);
-            }
-        } else {
-            if (index >= 0) {
-                this.values.splice(index, 1);
-            }
-        }
+    /** 选中的值（可以多选，因此存储为数组） */
+    private values: any[] = [];
 
-        // view -> model -> outside world (ie. NgModel on this control)
-        this.onChange(this.values);
+    /** 是否已选中 */
+    public get checked(): boolean {
+        return this._checked;
+    }
+    public set checked(checked: boolean) {
+        this._checked = checked;
+        this.emitValue();
+    }
+    private _checked = false;
 
-        // console.log('innerValue: id=' + this.id + ', name=' + this.name
-        //  + ', values=' + JSON.stringify(this.values) + ', checked=' + this._value);
+    constructor(
+        protected renderer: Renderer2,
+        protected el: ElementRef,
+        protected updateClassService: UpdateClassService,
+        @Optional() @Inject(COMPOSITION_BUFFER_MODE) protected compositionMode: boolean) {
+        super(renderer, el, compositionMode);
+        this.id = `weui-checkbox-${++WeUICheckbox.count}`;
+    }
+
+    ngOnInit(): void {
+        this.updateClassMap();
+    }
+
+    private updateClassMap(): void {
+        const classes = {
+            [`weui-cell`]: 1,
+            [`weui-check__label`]: 1
+        };
+        this.updateClassService.update(this.el.nativeElement, classes);
     }
 
     /**
      * Write a new value to the element. (From ControlValueAccessor interface)
      */
     writeValue(value: any): void {
-        if (value !== null) {
-            this.values = value;
+        this.values = toArray(value);
+        this._checked = this.values.indexOf(this.value) >= 0;
+    }
+
+    /** 勾选框的选择状态发生变化时，发射出实际值 */
+    emitValue(): void {
+        const index = this.values.indexOf(this.value);
+        if (this.checked && index === -1) {
+            this.values.push(this.value);
+        } else if (!this.checked && index >= 0) {
+            this.values.splice(index, 1);
         }
-
-        this.checked = this.values.indexOf(this.value) >= 0;
-        super.writeValue(this.checked);
-
-        // console.log('writeValue: id=' + this.id + ', name=' + this.name
-        //  + ', values=' + JSON.stringify(this.values) + ', checked=' + this._value);
+        // view -> model -> outside world (ie. NgModel on this control)
+        this.onChange(this.values);
     }
-
-    /**
-     * 扩展样式
-     */
-    @HostBinding('class.weui-check__label') _cls_check_label = true;
-
-    constructor(
-        protected renderer: Renderer2,
-        protected elementRef: ElementRef,
-        @Optional() @Inject(COMPOSITION_BUFFER_MODE) protected compositionMode: boolean) {
-        super(renderer, elementRef, compositionMode);
-        this.value = 'on'; // default value
-    }
-
 }

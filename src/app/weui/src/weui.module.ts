@@ -14,7 +14,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 /** Import WeUI Components */
-import { WeUIFormControl } from './input/weui.form.control';
 import { WeUIBadge } from './badge/weui.badge';
 import { WeUIButton } from './button/weui.button';
 import { WeUISubmit } from './button/weui.submit';
@@ -42,9 +41,8 @@ import { WeUITabBarItem } from './tabbar/weui.tabbar.item';
 import { WeUITips } from './list/weui.tips';
 import { WeUITitle } from './list/weui.title';
 import { WeUIUploader } from './uploader/weui.uploader';
-import { FormValidation } from './validation/form.validation';
 import { FormDirective } from './form/form.directive';
-import { FormErrorEmitter } from './form/form.error.emitter';
+import { FormError } from './form/form.error';
 
 
 /**
@@ -69,7 +67,6 @@ import { WeUIPickerService } from './picker/weui.picker.service';
         FormsModule
     ],
     declarations: [
-        WeUIFormControl,
         WeUIButton,
         WeUISubmit,
         WeUIInput,
@@ -104,12 +101,10 @@ import { WeUIPickerService } from './picker/weui.picker.service';
         WeUINavBarItem,
         WeUITabBar,
         WeUITabBarItem,
-        FormValidation,
         FormDirective,
-        FormErrorEmitter
+        FormError
     ],
     exports: [
-        WeUIFormControl,
         WeUIButton,
         WeUISubmit,
         WeUIInput,
@@ -143,9 +138,8 @@ import { WeUIPickerService } from './picker/weui.picker.service';
         WeUINavBarItem,
         WeUITabBar,
         WeUITabBarItem,
-        FormValidation,
         FormDirective,
-        FormErrorEmitter
+        FormError
     ],
     entryComponents: [
         WeUIActionSheet,

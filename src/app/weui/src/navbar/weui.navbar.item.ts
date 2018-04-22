@@ -6,35 +6,34 @@
  * found in the LICENSE file.
  */
 
-import { Directive, Host, Input, HostBinding, HostListener, Optional } from '@angular/core';
-import { Inject, forwardRef } from '@angular/core';
+import { Component, Host, Input, ElementRef, Renderer2, HostListener, Optional, Inject, forwardRef, OnInit } from '@angular/core';
+import { UpdateClassService } from '../core/service/update.class.service';
 
 import { WeUINavBar } from './weui.navbar';
 
-@Directive({
+@Component({
     // tslint:disable-next-line:directive-selector
-    selector: 'weui-navbar-item,[weui-navbar-item]'
+    selector: 'weui-navbar-item,[weui-navbar-item]',
+    preserveWhitespaces: false,
+    providers: [ UpdateClassService ],
+    template: `<ng-content></ng-content>`
 })
-export class WeUINavBarItem {
+export class WeUINavBarItem implements OnInit {
 
     /**
      * 任意值，当激活时传递给父级控件
      */
     @Input() value: any;
 
-    /**
-     * 设置基本样式
-     */
-    @HostBinding('class.weui-navbar__item') barItemCls = true;
-
-    /**
-     * 设置激活样式
-     */
-    @HostBinding('class.weui-bar__item_on') get activatedCls(): boolean {
+    // 用于设置激活样式
+    public get activated(): boolean {
         return this._activated;
     }
-
-    private _activated = false; // 用于设置激活样式
+    public set activated(activated: boolean) {
+        this._activated = activated;
+        this.updateClassMap();
+    }
+    private _activated = false;
 
     /**
      * 点击触发激活
@@ -48,8 +47,24 @@ export class WeUINavBarItem {
         }
     }
 
-    constructor( @Optional() @Host() @Inject(forwardRef(() => WeUINavBar)) private navbar: WeUINavBar) {
+    constructor(
+        protected renderer: Renderer2,
+        protected el: ElementRef,
+        protected updateClassService: UpdateClassService,
+        @Optional() @Host() @Inject(forwardRef(() => WeUINavBar)) private navbar: WeUINavBar) {
 
+    }
+
+    ngOnInit(): void {
+        this.updateClassMap();
+    }
+
+    private updateClassMap(): void {
+        const classes = {
+            [`weui-navbar__item`]: true,
+            [`weui-bar__item_on`]: this.activated
+        };
+        this.updateClassService.update(this.el.nativeElement, classes);
     }
 
     /**
@@ -57,12 +72,12 @@ export class WeUINavBarItem {
      *
      * @param activated 激活状态
      */
-    activated(activated: boolean): void {
-        this._activated = activated;
+    activate(activated: boolean): void {
+        this.activated = activated;
     }
 
     isActivated(): boolean {
-        return this._activated;
+        return this.activated;
     }
 
 }

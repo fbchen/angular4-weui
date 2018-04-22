@@ -18,7 +18,7 @@ export interface DialogProps {
     type?: string | null;
     icon?: string;
     iconCls?: string;
-};
+}
 
 /**
  * 浮层通用接口
@@ -27,9 +27,9 @@ export interface DialogProps {
 export class Layer {
 
     constructor(
-        private _componentFactoryResolver: ComponentFactoryResolver,
-        private _appRef: ApplicationRef,
-        private _injector: Injector) {
+        private componentFactoryResolver: ComponentFactoryResolver,
+        private appRef: ApplicationRef,
+        private injector: Injector) {
 
     }
 
@@ -47,9 +47,9 @@ export class Layer {
     }
 
     private _createCompInstance<T>(component: Type<T>): ComponentRef<T> {
-        const componentFactory = this._componentFactoryResolver.resolveComponentFactory(component);
-        const componentRef: ComponentRef<T> = componentFactory.create(this._injector);
-        this._appRef.attachView(componentRef.hostView);
+        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
+        const componentRef: ComponentRef<T> = componentFactory.create(this.injector);
+        this.appRef.attachView(componentRef.hostView);
 
         // At this point the component has been instantiated, so we move it to the location in the DOM
         // where we want it to be rendered.

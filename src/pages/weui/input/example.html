@@ -98,7 +98,7 @@
         <weui-title>选择</weui-title>
         <weui-items baseCls="">
             <weui-item>
-                <select weui-start name="select1" [(ngModel)]="data.select1">
+                <select weui-select weui-start name="select1" [(ngModel)]="data.select1">
                     <option value="1">+86</option>
                     <option value="2">+80</option>
                     <option value="3">+84</option>
@@ -112,7 +112,7 @@
         <weui-title>选择</weui-title>
         <weui-items baseCls="">
             <weui-item>
-                <select weui-content name="select2" [(ngModel)]="data.select2">
+                <select weui-select weui-content name="select2" [(ngModel)]="data.select2">
                     <option value="1">微信号</option>
                     <option value="2">QQ号</option>
                     <option value="3">Email</option>
@@ -120,7 +120,7 @@
             </weui-item>
             <weui-item>
                 <label weui-start for="" class="weui-label">国家/地区</label>
-                <select weui-content name="select3" [(ngModel)]="data.select3">
+                <select weui-select weui-content name="select3" [(ngModel)]="data.select3">
                     <option value="1">中国</option>
                     <option value="2">美国</option>
                     <option value="3">英国</option>
@@ -136,11 +136,10 @@
         </label>
 
         <div class="weui-btn-area">
-            <weui-button color="primary" (click)="showError()">确定</weui-button>
-            <weui-button (click)="showError2()">显示错误</weui-button>
+            <a href="javascript:;" weui-button color="primary" (click)="showError()">确定</a>
+            <a href="javascript:;" weui-button (click)="showError2()">显示错误</a>
             <weui-submit style="margin-top: 10px">提 交</weui-submit>
         </div>
-        <form-validation [messages]="{card: {required: '请填写卡号'}}"></form-validation>
     </form>
     <div class="page__bd page__bd_spacing" style="padding-top: 20px">
         <div>表单内容：</div>

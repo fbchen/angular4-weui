@@ -8,6 +8,7 @@
 
 import { Component, ViewChild, forwardRef } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { UpdateClassService } from '../core/service/update.class.service';
 
 import { WeUIGallery } from '../gallery/weui.gallery';
 
@@ -74,7 +75,9 @@ export class WeUIFile {
 }
 
 @Component({
-    selector: 'weui-uploader',
+    selector: 'weui-uploader,[weui-uploader]',
+    preserveWhitespaces: false,
+    providers: [ UpdateClassService ],
     template: `
         <div class="weui-uploader">
             <div class="weui-uploader__hd">
@@ -149,10 +152,12 @@ export class WeUIUploader {
 
         const length = files.length;
         for (let i = 0; i < length; i++) {
-            const file: File = files.item(i);
-            const url: string = 'url(' + window.URL.createObjectURL(file) + ')';
-            const safeUrl = this.sanitizer.bypassSecurityTrustStyle(url);
-            this.files.push(new WeUIFile(file, safeUrl));
+            const file: File | null = files.item(i);
+            if (file) {
+                const url: string = 'url(' + window.URL.createObjectURL(file) + ')';
+                const safeUrl = this.sanitizer.bypassSecurityTrustStyle(url);
+                this.files.push(new WeUIFile(file, safeUrl));
+            }
         }
     }
 

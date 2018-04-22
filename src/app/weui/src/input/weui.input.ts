@@ -6,10 +6,14 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, Output, EventEmitter, Renderer2, ElementRef, HostBinding, ContentChild } from '@angular/core';
-import { OnChanges, SimpleChanges, forwardRef, ViewEncapsulation, Optional, Inject } from '@angular/core';
-import { NgControl, NG_VALUE_ACCESSOR, COMPOSITION_BUFFER_MODE } from '@angular/forms';
-import { WeUIFormControl } from './weui.form.control';
+import {
+    Component, Input, Output, EventEmitter, Renderer2, ElementRef, ContentChild,
+    OnInit, forwardRef, ViewEncapsulation, Optional, Inject, HostBinding
+} from '@angular/core';
+import { DefaultValueAccessor, NgControl, NgForm, NG_VALUE_ACCESSOR, COMPOSITION_BUFFER_MODE } from '@angular/forms';
+import { UpdateClassService } from '../core/service/update.class.service';
+import { toBoolean } from '../util/lang';
+
 
 const WEUI_INPUT_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -19,6 +23,8 @@ const WEUI_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 
 @Component({
     selector: 'weui-input',
+    preserveWhitespaces: false,
+    providers: [ UpdateClassService, WEUI_INPUT_CONTROL_VALUE_ACCESSOR ],
     template: `
         <div class="weui-cell__hd">
             {{label}}<ng-content select="label"></ng-content>
@@ -30,7 +36,7 @@ const WEUI_INPUT_CONTROL_VALUE_ACCESSOR: any = {
                     [attr.maxlength]="maxlength" [attr.minlength]="minlength" [pattern]="pattern"
                     [attr.max]="max" [attr.min]="min" [required]="required" [readonly]="readonly"
                     [disabled]="disabled" [autocomplete]="autocomplete ? 'on' : 'off'"
-                    [(ngModel)]="innerValue"
+                    [(ngModel)]="value"
                     (blur)="onBlur($event)" (focus)="onFocus($event)"
                     (keydown)="onKeyboardEvent($event)" (keyup)="onKeyboardEvent($event)" />
                 <div *ngIf="maxlength && countChars" class="weui-text-counter">
@@ -43,7 +49,7 @@ const WEUI_INPUT_CONTROL_VALUE_ACCESSOR: any = {
                     [placeholder]="placeholder" [rows]="rows"
                     [required]="required" [readonly]="readonly"
                     [attr.minlength]="minlength" [attr.maxlength]="maxlength"
-                    [(ngModel)]="innerValue"
+                    [(ngModel)]="value"
                     (keydown)="onKeyboardEvent($event)" (keyup)="onKeyboardEvent($event)"></textarea>
                 <div *ngIf="maxlength && countChars" class="weui-textarea-counter">
                     <span>{{getCharCount()}}</span>/{{maxlength}}
@@ -55,15 +61,35 @@ const WEUI_INPUT_CONTROL_VALUE_ACCESSOR: any = {
             <i class="weui-icon-warn" *ngIf="shouldShowWarnIcon()"></i>
         </div>
     `,
-    providers: [WEUI_INPUT_CONTROL_VALUE_ACCESSOR],
     encapsulation: ViewEncapsulation.None
 })
-export class WeUIInput extends WeUIFormControl implements OnChanges {
+export class WeUIInput extends DefaultValueAccessor implements OnInit {
+
+    public static count = 0;
+
+    @Input() id: string;
+
+    @Input() name: string;
 
     /**
      * 控件类型：text, number, tel, email, password, date, datetime-local等
      */
     @Input() type = 'text';
+
+    /**
+     * 样式
+     */
+    @Input()
+    get baseCls(): string {
+        return this._baseCls;
+    }
+    set baseCls(baseCls: string) {
+        if (this._baseCls !== baseCls) {
+            this._baseCls = baseCls;
+            this.updateClassMap();
+        }
+    }
+    private _baseCls: string;
 
     /**
      * pattern 属性规定用于验证输入字段的模式（正则表达式）。<br>
@@ -104,12 +130,50 @@ export class WeUIInput extends WeUIFormControl implements OnChanges {
     /**
      * 是否必填
      */
-    @Input() required = false;
+    @Input()
+    get required(): boolean {
+        return this._required;
+    }
+    set required(required: boolean) {
+        const value = toBoolean(required);
+        if (this._required !== value) {
+            this._required = value;
+            this.updateClassMap();
+        }
+    }
+    private _required = false;
 
     /**
      * 是否只读
      */
-    @Input() readonly = false;
+    @Input()
+    get readonly(): boolean {
+        return this._readonly;
+    }
+    set readonly(readonly: boolean) {
+        const value = toBoolean(readonly);
+        if (this._readonly !== value) {
+            this._readonly = value;
+            this.updateClassMap();
+        }
+    }
+    private _readonly = false;
+
+    /**
+     * 是否禁用
+     */
+    @Input()
+    get disabled(): boolean {
+        return this._disabled;
+    }
+    set disabled(disabled: boolean) {
+        const value = toBoolean(disabled);
+        if (this._disabled !== value) {
+            this._disabled = value;
+            this.updateClassMap();
+        }
+    }
+    private _disabled = false;
 
     /**
      * autocomplete 属性规定输入字段是否应该启用自动完成功能。默认为on。<br>
@@ -121,11 +185,6 @@ export class WeUIInput extends WeUIFormControl implements OnChanges {
      * 是否监听输入长度
      */
     @Input() countChars = false;
-
-    /**
-     * 样式
-     */
-    @Input() baseCls: string;
 
     /**
      * 输入域无效时显示告警图标，默认为true
@@ -148,43 +207,61 @@ export class WeUIInput extends WeUIFormControl implements OnChanges {
     @Output() focus: EventEmitter<Event> = new EventEmitter<Event>();
 
     // 实际输入控件(<input>)
-    @ContentChild(NgControl) state: NgControl;
+    @ContentChild(NgControl) control: NgControl;
+
+    public get value(): any {
+        return this._value;
+    }
+    public set value(value: any) {
+        if (this._value !== value) {
+            const v = this.processValue(value);
+            this._value = v;
+            this.onChange(this._value); // Angular need this
+        }
+    }
+    private _value: any;
+
 
     constructor(
         protected renderer: Renderer2,
-        protected elementRef: ElementRef,
-        @Optional() @Inject(COMPOSITION_BUFFER_MODE) protected compositionMode: boolean) {
-        super(renderer, elementRef, compositionMode);
-    }
+        protected el: ElementRef,
+        protected updateClassService: UpdateClassService,
+        @Optional() @Inject(COMPOSITION_BUFFER_MODE) protected compositionMode: boolean,
+        @Optional() protected parentForm: NgForm) {
+        super(renderer, el, compositionMode);
+        this.id = `weui-input-${++WeUIInput.count}`;
 
-    /**
-     * 扩展样式，如：weui-cell_example
-     */
-    @HostBinding('class.weui-check__label') _cls_check_label = true;
-
-    /**
-     * 扩展样式，如：weui-cell_example
-     */
-    @HostBinding('class.weui-cell_warn') get warnCls(): boolean {
-        return this.shouldWarn();
-    }
-
-    ngOnChanges(changes: SimpleChanges): void {
-        const changed = changes['baseCls'];
-        if (changed) {
-            const _el = this.elementRef.nativeElement as HTMLElement;
-            if (changed.previousValue) {
-                _el.classList.remove(`weui-cell_${changed.previousValue}`);
-            }
-            if (changed.currentValue) {
-                _el.classList.add(`weui-cell_${changed.currentValue}`);
-            }
+        if (parentForm) {
+            parentForm.ngSubmit.subscribe(() => {
+                this.updateClassMap();
+            });
         }
     }
 
+    ngOnInit(): void {
+        this.updateClassMap();
+    }
+
+    private updateClassMap(): void {
+        const classes = {
+            [`weui-cell`]: 1,
+            [`weui-cell_${this.baseCls}`]: this.baseCls,
+            // [`weui-cell_warn`]: this.shouldWarn(),
+            [`weui-input-disabled`]: this.disabled,
+            [`weui-input-readonly`]: this.readonly,
+            [`weui-input-required`]: this.required
+        };
+        this.updateClassService.update(this.el.nativeElement, classes);
+    }
+
+    @HostBinding('class.weui-cell_warn') get warnCellCls(): boolean {
+        return this.shouldWarn();
+    }
+
     shouldWarn(): boolean {
-        return this.state.invalid === true &&
-            (this.state.touched === true || this.state.dirty === true);
+        return this.control.invalid === true && (
+            this.control.touched === true || this.control.dirty === true ||
+            (this.parentForm && this.parentForm.submitted));
     }
 
     shouldShowWarnIcon(): boolean {
@@ -204,7 +281,7 @@ export class WeUIInput extends WeUIFormControl implements OnChanges {
      * 统计字符总长度
      */
     getCharCount(): number {
-        return (this._value && this._value.length) || 0;
+        return (this.value && this.value.length) || 0;
     }
 
     /**
@@ -217,5 +294,28 @@ export class WeUIInput extends WeUIFormControl implements OnChanges {
                 event.preventDefault(); // 禁止输入
             }
         }
+    }
+
+    /**
+     * 设置禁用状态 (From ControlValueAccessor interface)
+     */
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+    }
+
+    /**
+     * Write a new value to the element. (From ControlValueAccessor interface)
+     */
+    writeValue(value: any): void {
+        this._value = value;
+    }
+
+    /** 对用户输入的值进行预处理，如文本转数字等 */
+    processValue(value: any): any {
+        if (this.type === 'number') {
+            const num = parseFloat(value);
+            return isNaN(num) ? null : num;
+        }
+        return value;
     }
 }

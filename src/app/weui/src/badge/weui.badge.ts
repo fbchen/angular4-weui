@@ -6,32 +6,70 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input } from '@angular/core';
+import { Component, Input, ElementRef, Renderer2, OnInit } from '@angular/core';
+import { UpdateClassService } from '../core/service/update.class.service';
+import { toBoolean } from '../util/lang';
 
 /**
  * 徽章
  */
 @Component({
     selector: 'weui-badge',
-    template: `
-        <span class="weui-badge weui-badge_{{color}}"
-             [ngClass]="{'weui-badge_dot': dot !== undefined && dot !== null}"><ng-content></ng-content></span>`
+    preserveWhitespaces: false,
+    providers: [ UpdateClassService ],
+    template: `<ng-content></ng-content>`
 })
-export class WeUIBadge {
+export class WeUIBadge implements OnInit {
 
     /**
      * 颜色，取值：default、primary、warn等。默认为default。<br>
      * 自定义的颜色名称与色值，可以定义在 工程根目录/src/theme/variables.scss 文件中的 $colors 对象。
      */
-    @Input() color = 'default';
+    @Input()
+    get color(): string {
+        return this._color;
+    }
+    set color(color: string) {
+        if (this._color !== color) {
+            this._color = color;
+            this.updateClassMap();
+        }
+    }
+    private _color = 'default';
 
-    /**
-     * 点
-     */
-    @Input() dot: any;
 
-    constructor() {
+    /** 不展示数字，只有一个小红点。 whether to show red dot without number */
+    @Input()
+    get dot(): boolean {
+        return this._dot;
+    }
+    set dot(dot: boolean) {
+        const value = toBoolean(dot);
+        if (this._dot !== value) {
+            this._dot = value;
+            this.updateClassMap();
+        }
+    }
+    private _dot = false;
+
+
+    constructor(
+        protected renderer: Renderer2,
+        protected el: ElementRef,
+        protected updateClassService: UpdateClassService) {
 
     }
 
+    ngOnInit(): void {
+        this.updateClassMap();
+    }
+
+    private updateClassMap(): void {
+        const classes = {
+            [`weui-badge`]: true,
+            [`weui-badge_dot`]: this.dot,
+            [`weui-badge_${this.color}`]: this.color
+        };
+        this.updateClassService.update(this.el.nativeElement, classes);
+    }
 }
