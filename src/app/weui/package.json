@@ -16,9 +16,9 @@
   "typings": "./index.d.ts",
 
   "peerDependencies": {
-    "@angular/common": "^5.1.0",
-    "@angular/core": "^5.1.0",
-    "@angular/forms": "^5.1.0",
-    "@angular/animations": "^5.1.0"
+    "@angular/common": "^5.2.4",
+    "@angular/core": "^5.2.4",
+    "@angular/forms": "^5.2.4",
+    "@angular/animations": "^5.2.4"
   }
 }

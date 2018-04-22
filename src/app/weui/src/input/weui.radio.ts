@@ -45,6 +45,11 @@ export class WeUIRadio extends DefaultValueAccessor implements OnInit {
     @Input() value: any = 'on';
 
     /**
+     * 控件 label
+     */
+    @Input() label: string;
+
+    /**
      * 是否禁用
      */
     @Input() disabled = false;

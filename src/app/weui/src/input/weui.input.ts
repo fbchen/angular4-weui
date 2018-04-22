@@ -72,6 +72,11 @@ export class WeUIInput extends DefaultValueAccessor implements OnInit {
     @Input() name: string;
 
     /**
+     * 控件 label
+     */
+    @Input() label: string;
+
+    /**
      * 控件类型：text, number, tel, email, password, date, datetime-local等
      */
     @Input() type = 'text';
