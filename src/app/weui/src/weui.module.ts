@@ -16,7 +16,6 @@ import { FormsModule } from '@angular/forms';
 /** Import WeUI Components */
 import { WeUIBadge } from './badge/weui.badge';
 import { WeUIButton } from './button/weui.button';
-import { WeUISubmit } from './button/weui.submit';
 import { WeUICheckbox } from './input/weui.checkbox';
 import { WeUIDatePicker } from './picker/weui.date.picker';
 import { WeUIFooter, WeUIFooterText, WeUIFooterLinks, WeUIFooterLink } from './footer/weui.footer';
@@ -68,7 +67,6 @@ import { WeUIPickerService } from './picker/weui.picker.service';
     ],
     declarations: [
         WeUIButton,
-        WeUISubmit,
         WeUIInput,
         WeUIRadio,
         WeUICheckbox,
@@ -106,7 +104,6 @@ import { WeUIPickerService } from './picker/weui.picker.service';
     ],
     exports: [
         WeUIButton,
-        WeUISubmit,
         WeUIInput,
         WeUIRadio,
         WeUICheckbox,

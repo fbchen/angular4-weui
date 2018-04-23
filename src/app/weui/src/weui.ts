@@ -13,7 +13,6 @@
  */
 export { WeUIBadge } from './badge/weui.badge';
 export { WeUIButton } from './button/weui.button';
-export { WeUISubmit } from './button/weui.submit';
 export { WeUICheckbox } from './input/weui.checkbox';
 export { WeUIDatePicker } from './picker/weui.date.picker';
 export { WeUIFooter, WeUIFooterText, WeUIFooterLinks, WeUIFooterLink } from './footer/weui.footer';
