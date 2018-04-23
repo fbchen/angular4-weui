@@ -19,7 +19,9 @@ import { toBoolean } from '../util/lang';
     providers: [ UpdateClassService ],
     template: `
         <i class="weui-loading" *ngIf="loading"></i>
-        <span class="weui-loadmore__tips"><ng-content></ng-content></span>
+        <span class="weui-loadmore__tips">
+            <ng-container *ngIf="loading">{{loadingText}}</ng-container><ng-content></ng-content>
+        </span>
     `,
     styles: [`
         :host { display: block; }
@@ -68,6 +70,9 @@ export class WeUILoadmore implements OnInit {
         }
     }
     private _loading = false;
+
+    /** 加载中显示文本，默认为空，即不显示 */
+    @Input() loadingText: string;
 
 
     constructor(
