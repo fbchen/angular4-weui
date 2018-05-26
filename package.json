@@ -29,7 +29,7 @@
     "weui": "^1.1.2"
   },
   "devDependencies": {
-    "@angular/cli": "latest",
+    "@angular/cli": "1.7.4",
     "@angular/compiler-cli": "^5.2.4",
     "@angular/language-service": "^5.2.4",
     "@types/jasmine": "^2.8.6",
