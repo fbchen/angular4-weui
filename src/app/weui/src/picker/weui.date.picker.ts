@@ -151,10 +151,11 @@ export class WeUIDatePicker extends WeUIPicker implements OnInit, AfterViewInit 
 
     private _parseDate(value: any, sub: string): Date {
         if (typeof value === 'string') {
-            if (value.length === 4) {
-                value = value + sub;
+            let v = value;
+            if (v.length === 4) {
+                v = v + sub;
             }
-            if (/^(\d{4})-(\d{2})-(\d{2})$/.test(value) || /^(\d{4})(\d{2})(\d{2})$/.test(value)) {
+            if (/^(\d{4})-(\d{2})-(\d{2})$/.test(v) || /^(\d{4})(\d{2})(\d{2})$/.test(v)) {
                 return new Date(+RegExp.$1, +RegExp.$2 - 1, +RegExp.$3);
             }
         }

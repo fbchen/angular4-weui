@@ -21,7 +21,7 @@ export class FileUtils {
      * 下载Blob内容
      */
     static download(fileName: string, type: string, data: any): void {
-        const blob = new Blob([data], { type: type });
+        const blob = new Blob([data], { type });
         if (window.navigator.msSaveOrOpenBlob) {
             navigator.msSaveBlob(blob, fileName);
         } else {
@@ -43,13 +43,12 @@ export class FileUtils {
             const value = filesize / base;
             if (value >= 1) {
                 if (i === 0) {
-                    return Math.round(value) + ' ' + FILE_SIZE_UINTS[i - 1];
+                    return `${Math.round(value)} ${FILE_SIZE_UINTS[i - 1]}`;
                 }
-                return (Math.round(value * 100) / 100) + ' ' + FILE_SIZE_UINTS[i - 1];
+                return `${Math.round(value * 100) / 100} ${FILE_SIZE_UINTS[i - 1]}`;
             }
         }
-        return '0 KB';
+        return `0 KB`;
     }
-
 
 }

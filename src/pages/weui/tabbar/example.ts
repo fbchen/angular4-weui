@@ -16,7 +16,7 @@ import { WeUITabBarItem } from '../../../app/weui';
 @Component({
     templateUrl: 'example.html'
 })
-export class TabBarExamplePage extends AbstractPage implements OnInit {
+export class TabBarExamplePageComponent extends AbstractPage implements OnInit {
 
     public activeValue: string;
 

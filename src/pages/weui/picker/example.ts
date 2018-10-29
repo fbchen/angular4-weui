@@ -15,7 +15,7 @@ import { WeUIPicker, WeUIDatePicker } from '../../../app/weui';
 @Component({
     templateUrl: 'example.html'
 })
-export class PickerExamplePage extends AbstractPage implements OnInit {
+export class PickerExamplePageComponent extends AbstractPage implements OnInit {
 
     public menu1: any[] = [{
         label: '飞机票',

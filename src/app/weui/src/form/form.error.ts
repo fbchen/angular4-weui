@@ -29,6 +29,7 @@ export interface FieldMessages {
 }
 
 @Component({
+    // tslint:disable-next-line:component-selector
     selector: 'form-error',
     template: `
         <ng-container *ngIf="name && hasError(name)">

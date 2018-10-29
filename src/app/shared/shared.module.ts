@@ -13,11 +13,13 @@ import { FormsModule } from '@angular/forms';
 import { FileSizePipe } from './pipe/filesize.pipe';
 import { FormatDatePipe } from './pipe/format.date.pipe';
 import { ArrayFilterPipe } from './pipe/array.filter.pipe';
+import { SafeHtmlPipe } from './pipe/safe.html.pipe';
+
 import { RangeValidatorDirective } from './directive/range.validator.directive';
 import { PhoneNumberValidatorDirective } from './directive/phone.validator.directive';
 import { URLValidatorDirective } from './directive/url.validator.directive';
 
-export { isPresent, isDate } from './utils/lang';
+export { isPresent, isDate, isNumeric, isInteger, isPrice, isEmptyArray, arrayEquals, toArray, toArrayBuffer } from './utils/lang';
 export { StringUtils } from './utils/string.utils';
 export { FileUtils } from './utils/file.utils';
 
@@ -42,14 +44,24 @@ export { FileUtils } from './utils/file.utils';
         RangeValidatorDirective,
         PhoneNumberValidatorDirective,
         URLValidatorDirective,
-        FileSizePipe, FormatDatePipe, ArrayFilterPipe
+        
+        FileSizePipe,
+        FormatDatePipe,
+        ArrayFilterPipe,
+        SafeHtmlPipe
     ],
     exports: [
-        CommonModule, FormsModule,
+        CommonModule,
+        FormsModule,
+
         RangeValidatorDirective,
         PhoneNumberValidatorDirective,
         URLValidatorDirective,
-        FileSizePipe, FormatDatePipe, ArrayFilterPipe
+
+        FileSizePipe,
+        FormatDatePipe,
+        ArrayFilterPipe,
+        SafeHtmlPipe
     ],
     entryComponents: [
 

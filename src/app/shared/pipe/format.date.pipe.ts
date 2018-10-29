@@ -8,15 +8,13 @@
 
 
 import { Inject, LOCALE_ID, Pipe, PipeTransform } from '@angular/core';
-import { DatePipe } from '@angular/common';
 
 import { DateFormatter } from './intl';
 import { invalidPipeArgumentError } from './invalid_pipe_argument_error';
 import { StringUtils } from '../utils/string.utils';
-import { isNumeric } from '../utils/lang';
 
 /**
- * @ngModule CommonModule
+ * @ngModule SharedModule
  * @whatItDoes Formats a date according to locale rules.
  * @howToUse `date_expression | formatDate[:to-format][:from-format]`
  * @author fbchen
@@ -38,26 +36,38 @@ import { isNumeric } from '../utils/lang';
 @Pipe({ name: 'formatDate' })
 export class FormatDatePipe implements PipeTransform {
 
+    static _ALIASES: {[key: string]: string} = {
+        'medium': 'yMMMdjms',
+        'short': 'yMdjm',
+        'fullDate': 'yMMMMEEEEd',
+        'longDate': 'yMMMMd',
+        'mediumDate': 'yMMMd',
+        'shortDate': 'yMd',
+        'mediumTime': 'jms',
+        'shortTime': 'jm'
+    };
+
     constructor( @Inject(LOCALE_ID) private _locale: string) {
 
     }
 
     transform(value: any, toPattern = 'y-MM-dd', fromPattern = 'y-MM-dd HH:mm:ss'): string {
         let date: Date;
+        let localValue: any = value;
 
-        if (StringUtils.isBlank(value)) {
+        if (StringUtils.isBlank(localValue)) {
             return null;
         }
 
-        if (typeof value === 'string') {
-            value = value.trim();
+        if (typeof localValue === 'string') {
+            localValue = localValue.trim();
         }
 
-        if (typeof value['getTime'] !== 'undefined') {
-            date = value;
-        } else if (isNumeric(value)) {
-            date = new Date(parseFloat(value));
-        } else if (typeof value === 'string') {
+        if (typeof localValue.getTime !== 'undefined') {
+            date = localValue;
+        } else if (typeof localValue === 'number') {
+            date = new Date(localValue);
+        } else if (typeof localValue === 'string') {
             /**
              * For ISO Strings without time the day, month and year must be extracted from the ISO String
              * before Date creation to avoid time offset and errors in the new Date.
@@ -68,21 +78,24 @@ export class FormatDatePipe implements PipeTransform {
              * Note: ISO months are 0 for January, 1 for February, ...
              */
             try {
-                date = StringUtils.parseDate(value, fromPattern);
+                date = StringUtils.parseDate(localValue, fromPattern);
             } catch (e) {
                 console.error(e);
+            }
+            if (!date) {
+                date = new Date(localValue);
             }
         }
 
         if (date == null || date === undefined) {
-            date = new Date(value);
+            date = new Date(localValue);
         }
 
-        if (typeof date['getTime'] === 'undefined') {
-            throw invalidPipeArgumentError(FormatDatePipe, value);
+        if (typeof date.getTime === 'undefined') {
+            throw invalidPipeArgumentError(FormatDatePipe, localValue);
         }
 
-        return DateFormatter.format(date, this._locale, DatePipe['_ALIASES'][toPattern] || toPattern);
+        return DateFormatter.format(date, this._locale, FormatDatePipe._ALIASES[toPattern] || toPattern);
     }
 
 

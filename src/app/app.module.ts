@@ -18,7 +18,7 @@ import { WeUIModule } from './weui'; // 'angular-weui'
 
 /* WeUI Example Module */
 import { WeUIExampleModule } from '../pages/weui/weui.example.module';
-import { WeUIExample } from '../pages/weui/weui.example';
+import { WeUIExampleComponent } from '../pages/weui/weui.example';
 
 
 @NgModule({
@@ -40,7 +40,7 @@ import { WeUIExample } from '../pages/weui/weui.example';
 
     ],
     bootstrap: [
-        WeUIExample
+        WeUIExampleComponent
     ]
 })
 export class AppModule { }

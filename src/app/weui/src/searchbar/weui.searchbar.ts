@@ -7,8 +7,7 @@
  */
 
 import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, ElementRef, Renderer2, ViewChild } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
+import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { UpdateClassService } from '../core/service/update.class.service';
 
@@ -63,7 +62,7 @@ export class WeUISearchBar implements OnInit, OnDestroy {
     /**
      * 输入事件
      */
-    @Output() search = new EventEmitter<string>();
+    @Output() weSearch = new EventEmitter<string>();
 
     // 输入控件
     @ViewChild('searchBox') searchBox: ElementRef;
@@ -109,7 +108,7 @@ export class WeUISearchBar implements OnInit, OnDestroy {
             debounceTime(300),     // wait for 300ms pause in events
             distinctUntilChanged() // ignore if next search term is same as previous
         ).subscribe((term: string) => {
-            this.search.emit(term);
+            this.weSearch.emit(term);
         });
         // 更新样式
         this.updateClassMap();
@@ -147,7 +146,7 @@ export class WeUISearchBar implements OnInit, OnDestroy {
     onCancel(): void {
         this.value = '';
         this.onBlur();
-        this.search.emit('');
+        this.weSearch.emit('');
     }
 
     // Push a search term into the observable stream.

@@ -15,7 +15,7 @@ import { WeUILoadmore } from '../../../app/weui';
 @Component({
     templateUrl: 'example.html'
 })
-export class LoadmoreExamplePage extends AbstractPage {
+export class LoadmoreExamplePageComponent extends AbstractPage {
 
     @ViewChild('loadmore') loadmore: WeUILoadmore;
 

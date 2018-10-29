@@ -8,11 +8,8 @@
 
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/observable/from';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/concatMap';
+import { Subject, from } from 'rxjs';
+import { filter, concatMap } from 'rxjs/operators';
 
 import { AbstractPage } from '../abstract-page';
 
@@ -21,7 +18,7 @@ import { WeUIUploader, WeUIFile } from '../../../app/weui';
 @Component({
     templateUrl: 'example.html'
 })
-export class UploaderExamplePage extends AbstractPage {
+export class UploaderExamplePageComponent extends AbstractPage {
 
     @ViewChild('uploader') uploader: WeUIUploader;
 
@@ -41,14 +38,16 @@ export class UploaderExamplePage extends AbstractPage {
             return;
         }
 
-        Observable.from(files)
-            .filter((file: WeUIFile): boolean => !file.isUploaded)
-            .concatMap((file: WeUIFile, index: number) => this.uploadFile(file, index))
+        from(files)
+            .pipe(
+                filter((file: WeUIFile): boolean => !file.isUploaded),
+                concatMap((file: WeUIFile, index: number) => this.uploadFile(file, index))
+            )
             .subscribe((file: WeUIFile) => {
                 if (file.hasError()) {
-                    console.log('文件“' + file.file.name + '”上传失败，原因：' + file.error);
+                    console.log(`文件“${file.file.name}”上传失败，原因：${file.error}`);
                 } else {
-                    console.log('文件“' + file.file.name + '”上传成功！');
+                    console.log(`文件“${file.file.name}”上传成功！`);
                 }
             }, (err: any) => {
                 console.error(err);

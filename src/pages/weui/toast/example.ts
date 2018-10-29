@@ -15,7 +15,7 @@ import { WeUIToast, Layer } from '../../../app/weui';
 @Component({
     templateUrl: 'example.html'
 })
-export class ToastExamplePage extends AbstractPage {
+export class ToastExamplePageComponent extends AbstractPage {
 
     @ViewChild('toast1') toast1: WeUIToast;
     @ViewChild('toast2') toast2: WeUIToast;

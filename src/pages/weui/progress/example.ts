@@ -16,7 +16,7 @@ import { WeUIProgressBar } from '../../../app/weui';
 @Component({
     templateUrl: 'example.html'
 })
-export class ProgressExamplePage extends AbstractPage {
+export class ProgressExamplePageComponent extends AbstractPage {
 
     public data: any = {
         value1: 0,

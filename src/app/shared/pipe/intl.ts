@@ -202,7 +202,7 @@ function dateFormatter(format: string, date: Date, locale: string): string {
             match = DATE_FORMATS_SPLIT.exec(_format);
             if (match) {
                 parts = parts.concat(match.slice(1));
-                _format = parts.pop()!;
+                _format = parts.pop();
             } else {
                 parts.push(_format);
                 _format = null;
@@ -213,8 +213,8 @@ function dateFormatter(format: string, date: Date, locale: string): string {
     }
 
     return parts.reduce((text, part) => {
-        const _fn = DATE_FORMATS[part];
-        return text + (_fn ? _fn(date, locale) : partToTime(part));
+        const fun = DATE_FORMATS[part];
+        return text + (fun ? fun(date, locale) : partToTime(part));
     }, '');
 }
 

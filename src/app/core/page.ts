@@ -44,4 +44,28 @@ export class Page {
      */
     recordStart = 1;
 
+    /** 更新内部数据 */
+    public update(data: any): void {
+        Object.assign(this, data);
+    }
+
+    /** 数据显示范围 */
+    public range(range: number[], total: number): string {
+        const min = Math.min(range[0], this.totalCount);
+        const max = Math.min(range[1], this.totalCount);
+        return `${min} - ${max}`;
+    }
+
+    /** 减少一个记录 */
+    public reduce(count = 1): void {
+        this.totalCount -= count;
+        this.recordCount -= count;
+    }
+
+    /** 增加一个记录 */
+    public increase(count = 1): void {
+        this.totalCount += count;
+        this.recordCount += count;
+    }
+
 }

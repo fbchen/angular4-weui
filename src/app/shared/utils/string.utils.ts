@@ -61,16 +61,16 @@ export class StringUtils {
                 .replace(/(H)\1*/g, '$1|').replace(/(m)\1*/g, '$1|')
                 .replace(/(s)\1*/g, '$1|').replace(/[^yMdHms]+/g, '|');
             formatRe = (formatRe.charAt(0) === '|') ? formatRe.slice(1) : formatRe;
-            const indexs: Array<string> = formatRe.split('|');
+            const indexs: string[] = formatRe.split('|');
 
             const now = new Date();
             const time = {
-                y: parseInt(values[indexs.indexOf('y') + 1] || String(now.getFullYear()), 10),
-                M: parseInt(values[indexs.indexOf('M') + 1] || String(now.getMonth() + 1), 10),
-                d: parseInt(values[indexs.indexOf('d') + 1] || String(now.getDay()), 10),
-                H: parseInt(values[indexs.indexOf('H') + 1] || String(now.getHours()), 10),
-                m: parseInt(values[indexs.indexOf('m') + 1] || String(now.getMinutes()), 10),
-                s: parseInt(values[indexs.indexOf('s') + 1] || String(now.getSeconds()), 10)
+                y: parseInt(indexs.indexOf('y') >= 0 ? values[indexs.indexOf('y') + 1] : String(now.getFullYear()), 10),
+                M: parseInt(indexs.indexOf('M') >= 0 ? values[indexs.indexOf('M') + 1] : String(now.getMonth() + 1), 10),
+                d: parseInt(indexs.indexOf('d') >= 0 ? values[indexs.indexOf('d') + 1] : String(now.getDay()), 10),
+                H: parseInt(indexs.indexOf('H') >= 0 ? values[indexs.indexOf('H') + 1] : String(now.getHours()), 10),
+                m: parseInt(indexs.indexOf('m') >= 0 ? values[indexs.indexOf('m') + 1] : String(now.getMinutes()), 10),
+                s: parseInt(indexs.indexOf('s') >= 0 ? values[indexs.indexOf('s') + 1] : String(now.getSeconds()), 10)
             };
             return new Date(time.y, time.M - 1, time.d, time.H, time.m, time.s, 0);
         }
@@ -92,4 +92,50 @@ export class StringUtils {
         return true;
     }
 
+    /**
+     *  格式化字符串<br>
+     *  两种调用方式:
+     *  <code>
+     *  var template1 = "我是{0}，今年{1}了";
+     *  var template2 = "我是{name}，今年{age}了";
+     *  var result1 = template1.format("小明", 22);
+     *  var result2 = template2.format({name: "小明", age: 22});
+     *  // 两个结果都是"我是小明，今年22了"
+     *  </code>
+     * @param {String/Object/Array} args 参数
+     * @return {String}
+     */
+    static format(str: string, ...args: any[]): string {
+        let result: string = str;
+        if (args.length > 0) {
+            const obj = args[0];
+            // 1、调用参数为: format({key: value, ...})
+            if (typeof obj === 'object') {
+                for (const key in obj) {
+                    if (obj.hasOwnProperty(key)) {
+                        const regex = new RegExp(`({${key}})`, 'g');
+                        result = str.replace(regex, obj[key]);
+                    }
+                }
+            } else { // 2、调用参数为: format('123', 'abc', ...)
+                for (let i = 0; i < args.length; i++) {
+                    if (args[i] !== undefined) {
+                        const regex = new RegExp(`(\\{${i}\\})`, 'g');
+                        result = str.replace(regex, args[i]);
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * 日期转换为数字格式，格式为 YYYYMMDD
+     *
+     * @param date Date对象
+     */
+    static date2Integer(date: Date): number {
+        return date.getFullYear() * 10000 + (date.getMonth() + 1) * 100 + date.getDate();
+    }
 }

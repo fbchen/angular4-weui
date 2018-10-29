@@ -14,7 +14,7 @@ import { AbstractPage } from '../abstract-page';
 @Component({
     templateUrl: 'example.html'
 })
-export class SliderExamplePage extends AbstractPage {
+export class SliderExamplePageComponent extends AbstractPage {
 
     public data: any = {
         slider1: 50,

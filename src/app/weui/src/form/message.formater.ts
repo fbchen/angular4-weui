@@ -93,13 +93,13 @@ export class MessageFormater {
             return StringUtils.format(msg, e.min, e.max, e.actual);
         }
         if (key === 'number') {
-            if (isPresent(e['max'])) {
-                msg = this.defaultValidationMessages.max;
-                return StringUtils.format(msg, e.max, e.actual);
+            if (isPresent(e.max)) {
+                const msg2 = this.defaultValidationMessages.max;
+                return StringUtils.format(msg2, e.max, e.actual);
             }
-            if (isPresent(e['min'])) {
-                msg = this.defaultValidationMessages.min;
-                return StringUtils.format(msg, e.min, e.actual);
+            if (isPresent(e.min)) {
+                const msg2 = this.defaultValidationMessages.min;
+                return StringUtils.format(msg2, e.min, e.actual);
             }
         }
         return msg;

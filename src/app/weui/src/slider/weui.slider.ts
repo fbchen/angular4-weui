@@ -161,9 +161,9 @@ export class WeUISlider extends DefaultValueAccessor implements OnInit {
      * Write a new value to the element. (From ControlValueAccessor interface)
      */
     writeValue(value: number = 0): void {
-        value = Math.min(Math.max(value, this.min), this.max);
-        this.value = value;
-        this.percent = (value + this.min) * 100 / this.max;
+        const v = Math.min(Math.max(value, this.min), this.max);
+        this.value = v;
+        this.percent = (v + this.min) * 100 / this.max;
     }
 
     /**

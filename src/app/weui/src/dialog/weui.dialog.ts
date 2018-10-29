@@ -7,7 +7,7 @@
  */
 
 import { Component, Input, Output, HostBinding, EventEmitter, ElementRef, Renderer2, OnInit } from '@angular/core';
-import { animate, state, style, transition, trigger } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { UpdateClassService } from '../core/service/update.class.service';
 import { toBoolean } from '../util/lang';
 

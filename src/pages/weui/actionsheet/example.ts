@@ -15,9 +15,9 @@ import { WeUIActionSheet, Layer } from '../../../app/weui';
 @Component({
     templateUrl: 'example.html'
 })
-export class ActionsheetExamplePage extends AbstractPage {
+export class ActionsheetExamplePageComponent extends AbstractPage {
 
-    public actionsheet_menu = [
+    public actionsheetMenu = [
         {text: '示例菜单1', value: '01', foo: 'dd', bar: '123'},
         {text: '示例菜单2', value: '02'},
         {text: '示例菜单3', value: '03'},
@@ -48,12 +48,12 @@ export class ActionsheetExamplePage extends AbstractPage {
     }
 
     showIOSActionSheet2(): void {
-        const actionsheet_menu = [
+        const actionsheetMenu = [
             {text: '示例菜单5', value: '05'},
             {text: '示例菜单6', value: '06'},
             {text: '示例菜单7', value: '07'}
         ];
-        this.layer.showActionsheet(actionsheet_menu).then((menu: any) => {
+        this.layer.showActionsheet(actionsheetMenu).then((menu: any) => {
             console.log('您刚刚选择了:', menu);
         });
     }

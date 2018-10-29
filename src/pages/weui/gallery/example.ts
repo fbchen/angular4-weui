@@ -16,7 +16,7 @@ import { WeUIGallery } from '../../../app/weui';
 @Component({
     templateUrl: 'example.html'
 })
-export class GalleryExamplePage extends AbstractPage implements OnInit {
+export class GalleryExamplePageComponent extends AbstractPage implements OnInit {
 
     /**
      * 图片预览控件

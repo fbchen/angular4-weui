@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
     selector: 'weui-example',
     templateUrl: 'weui.example.html'
 })
-export class WeUIExample implements OnInit {
+export class WeUIExampleComponent implements OnInit {
 
     constructor(public element: ElementRef, private router: Router) {
     }
@@ -29,8 +29,8 @@ export class WeUIExample implements OnInit {
     }
 
     toggleCategory($event: Event): void {
-        const el = $event.currentTarget as HTMLElement,
-              parent = el.parentElement;
+        const el = $event.currentTarget as HTMLElement;
+        const parent = el.parentElement;
         if (parent.classList.contains('js_show')) {
             parent.classList.remove('js_show');
         } else {
@@ -44,7 +44,7 @@ export class WeUIExample implements OnInit {
 
     navigate($event): void {
         const el = $event.currentTarget as HTMLElement;
-        const name: string = el.dataset['id'];
+        const name: string = el.dataset.id;
         this.router.navigate([name]);
     }
 

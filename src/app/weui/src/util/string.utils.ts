@@ -61,7 +61,7 @@ export class StringUtils {
                 .replace(/(H)\1*/g, '$1|').replace(/(m)\1*/g, '$1|')
                 .replace(/(s)\1*/g, '$1|').replace(/[^yMdHms]+/g, '|');
             formatRe = (formatRe.charAt(0) === '|') ? formatRe.slice(1) : formatRe;
-            const indexs: Array<string> = formatRe.split('|');
+            const indexs: string[] = formatRe.split('|');
 
             const now = new Date();
             const time = {
@@ -106,26 +106,27 @@ export class StringUtils {
      * @return 格式化后的字符串
      */
     static format(str: string, ...args: any[]): string {
+        let s = str;
         if (args.length > 0) {
             const obj = args[0];
             // 1、调用参数为: format({key: value, ...})
             if (typeof obj === 'object') {
                 for (const key in obj) {
                     if (obj.hasOwnProperty(key)) {
-                        const regex = new RegExp('({' + key + '})', 'g');
-                        str = str.replace(regex, obj[key]);
+                        const regex = new RegExp(`({${key}})`, 'g');
+                        s = s.replace(regex, obj[key]);
                     }
                 }
             } else { // 2、调用参数为: format('123', 'abc', ...)
                 for (let i = 0; i < args.length; i++) {
                     if (args[i] !== undefined) {
-                        const regex = new RegExp('(\\{' + i + '\\})', 'g');
-                        str = str.replace(regex, args[i]);
+                        const regex = new RegExp(`(\\{${i}\\})`, 'g');
+                        s = s.replace(regex, args[i]);
                     }
                 }
             }
         }
 
-        return str;
+        return s;
     }
 }

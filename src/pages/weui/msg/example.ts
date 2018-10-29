@@ -14,7 +14,7 @@ import { AbstractPage } from '../abstract-page';
 @Component({
     templateUrl: 'example.html'
 })
-export class MsgExamplePage extends AbstractPage {
+export class MsgExamplePageComponent extends AbstractPage {
 
     constructor(
         public element: ElementRef,
@@ -29,7 +29,7 @@ export class MsgExamplePage extends AbstractPage {
 @Component({
     templateUrl: 'succ_example.html'
 })
-export class MsgSuccExamplePage extends AbstractPage {
+export class MsgSuccExamplePageComponent extends AbstractPage {
 
     constructor(
         public element: ElementRef,
@@ -44,7 +44,7 @@ export class MsgSuccExamplePage extends AbstractPage {
 @Component({
     templateUrl: 'warn_example.html'
 })
-export class MsgWarnExamplePage extends AbstractPage {
+export class MsgWarnExamplePageComponent extends AbstractPage {
 
     constructor(
         public element: ElementRef,

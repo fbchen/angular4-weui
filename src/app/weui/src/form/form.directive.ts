@@ -15,6 +15,7 @@ import { toBoolean } from '../util/lang';
 import { AbstractForm } from './abstract.form';
 
 @Directive({
+    // tslint:disable-next-line:directive-selector
     selector: 'form:not([ngNoForm]):not([formGroup]),ngForm,[ngForm]',
     exportAs: 'faForm',
     providers: [ UpdateClassService ]

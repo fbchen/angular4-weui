@@ -19,34 +19,34 @@ import { WeUIExampleRoutingModule } from './weui.example.routing.module';
 import { SharedModule } from '../../app/shared/shared.module';
 
 /** WeUI Demo Components */
-import { WeUIExample } from './weui.example';
-import { ButtonExamplePage } from './button/example';
-import { InputExamplePage } from './input/example';
-import { ListExamplePage } from './list/example';
-import { SliderExamplePage } from './slider/example';
-import { UploaderExamplePage } from './uploader/example';
-import { GalleryExamplePage } from './gallery/example';
-import { BadgeExamplePage } from './badge/example';
-import { FooterExamplePage } from './footer/example';
-import { LoadmoreExamplePage } from './loadmore/example';
-import { ProgressExamplePage } from './progress/example';
+import { WeUIExampleComponent } from './weui.example';
+import { ButtonExamplePageComponent } from './button/example';
+import { InputExamplePageComponent } from './input/example';
+import { ListExamplePageComponent } from './list/example';
+import { SliderExamplePageComponent } from './slider/example';
+import { UploaderExamplePageComponent } from './uploader/example';
+import { GalleryExamplePageComponent } from './gallery/example';
+import { BadgeExamplePageComponent } from './badge/example';
+import { FooterExamplePageComponent } from './footer/example';
+import { LoadmoreExamplePageComponent } from './loadmore/example';
+import { ProgressExamplePageComponent } from './progress/example';
 
-import { ActionsheetExamplePage } from './actionsheet/example';
-import { DialogExamplePage } from './dialog/example';
-import { ToastExamplePage } from './toast/example';
-import { PickerExamplePage } from './picker/example';
-import { SearchBarExamplePage } from './searchbar/example';
-import { NavBarExamplePage } from './navbar/example';
-import { TabBarExamplePage } from './tabbar/example';
+import { ActionsheetExamplePageComponent } from './actionsheet/example';
+import { DialogExamplePageComponent } from './dialog/example';
+import { ToastExamplePageComponent } from './toast/example';
+import { PickerExamplePageComponent } from './picker/example';
+import { SearchBarExamplePageComponent } from './searchbar/example';
+import { NavBarExamplePageComponent } from './navbar/example';
+import { TabBarExamplePageComponent } from './tabbar/example';
 
 /** 无需组件化 */
-import { ArticleExamplePage } from './article/example';
-import { FlexExamplePage } from './flex/example';
-import { GridExamplePage } from './grid/example';
-import { IconsExamplePage } from './icons/example';
-import { PanelExamplePage } from './panel/example';
-import { PreviewExamplePage } from './preview/example';
-import { MsgExamplePage, MsgSuccExamplePage, MsgWarnExamplePage } from './msg/example';
+import { ArticleExamplePageComponent } from './article/example';
+import { FlexExamplePageComponent } from './flex/example';
+import { GridExamplePageComponent } from './grid/example';
+import { IconsExamplePageComponent } from './icons/example';
+import { PanelExamplePageComponent } from './panel/example';
+import { PreviewExamplePageComponent } from './preview/example';
+import { MsgExamplePageComponent, MsgSuccExamplePageComponent, MsgWarnExamplePageComponent } from './msg/example';
 
 
 @NgModule({
@@ -60,62 +60,62 @@ import { MsgExamplePage, MsgSuccExamplePage, MsgWarnExamplePage } from './msg/ex
         WeUIExampleRoutingModule
     ],
     declarations: [
-        WeUIExample,
-        ButtonExamplePage,
-        InputExamplePage,
-        ListExamplePage,
-        SliderExamplePage,
-        UploaderExamplePage,
-        GalleryExamplePage,
-        BadgeExamplePage,
-        FooterExamplePage,
-        LoadmoreExamplePage,
-        ProgressExamplePage,
-        ActionsheetExamplePage,
-        DialogExamplePage,
-        ToastExamplePage,
-        PickerExamplePage,
-        SearchBarExamplePage,
-        NavBarExamplePage,
-        TabBarExamplePage,
-        ArticleExamplePage,
-        FlexExamplePage,
-        GridExamplePage,
-        IconsExamplePage,
-        PanelExamplePage,
-        PreviewExamplePage,
-        MsgExamplePage,
-        MsgSuccExamplePage,
-        MsgWarnExamplePage
+        WeUIExampleComponent,
+        ButtonExamplePageComponent,
+        InputExamplePageComponent,
+        ListExamplePageComponent,
+        SliderExamplePageComponent,
+        UploaderExamplePageComponent,
+        GalleryExamplePageComponent,
+        BadgeExamplePageComponent,
+        FooterExamplePageComponent,
+        LoadmoreExamplePageComponent,
+        ProgressExamplePageComponent,
+        ActionsheetExamplePageComponent,
+        DialogExamplePageComponent,
+        ToastExamplePageComponent,
+        PickerExamplePageComponent,
+        SearchBarExamplePageComponent,
+        NavBarExamplePageComponent,
+        TabBarExamplePageComponent,
+        ArticleExamplePageComponent,
+        FlexExamplePageComponent,
+        GridExamplePageComponent,
+        IconsExamplePageComponent,
+        PanelExamplePageComponent,
+        PreviewExamplePageComponent,
+        MsgExamplePageComponent,
+        MsgSuccExamplePageComponent,
+        MsgWarnExamplePageComponent
     ],
     entryComponents: [
-        WeUIExample,
-        ButtonExamplePage,
-        InputExamplePage,
-        ListExamplePage,
-        SliderExamplePage,
-        UploaderExamplePage,
-        GalleryExamplePage,
-        BadgeExamplePage,
-        FooterExamplePage,
-        LoadmoreExamplePage,
-        ProgressExamplePage,
-        ActionsheetExamplePage,
-        DialogExamplePage,
-        ToastExamplePage,
-        PickerExamplePage,
-        SearchBarExamplePage,
-        NavBarExamplePage,
-        TabBarExamplePage,
-        ArticleExamplePage,
-        FlexExamplePage,
-        GridExamplePage,
-        IconsExamplePage,
-        PanelExamplePage,
-        PreviewExamplePage,
-        MsgExamplePage,
-        MsgSuccExamplePage,
-        MsgWarnExamplePage
+        WeUIExampleComponent,
+        ButtonExamplePageComponent,
+        InputExamplePageComponent,
+        ListExamplePageComponent,
+        SliderExamplePageComponent,
+        UploaderExamplePageComponent,
+        GalleryExamplePageComponent,
+        BadgeExamplePageComponent,
+        FooterExamplePageComponent,
+        LoadmoreExamplePageComponent,
+        ProgressExamplePageComponent,
+        ActionsheetExamplePageComponent,
+        DialogExamplePageComponent,
+        ToastExamplePageComponent,
+        PickerExamplePageComponent,
+        SearchBarExamplePageComponent,
+        NavBarExamplePageComponent,
+        TabBarExamplePageComponent,
+        ArticleExamplePageComponent,
+        FlexExamplePageComponent,
+        GridExamplePageComponent,
+        IconsExamplePageComponent,
+        PanelExamplePageComponent,
+        PreviewExamplePageComponent,
+        MsgExamplePageComponent,
+        MsgSuccExamplePageComponent,
+        MsgWarnExamplePageComponent
     ],
     providers: [
 

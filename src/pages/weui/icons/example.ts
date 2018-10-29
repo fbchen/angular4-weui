@@ -14,7 +14,7 @@ import { AbstractPage } from '../abstract-page';
 @Component({
     templateUrl: 'example.html'
 })
-export class IconsExamplePage extends AbstractPage {
+export class IconsExamplePageComponent extends AbstractPage {
 
     constructor(
         public element: ElementRef,

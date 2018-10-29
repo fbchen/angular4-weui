@@ -152,7 +152,7 @@ export class WeUIPickerGroup implements AfterViewInit {
             const len = this.options && this.options.length || 0;
             for (; index < len; index++) {
                 const option = this.options[index];
-                if (this.value === option.value || this.value['value'] === option.value) {
+                if (this.value === option.value || this.value.value === option.value) {
                     this.onChange(option, index);
                     this.distance = (this.defaults.offset - index) * this.defaults.rowHeight;
                     return; // 已找到匹配选项，直接返回

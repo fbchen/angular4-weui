@@ -69,7 +69,7 @@ export class Result {
     /**
      * 创建
      */
-    public constructor(success = true, code?: string | number, msg?: string) {
+    public constructor(success: boolean = true, code?: string | number, msg?: string) {
         this.success = success;
         this.code = code;
         this.msg = msg;

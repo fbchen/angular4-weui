@@ -15,7 +15,7 @@ import { WeUIDialog, Layer } from '../../../app/weui';
 @Component({
     templateUrl: 'example.html'
 })
-export class DialogExamplePage extends AbstractPage {
+export class DialogExamplePageComponent extends AbstractPage {
 
     @ViewChild('dialog1') dialog1: WeUIDialog;
     @ViewChild('dialog2') dialog2: WeUIDialog;

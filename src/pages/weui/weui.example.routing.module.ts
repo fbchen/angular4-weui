@@ -9,63 +9,63 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { ButtonExamplePage } from './button/example';
-import { InputExamplePage } from './input/example';
-import { ListExamplePage } from './list/example';
-import { SliderExamplePage } from './slider/example';
-import { UploaderExamplePage } from './uploader/example';
-import { GalleryExamplePage } from './gallery/example';
-import { BadgeExamplePage } from './badge/example';
-import { FooterExamplePage } from './footer/example';
-import { LoadmoreExamplePage } from './loadmore/example';
-import { ProgressExamplePage } from './progress/example';
+import { ButtonExamplePageComponent } from './button/example';
+import { InputExamplePageComponent } from './input/example';
+import { ListExamplePageComponent } from './list/example';
+import { SliderExamplePageComponent } from './slider/example';
+import { UploaderExamplePageComponent } from './uploader/example';
+import { GalleryExamplePageComponent } from './gallery/example';
+import { BadgeExamplePageComponent } from './badge/example';
+import { FooterExamplePageComponent } from './footer/example';
+import { LoadmoreExamplePageComponent } from './loadmore/example';
+import { ProgressExamplePageComponent } from './progress/example';
 
-import { ActionsheetExamplePage } from './actionsheet/example';
-import { DialogExamplePage } from './dialog/example';
-import { ToastExamplePage } from './toast/example';
-import { PickerExamplePage } from './picker/example';
-import { SearchBarExamplePage } from './searchbar/example';
-import { NavBarExamplePage } from './navbar/example';
-import { TabBarExamplePage } from './tabbar/example';
+import { ActionsheetExamplePageComponent } from './actionsheet/example';
+import { DialogExamplePageComponent } from './dialog/example';
+import { ToastExamplePageComponent } from './toast/example';
+import { PickerExamplePageComponent } from './picker/example';
+import { SearchBarExamplePageComponent } from './searchbar/example';
+import { NavBarExamplePageComponent } from './navbar/example';
+import { TabBarExamplePageComponent } from './tabbar/example';
 
-import { ArticleExamplePage } from './article/example';
-import { FlexExamplePage } from './flex/example';
-import { GridExamplePage } from './grid/example';
-import { IconsExamplePage } from './icons/example';
-import { PanelExamplePage } from './panel/example';
-import { PreviewExamplePage } from './preview/example';
-import { MsgExamplePage, MsgSuccExamplePage, MsgWarnExamplePage } from './msg/example';
+import { ArticleExamplePageComponent } from './article/example';
+import { FlexExamplePageComponent } from './flex/example';
+import { GridExamplePageComponent } from './grid/example';
+import { IconsExamplePageComponent } from './icons/example';
+import { PanelExamplePageComponent } from './panel/example';
+import { PreviewExamplePageComponent } from './preview/example';
+import { MsgExamplePageComponent, MsgSuccExamplePageComponent, MsgWarnExamplePageComponent } from './msg/example';
 
 @NgModule({
     imports: [
         RouterModule.forChild([
-            { path: 'button', component: ButtonExamplePage },
-            { path: 'input', component: InputExamplePage },
-            { path: 'list', component: ListExamplePage },
-            { path: 'slider', component: SliderExamplePage },
-            { path: 'uploader', component: UploaderExamplePage },
-            { path: 'gallery', component: GalleryExamplePage },
-            { path: 'badge', component: BadgeExamplePage },
-            { path: 'footer', component: FooterExamplePage },
-            { path: 'loadmore', component: LoadmoreExamplePage },
-            { path: 'progress', component: ProgressExamplePage },
-            { path: 'actionsheet', component: ActionsheetExamplePage },
-            { path: 'dialog', component: DialogExamplePage },
-            { path: 'toast', component: ToastExamplePage },
-            { path: 'picker', component: PickerExamplePage },
-            { path: 'searchbar', component: SearchBarExamplePage },
-            { path: 'navbar', component: NavBarExamplePage },
-            { path: 'tabbar', component: TabBarExamplePage },
+            { path: 'button', component: ButtonExamplePageComponent },
+            { path: 'input', component: InputExamplePageComponent },
+            { path: 'list', component: ListExamplePageComponent },
+            { path: 'slider', component: SliderExamplePageComponent },
+            { path: 'uploader', component: UploaderExamplePageComponent },
+            { path: 'gallery', component: GalleryExamplePageComponent },
+            { path: 'badge', component: BadgeExamplePageComponent },
+            { path: 'footer', component: FooterExamplePageComponent },
+            { path: 'loadmore', component: LoadmoreExamplePageComponent },
+            { path: 'progress', component: ProgressExamplePageComponent },
+            { path: 'actionsheet', component: ActionsheetExamplePageComponent },
+            { path: 'dialog', component: DialogExamplePageComponent },
+            { path: 'toast', component: ToastExamplePageComponent },
+            { path: 'picker', component: PickerExamplePageComponent },
+            { path: 'searchbar', component: SearchBarExamplePageComponent },
+            { path: 'navbar', component: NavBarExamplePageComponent },
+            { path: 'tabbar', component: TabBarExamplePageComponent },
 
-            { path: 'article', component: ArticleExamplePage },
-            { path: 'flex', component: FlexExamplePage },
-            { path: 'grid', component: GridExamplePage },
-            { path: 'icons', component: IconsExamplePage },
-            { path: 'panel', component: PanelExamplePage },
-            { path: 'preview', component: PreviewExamplePage },
-            { path: 'msg', component: MsgExamplePage },
-            { path: 'msg/success', component: MsgSuccExamplePage },
-            { path: 'msg/warn', component: MsgWarnExamplePage }
+            { path: 'article', component: ArticleExamplePageComponent },
+            { path: 'flex', component: FlexExamplePageComponent },
+            { path: 'grid', component: GridExamplePageComponent },
+            { path: 'icons', component: IconsExamplePageComponent },
+            { path: 'panel', component: PanelExamplePageComponent },
+            { path: 'preview', component: PreviewExamplePageComponent },
+            { path: 'msg', component: MsgExamplePageComponent },
+            { path: 'msg/success', component: MsgSuccExamplePageComponent },
+            { path: 'msg/warn', component: MsgWarnExamplePageComponent }
         ])
     ],
     exports: [

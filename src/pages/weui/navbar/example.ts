@@ -16,7 +16,7 @@ import { WeUINavBarItem } from '../../../app/weui';
 @Component({
     templateUrl: 'example.html'
 })
-export class NavBarExamplePage extends AbstractPage implements OnInit {
+export class NavBarExamplePageComponent extends AbstractPage implements OnInit {
 
     public activeValue: string;
 

@@ -15,7 +15,7 @@ import { WeUIButton } from '../../../app/weui';
 @Component({
     templateUrl: 'example.html'
 })
-export class ButtonExamplePage extends AbstractPage {
+export class ButtonExamplePageComponent extends AbstractPage {
 
     @ViewChild('button')
     private button: WeUIButton;

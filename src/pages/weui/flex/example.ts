@@ -14,7 +14,7 @@ import { AbstractPage } from '../abstract-page';
 @Component({
     templateUrl: 'example.html'
 })
-export class FlexExamplePage extends AbstractPage {
+export class FlexExamplePageComponent extends AbstractPage {
 
     constructor(
         public element: ElementRef,

@@ -8,23 +8,8 @@
 
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Observable } from 'rxjs/Observable';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-/** ======= 导入自定义rxjs操作符 ======= */
-import { Result } from './result';
-import { toResult, ToResultSignature } from './rxjs/to-result.operator';
-declare module 'rxjs/Observable' {
-    interface Observable<T> {
-        toResult: ToResultSignature<Result>;
-    }
-}
-Observable.prototype.toResult = toResult;
-
-/**
- * Export Class
- */
-export { Page } from './page';
-export { Result } from './result';
 
 /**
  * @name CoreModule
@@ -35,7 +20,8 @@ export { Result } from './result';
  */
 @NgModule({
     imports: [
-        BrowserModule
+        BrowserModule,
+        BrowserAnimationsModule
     ],
     declarations: [],
     exports: [],
@@ -51,3 +37,10 @@ export class CoreModule {
     }
 
 }
+
+
+/** Export Class */
+export { Page } from './page';
+export { Result } from './result';
+export { toResult } from './rxjs/operators/to-result';
+

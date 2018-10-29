@@ -13,12 +13,5 @@
   "main": "./bundles/index.umd.js",
   "module": "./es2015/index.es5.js",
   "es2015": "./es2015/index.js",
-  "typings": "./index.d.ts",
-
-  "peerDependencies": {
-    "@angular/common": "^5.2.4",
-    "@angular/core": "^5.2.4",
-    "@angular/forms": "^5.2.4",
-    "@angular/animations": "^5.2.4"
-  }
+  "typings": "./index.d.ts"
 }

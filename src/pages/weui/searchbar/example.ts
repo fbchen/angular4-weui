@@ -22,7 +22,7 @@ export interface POST {
 @Component({
     templateUrl: 'example.html'
 })
-export class SearchBarExamplePage extends AbstractPage implements OnInit {
+export class SearchBarExamplePageComponent extends AbstractPage implements OnInit {
 
     public list: any[];
 
@@ -60,7 +60,7 @@ export class SearchBarExamplePage extends AbstractPage implements OnInit {
         return item.title.toUpperCase().indexOf(this.value.toUpperCase()) >= 0;
     }
 
-    get _filterFn(): Function {
+    get _filterFn(): () => boolean {
         return this.filter.bind(this);
     }
 

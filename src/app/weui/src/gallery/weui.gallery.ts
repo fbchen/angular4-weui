@@ -7,7 +7,7 @@
  */
 
 import { Component, Input, Output, EventEmitter, ElementRef, Renderer2, OnInit, HostBinding, HostListener } from '@angular/core';
-import { animate, state, style, transition, trigger } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { WeUIFile } from '../uploader/weui.uploader';
 import { UpdateClassService } from '../core/service/update.class.service';
 

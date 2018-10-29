@@ -6,7 +6,7 @@
  * found in the LICENSE file.
  */
 
-import { Component, Input, Renderer2, ElementRef, Directive, Host, Optional, OnInit } from '@angular/core';
+import { Component, Input, Renderer2, ElementRef, Directive, OnInit } from '@angular/core';
 import { UpdateClassService } from '../core/service/update.class.service';
 import { toBoolean } from '../util/lang';
 

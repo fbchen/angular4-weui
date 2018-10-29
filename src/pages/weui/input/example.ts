@@ -16,7 +16,7 @@ import { WeUITopTips, Layer } from '../../../app/weui';
 @Component({
     templateUrl: 'example.html'
 })
-export class InputExamplePage extends AbstractPage {
+export class InputExamplePageComponent extends AbstractPage {
 
     public data: any = {
         radio1: '2',
@@ -58,6 +58,6 @@ export class InputExamplePage extends AbstractPage {
      */
     onEvent(event: Event): void {
         const target = event.target as HTMLInputElement;
-        console.log(event.type + ': ' + target.name + '=' + target.value);
+        console.log(`${event.type}: ${target.name}=${target.value}`);
     }
 }

@@ -154,7 +154,7 @@ export class WeUIUploader {
         for (let i = 0; i < length; i++) {
             const file: File | null = files.item(i);
             if (file) {
-                const url: string = 'url(' + window.URL.createObjectURL(file) + ')';
+                const url = `url(${window.URL.createObjectURL(file)})`;
                 const safeUrl = this.sanitizer.bypassSecurityTrustStyle(url);
                 this.files.push(new WeUIFile(file, safeUrl));
             }

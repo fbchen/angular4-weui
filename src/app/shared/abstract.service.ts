@@ -7,7 +7,7 @@
  */
 
 import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { AppEnvironment } from '../app.environment';
 import { Result } from '../core/result';

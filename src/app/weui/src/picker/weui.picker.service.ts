@@ -6,8 +6,9 @@
  * found in the LICENSE file.
  */
 
-import { Injectable, Inject } from '@angular/core';
-import { ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, ApplicationRef, Injector, Type } from '@angular/core';
+import {
+    Injectable, Inject,
+    ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, ApplicationRef, Injector, Type } from '@angular/core';
 import { ɵgetDOM as getDOM, DOCUMENT } from '@angular/platform-browser';
 
 import { WeUIPicker, PickerOption } from './weui.picker';
@@ -72,7 +73,7 @@ export class WeUIPickerService {
         const instance: WeUIPicker = componentRef.instance;
         instance.close.subscribe(() => {
             componentRef.destroy();
-            componentRef['_container'].remove();
+            (componentRef as any)._container.remove();
         });
         if (config) {
             Object.assign(instance, config);
@@ -96,7 +97,7 @@ export class WeUIPickerService {
         // where we want it to be rendered.
         const _hostDomElement = this._getContainer();
         _hostDomElement.appendChild(this._getComponentRootNode(componentRef));
-        componentRef['_container'] = _hostDomElement;
+        (componentRef as any)._container = _hostDomElement;
         return componentRef;
     }
 

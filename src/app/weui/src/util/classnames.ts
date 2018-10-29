@@ -14,8 +14,7 @@ const hasOwn = {}.hasOwnProperty;
 export function classnames(..._arguments: any[]): string {
     const classes: any[] = [];
 
-    for (let i = 0; i < _arguments.length; i++) {
-        const arg = _arguments[i];
+    for (const arg of _arguments) {
         if (!arg) {
             continue;
         }

@@ -7,7 +7,7 @@
  */
 
 import { Component, Input, Output, EventEmitter, ElementRef, Renderer2, OnInit, AfterViewInit } from '@angular/core';
-import { animate, state, style, transition, trigger } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { UpdateClassService } from '../core/service/update.class.service';
 
 
@@ -46,7 +46,7 @@ export class WeUIActionSheet implements OnInit, AfterViewInit {
     /**
      * ActionSheet菜单，列表，内容任意，其中<code>text</code>用于显示
      */
-    @Input() menu: { text?: string, [key: string]: any }[] = [];
+    @Input() menu: Array<{ text?: string, [key: string]: any }> = [];
 
     /**
      * ActionSheet弹出模式，取值：ios(Ios模式) - 从底部上弹，md(Android模式) - 弹出在窗口中间。默认为ios。

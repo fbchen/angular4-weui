@@ -118,7 +118,7 @@ export class Schedule {
         // move next date
         this._pointer.setDate(this._pointer.getDate() + 1);
         return {
-            value: value,
+            value,
             done: !this.hasNext()
         };
     }
@@ -150,10 +150,10 @@ export function parseField(field: string, _constraints: number[]): number[] {
     const result: number[] = [];
 
     // * 号等于最低到最高
-    field = field.replace(/\*/g, low + '-' + high);
+    const expr = field.replace(/\*/g, `${low}-${high}`);
 
     // 处理 1,2,5-9 这种情况
-    const fields: string[] = field.split(',');
+    const fields: string[] = expr.split(',');
     const len = fields.length;
     for (let i = 0; i < len; i++) {
         const f: string = fields[i];
