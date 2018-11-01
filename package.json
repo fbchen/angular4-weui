@@ -1,13 +1,13 @@
 {
   "name": "angular4-weui",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "license": "MIT",
   "author": "32674406@qq.com",
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0",
-    "package": "ng build -prod --aot",
+    "package": "ng build --prod --aot",
     "lint": "ng lint",
     "tslint": "tslint src/*.ts -t verbose"
   },

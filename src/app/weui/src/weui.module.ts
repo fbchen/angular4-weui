@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { WeUIBadge } from './badge/weui.badge';
 import { WeUIButton } from './button/weui.button';
 import { WeUICheckbox } from './input/weui.checkbox';
+import { WeUICircle } from './progress/weui.circle';
 import { WeUIDatePicker } from './picker/weui.date.picker';
 import { WeUIFooter, WeUIFooterText, WeUIFooterLinks, WeUIFooterLink } from './footer/weui.footer';
 import { WeUIGallery } from './gallery/weui.gallery';
@@ -87,6 +88,7 @@ import { WeUIPickerService } from './picker/weui.picker.service';
         WeUIFooterLink,
         WeUILoadmore,
         WeUIProgressBar,
+        WeUICircle,
         WeUIActionSheet,
         WeUIDialog,
         WeUIToast,
@@ -124,6 +126,7 @@ import { WeUIPickerService } from './picker/weui.picker.service';
         WeUIFooterLink,
         WeUILoadmore,
         WeUIProgressBar,
+        WeUICircle,
         WeUIActionSheet,
         WeUIDialog,
         WeUIToast,

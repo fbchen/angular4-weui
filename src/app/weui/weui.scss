@@ -206,7 +206,32 @@ img[weui-avatar] {
     }
 }
 
+.weui-circle {
+    position: relative;
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    border-radius: 100%;
+    vertical-align: middle;
 
+    &-trail {
+        stroke: #f7f7f7;
+    }
+
+    &-path {
+        stroke: #108ee9;
+        animation: weui-circle-appear .3s;
+    }
+}
+
+@keyframes weui-circle-appear {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+}
 
 // Generate Slider-Track Colors
 // --------------------------------------------------
