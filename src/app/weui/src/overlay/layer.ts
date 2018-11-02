@@ -226,7 +226,7 @@ export class Layer {
      * @param buttons 菜单按钮
      * @param btnCancelText 取消按钮文本，默认为“取消”
      */
-    public showActionsheet(menus: { text?: string, [key: string]: any }[], btnCancelText?: string): Promise<any> {
+    public showActionsheet(menus: Array<{ text?: string, [key: string]: any }>, btnCancelText?: string): Promise<any> {
         const actionsheet: WeUIActionSheet = this._createActionSheet();
         actionsheet.menu = menus;
         if (btnCancelText) {
