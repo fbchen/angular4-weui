@@ -135,7 +135,7 @@ export class StringUtils {
      *
      * @param date Date对象
      */
-    static date2Integer(date: Date): number {
+    static date2Int(date: Date): number {
         return date.getFullYear() * 10000 + (date.getMonth() + 1) * 100 + date.getDate();
     }
 }
