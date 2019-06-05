@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'weui-example',
-    templateUrl: 'weui.example.html'
+    templateUrl: './weui.example.html'
 })
 export class WeUIExampleComponent implements OnInit {
 
