@@ -3,7 +3,9 @@
         "node_modules/codelyzer",
         "node_modules/tslint-consistent-codestyle"
     ],
+    "extends": ["tslint:latest"],
     "rules": {
+        "arrow-parens": false,
         "adjacent-overload-signatures": true,
         "callable-types": true,
         "class-name": true,
@@ -69,6 +71,12 @@
         "new-parens": true,
         "no-angle-bracket-type-assertion": true,
         "member-access": false,
+        "member-ordering": {
+            "options": {
+                "order": "statics-first",
+                "alphabetize": true,
+            },
+        },
         "no-any": false,
         "no-arg": true,
         "no-bitwise": false,
@@ -91,9 +99,10 @@
         "no-empty": false,
         "no-empty-interface": true,
         "no-eval": true,
-        "no-floating-promises": true,
+        "no-floating-promises": false,
         "no-for-in-array": true,
-        "no-import-side-effect": true,
+        "no-implicit-dependencies": false,
+        "no-import-side-effect": false,
         "no-inferrable-types": [
             true,
             "ignore-params",
@@ -108,11 +117,12 @@
             true,
             "allow-declarations"
         ],
-        "no-non-null-assertion": true,
+        "no-non-null-assertion": false,
         "no-shadowed-variable": true,
         "no-sparse-arrays": true,
         "no-string-literal": true,
         "no-string-throw": true,
+        "no-submodule-imports": false,
         "no-switch-case-fall-through": true,
         "no-this-assignment": true,
         "no-trailing-whitespace": true,

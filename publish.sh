@@ -91,9 +91,9 @@ rollupIndex() {
     echo "======           $ROLLUP -i ${in_file} -o ${out_file}"
 
     if [[ -f "${3}" ]]; then
-      $ROLLUP -i ${in_file} -o ${out_file} -c ${3} --sourcemap
+      $ROLLUP -i ${in_file} -o ${out_file} -c ${3} --sourcemap --format esm
     else
-      $ROLLUP -i ${in_file} -o ${out_file} --sourcemap
+      $ROLLUP -i ${in_file} -o ${out_file} --sourcemap --format esm
     fi
     cat ${LICENSE_BANNER} > ${out_file}.tmp
     cat ${out_file} >> ${out_file}.tmp
@@ -267,7 +267,7 @@ MAP_SOURCES="node `pwd`/.scripts/map_sources.js "
 
 # 清理目录
 rm -rf ./dist/packages
-rm -rf ./dist/packages-dist
+rm -rf ./dist/publish-dist
 
 
 # 执行打包
@@ -276,10 +276,10 @@ rm -rf ./dist/packages-dist
   PWD=`pwd`
   ROOT=${PWD}
   ROOT_DIR=${ROOT}/src/app
-  SRC_DIR=${ROOT_DIR}/${PACKAGE}
+  SRC_DIR=${ROOT_DIR}/${PACKAGE} # ${PWD}/src/app/weui
   ROOT_OUT_DIR=${ROOT}/dist/packages
   OUT_DIR=${ROOT_OUT_DIR}/${PACKAGE_OUT}
-  NPM_DIR=${ROOT}/dist/packages-dist/${PACKAGE_OUT}
+  NPM_DIR=${ROOT}/dist/publish-dist/${PACKAGE_OUT}
   MODULES_DIR=${NPM_DIR}/es2015
   BUNDLES_DIR=${NPM_DIR}/bundles
 
@@ -366,5 +366,5 @@ rm -rf ./dist/packages-dist
 travisFoldReturnArrows
 
 # 最后，发布（手动执行）
-# cd ./dist/packages-dist/angular-weui
+# cd ./dist/publish-dist/angular-weui
 # npm publish
