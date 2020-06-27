@@ -34,7 +34,7 @@ export class Result {
     /**
      * 新增或修改对象后返回的ID
      */
-    id?: string;
+    id?: string | number;
 
     /**
      * 结果集

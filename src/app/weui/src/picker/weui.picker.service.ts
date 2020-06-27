@@ -9,7 +9,7 @@
 import {
     Injectable, Inject,
     ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, ApplicationRef, Injector, Type } from '@angular/core';
-import { ɵgetDOM as getDOM, DOCUMENT } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
 
 import { WeUIPicker, PickerOption } from './weui.picker';
 import { WeUIDatePicker } from './weui.date.picker';
@@ -32,7 +32,7 @@ export class WeUIPickerService {
         private _componentFactoryResolver: ComponentFactoryResolver,
         private _appRef: ApplicationRef,
         private _injector: Injector,
-        @Inject(DOCUMENT) private doc: any) {
+        @Inject(DOCUMENT) private doc: Document) {
 
     }
 
@@ -107,10 +107,10 @@ export class WeUIPickerService {
     }
 
     private _getContainer(): HTMLElement {
-        const div: HTMLElement = getDOM().createElement('div');
+        const div: HTMLElement = this.doc.createElement('div');
         div.id = getUuid();
         div.classList.add('weui-overlay');
-        getDOM().appendChild(this.doc.body, div);
+        this.doc.body.appendChild(div);
         return div;
     }
 

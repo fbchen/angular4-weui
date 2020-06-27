@@ -7,7 +7,7 @@
  */
 
 import {
-    Component, Input, Output, EventEmitter, Renderer2, ElementRef, ContentChild,
+    Component, Input, Output, EventEmitter, Renderer2, ElementRef, ContentChild, ViewChild,
     OnInit, forwardRef, ViewEncapsulation, Optional, Inject, HostBinding
 } from '@angular/core';
 import { DefaultValueAccessor, NgControl, NgForm, NG_VALUE_ACCESSOR, COMPOSITION_BUFFER_MODE } from '@angular/forms';
@@ -45,7 +45,7 @@ const WEUI_INPUT_CONTROL_VALUE_ACCESSOR: any = {
             </div>
 
             <div class="weui-input-area" *ngIf="type == 'textarea'">
-                <textarea #textarea class="weui-textarea"
+                <textarea #input class="weui-textarea"
                     [placeholder]="placeholder" [rows]="rows"
                     [required]="required" [readonly]="readonly"
                     [attr.minlength]="minlength" [attr.maxlength]="maxlength"
@@ -212,7 +212,7 @@ export class WeUIInput extends DefaultValueAccessor implements OnInit {
     @Output() focus: EventEmitter<Event> = new EventEmitter<Event>();
 
     // 实际输入控件(<input>)
-    @ContentChild(NgControl) control: NgControl;
+    @ContentChild(NgControl, {read: NgControl}) input: NgControl;
 
     public get value(): any {
         return this._value;
@@ -232,12 +232,12 @@ export class WeUIInput extends DefaultValueAccessor implements OnInit {
         protected el: ElementRef,
         protected updateClassService: UpdateClassService,
         @Optional() @Inject(COMPOSITION_BUFFER_MODE) protected compositionMode: boolean,
-        @Optional() protected parentForm: NgForm) {
+        @Optional() protected form: NgForm) {
         super(renderer, el, compositionMode);
         this.id = `weui-input-${++WeUIInput.count}`;
 
-        if (parentForm) {
-            parentForm.ngSubmit.subscribe(() => {
+        if (form) {
+            form.ngSubmit.subscribe(() => {
                 this.updateClassMap();
             });
         }
@@ -264,9 +264,12 @@ export class WeUIInput extends DefaultValueAccessor implements OnInit {
     }
 
     shouldWarn(): boolean {
-        return this.control.invalid === true && (
-            this.control.touched === true || this.control.dirty === true ||
-            (this.parentForm && this.parentForm.submitted));
+        /*if (!this.input) {
+            return false;
+        }*/
+        return this.input.invalid === true && (
+            this.input.touched === true || this.input.dirty === true ||
+            (this.form && this.form.submitted));
     }
 
     shouldShowWarnIcon(): boolean {
@@ -274,7 +277,7 @@ export class WeUIInput extends DefaultValueAccessor implements OnInit {
     }
 
     onBlur(ev: UIEvent) {
-        this.onTouched(); // set your control to 'touched'
+        this.onTouched(); // set your input to 'touched'
         this.blur.emit(ev);
     }
 

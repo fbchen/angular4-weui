@@ -7,7 +7,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -23,7 +23,7 @@ import { WeUIExampleComponent } from '../pages/weui/weui.example';
 
 @NgModule({
     imports: [
-        HttpModule,
+        HttpClientModule,
         CoreModule,
         BrowserAnimationsModule,
         WeUIModule,
